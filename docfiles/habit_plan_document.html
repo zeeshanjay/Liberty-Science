@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Liberty Science Coaching — 6-Day Habit Building Plan</title>
+  <style>
+    @page {
+      size: letter;
+      margin: 16mm 14mm 16mm 14mm;
+      @bottom-right {
+        content: counter(page) " of " counter(pages);
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        font-size: 8pt;
+        color: #64748b;
+      }
+    }
+    
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 9.5pt;
+      line-height: 1.5;
+      color: #1e293b;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .masthead {
+      border-bottom: 2px solid #b45309;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+    
+    .masthead-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+    }
+
+    .brand-title {
+      font-size: 17pt;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .brand-subtitle {
+      font-size: 8pt;
+      font-weight: 600;
+      color: #b45309;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .practice-meta {
+      text-align: right;
+      font-size: 7.5pt;
+      color: #475569;
+      line-height: 1.35;
+      font-family: monospace;
+    }
+
+    .tag-pill {
+      display: inline-block;
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 7.5pt;
+    }
+
+    .virtual-badge {
+      display: inline-block;
+      background: #eff6ff;
+      color: #1e40af;
+      border: 1px solid #bfdbfe;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 7.5pt;
+      margin-top: 3px;
+    }
+
+    .document-title {
+      font-size: 15pt;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 10px 0 2px 0;
+    }
+
+    .document-deck {
+      font-size: 9.5pt;
+      color: #334155;
+      font-style: italic;
+      margin-bottom: 6px;
+    }
+
+    .hook-callout {
+      background: #fafaf9;
+      border-left: 3px solid #b45309;
+      padding: 6px 12px;
+      font-size: 8.5pt;
+      color: #334155;
+      margin: 8px 0 14px 0;
+    }
+
+    h2 {
+      font-size: 11pt;
+      font-weight: 700;
+      color: #0f172a;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 3px;
+      margin: 14px 0 8px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      page-break-after: avoid;
+    }
+
+    .fill-box {
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+    }
+
+    .fill-line {
+      display: flex;
+      align-items: baseline;
+      margin-bottom: 6px;
+      font-size: 8.5pt;
+    }
+
+    .fill-line:last-child {
+      margin-bottom: 0;
+    }
+
+    .fill-label {
+      font-weight: 700;
+      color: #0f172a;
+      white-space: nowrap;
+      margin-right: 8px;
+    }
+
+    .fill-underline {
+      flex: 1;
+      border-bottom: 1px solid #94a3b8;
+      min-height: 16px;
+    }
+
+    /* Table styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 12px 0;
+      font-size: 8pt;
+    }
+
+    th {
+      background: #1e293b;
+      color: #ffffff;
+      padding: 6px 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 7.5pt;
+    }
+
+    td {
+      padding: 6px 10px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: middle;
+    }
+
+    tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    .check-cell {
+      text-align: center;
+      width: 60px;
+      font-weight: bold;
+    }
+
+    /* Days Grid */
+    .days-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .day-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 9px 12px;
+      background: #ffffff;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+      page-break-inside: avoid;
+    }
+
+    .day-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1.5px solid #d97706;
+      padding-bottom: 4px;
+      margin-bottom: 6px;
+    }
+
+    .day-name {
+      font-weight: 800;
+      font-size: 8.5pt;
+      color: #92400e;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .day-theme {
+      font-size: 7.5pt;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .day-prompt {
+      font-size: 7.5pt;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: baseline;
+    }
+
+    .day-prompt strong {
+      color: #0f172a;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+
+    .day-prompt .line {
+      flex: 1;
+      border-bottom: 1px dotted #cbd5e1;
+      height: 12px;
+    }
+
+    .day-status {
+      margin-top: 6px;
+      padding-top: 4px;
+      border-top: 1px dashed #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7pt;
+      color: #475569;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .footer-box {
+      margin-top: 16px;
+      padding: 10px 14px;
+      background: #f1f5f9;
+      border-radius: 6px;
+      font-size: 7.5pt;
+      color: #334155;
+      text-align: center;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Masthead -->
+  <div class="masthead">
+    <div class="masthead-top">
+      <div>
+        <h1 class="brand-title">Liberty Science Coaching</h1>
+        <div class="brand-subtitle">Life · Business · Health Advisory • Metabolic Neuroplasticity</div>
+      </div>
+      <div class="practice-meta">
+        <div>12995 N Oracle Rd #141-135 • Tucson, AZ 85737</div>
+        <div>(520) 275-8755 • libertysciencecoaching.com</div>
+        <div>
+          <span class="tag-pill">Taxonomy: 71400000X</span>
+          <span class="virtual-badge">On-Site or Virtual Worldwide</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="document-title">6-Day Habit Building Plan: Metabolic Neuroplasticity Template</div>
+    <div class="document-deck">Adaptable for ANY purpose: Mobility, Focus, Executive Leadership, Emotional Stamina, or Weight Vitality.</div>
+    
+    <div class="hook-callout">
+      <strong>Core Principle:</strong> “Your brain is still hiring. Pair fuel, movement, and attention so the brain-body loop keeps working. No stagnancy — whether your purpose is physical balance, decision clarity, or emotional relief.” — Vera Shury, MS (ACE Health Coach, HeartMath Certified, PWR!Moves Instructor)
+    </div>
+  </div>
+
+  <!-- Purpose Section -->
+  <h2>1. My Purpose &amp; Chosen Focus</h2>
+  <div class="fill-box">
+    <div class="fill-line">
+      <span class="fill-label">I am building this habit because:</span>
+      <span class="fill-underline"></span>
+    </div>
+    <div class="fill-line">
+      <span class="fill-label">Specific micro-action I will practice:</span>
+      <span class="fill-underline"></span>
+    </div>
+    <div class="fill-line">
+      <span class="fill-label">Emotional signal (where I felt stuck or downhill):</span>
+      <span class="fill-underline"></span>
+    </div>
+  </div>
+
+  <!-- Readiness Check Section (Day 0) -->
+  <h2>2. Readiness Check (Day 0 — ACE Health Coaching Standard)</h2>
+  <p style="font-size: 8pt; color: #475569; margin: 0 0 6px 0;">Check YES or NO. High readiness guarantees a stronger neural wire.</p>
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: left;">Readiness Dimension</th>
+        <th class="check-cell">YES</th>
+        <th class="check-cell">NO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1. Am I looking to change a specific behavior or routine?</td>
+        <td class="check-cell">☐</td>
+        <td class="check-cell">☐</td>
+      </tr>
+      <tr>
+        <td>2. Am I willing to make this a top priority for 6 consecutive days?</td>
+        <td class="check-cell">☐</td>
+        <td class="check-cell">☐</td>
+      </tr>
+      <tr>
+        <td>3. Have I tried something similar before and learned what disrupted it?</td>
+        <td class="check-cell">☐</td>
+        <td class="check-cell">☐</td>
+      </tr>
+      <tr>
+        <td>4. Do I see clear physical or emotional risks in NOT making this change?</td>
+        <td class="check-cell">☐</td>
+        <td class="check-cell">☐</td>
+      </tr>
+      <tr>
+        <td>5. Am I committed even if resistance or old habits surface?</td>
+        <td class="check-cell">☐</td>
+        <td class="check-cell">☐</td>
+      </tr>
+      <tr>
+        <td>6. Do I have support (or am I ready to build a supportive loop)?</td>
+        <td class="check-cell">☐</td>
+        <td class="check-cell">☐</td>
+      </tr>
+      <tr>
+        <td>7. Do I have reasons that extend beyond vanity or obligation?</td>
+        <td class="check-cell">☐</td>
+        <td class="check-cell">☐</td>
+      </tr>
+      <tr>
+        <td>8. Am I ready to be patient with setbacks and celebrate micro-progress?</td>
+        <td class="check-cell">☐</td>
+        <td class="check-cell">☐</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- The 6-Day Neuroplasticity Loop Grid -->
+  <h2>3. The 6-Day Metabolic Neuroplasticity Loop (Keep it Small)</h2>
+  
+  <div class="days-grid">
+    <!-- Day 1 -->
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-name">Day 1: Set the Hire</span>
+        <span class="day-theme">Initiate Circuit</span>
+      </div>
+      <div class="day-prompt"><strong>Action:</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Fuel:</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Move (2–5m):</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Attention:</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Joy/Reward:</strong> <span class="line"></span></div>
+      <div class="day-status">
+        <span>Completed: ☐ Yes  ☐ Almost</span>
+        <span>Notes: ______________</span>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-name">Day 2: Fuel the Loop</span>
+        <span class="day-theme">Nutritional Support</span>
+      </div>
+      <div class="day-prompt"><strong>Action:</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Fuel:</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Move (2–5m):</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Attention:</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Joy/Reward:</strong> <span class="line"></span></div>
+      <div class="day-status">
+        <span>Completed: ☐ Yes  ☐ Almost</span>
+        <span>Notes: ______________</span>
+      </div>
+    </div>
+
+    <!-- Day 3 -->
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-name">Day 3: Move with Purpose</span>
+        <span class="day-theme">Neuromuscular Signal</span>
+      </div>
+      <div class="day-prompt"><strong>Action:</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Fuel:</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Move (2–5m):</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Attention:</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Joy/Reward:</strong> <span class="line"></span></div>
+      <div class="day-status">
+        <span>Completed: ☐ Yes  ☐ Almost</span>
+        <span>Notes: ______________</span>
+      </div>
+    </div>
+
+    <!-- Day 4 -->
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-name">Day 4: Attention &amp; Breath</span>
+        <span class="day-theme">HeartMath Coherence</span>
+      </div>
+      <div class="day-prompt"><strong>Action:</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Fuel:</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Move (2–5m):</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Attention:</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Joy/Reward:</strong> <span class="line"></span></div>
+      <div class="day-status">
+        <span>Completed: ☐ Yes  ☐ Almost</span>
+        <span>Notes: ______________</span>
+      </div>
+    </div>
+
+    <!-- Day 5 -->
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-name">Day 5: Reward the Circuit</span>
+        <span class="day-theme">Dopaminergic Lock</span>
+      </div>
+      <div class="day-prompt"><strong>Action:</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Fuel:</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Move (2–5m):</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Attention:</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Joy/Reward:</strong> <span class="line"></span></div>
+      <div class="day-status">
+        <span>Completed: ☐ Yes  ☐ Almost</span>
+        <span>Notes: ______________</span>
+      </div>
+    </div>
+
+    <!-- Day 6 -->
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-name">Day 6: Review &amp; Expand</span>
+        <span class="day-theme">Durable Retention</span>
+      </div>
+      <div class="day-prompt"><strong>Action:</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Fuel:</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Move (2–5m):</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Attention:</strong> <span class="line"></span></div>
+      <div class="day-prompt"><strong>Joy/Reward:</strong> <span class="line"></span></div>
+      <div class="day-status">
+        <span>Completed: ☐ Yes  ☐ Almost</span>
+        <span>Notes: ______________</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- After Day 6 Reflection -->
+  <h2>4. After Day 6 — No Stagnancy</h2>
+  <div class="fill-box">
+    <div class="fill-line">
+      <span class="fill-label">What worked best during this 6-day loop:</span>
+      <span class="fill-underline"></span>
+    </div>
+    <div class="fill-line">
+      <span class="fill-label">What habit I will continue or expand into my life:</span>
+      <span class="fill-underline"></span>
+    </div>
+  </div>
+
+  <!-- Footer CTA -->
+  <div class="footer-box">
+    <strong>Ready for Comprehensive 1:1 Clinical Guidance?</strong><br>
+    Advisory Retainers ($1,275 – $4,800) • Available <strong>On-Site in Tucson, AZ</strong> or <strong>Virtually Worldwide</strong> via Tele-Health.<br>
+    Contact Vera Shury: <strong>(520) 275-8755</strong> • vera@libertysciencecoaching.com • Healthcare Taxonomy: 71400000X
+  </div>
+
+</body>
+</html>

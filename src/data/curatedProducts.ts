@@ -1,0 +1,488 @@
+export interface CuratedProduct {
+  name: string;
+  link: string;
+  reason: string;
+  image?: string;
+}
+
+export interface CuratedProductLine {
+  id: string;
+  title: string;
+  category: string;
+  desc: string;
+  table_idx?: number;
+  bannerImage?: string;
+  quote?: string;
+  products: CuratedProduct[];
+}
+
+export const CURATED_PRODUCT_LINES: CuratedProductLine[] = [
+  {
+    "id": "books",
+    "bannerImage": "/cat-books.jpg",
+    "quote": "Rewiring the brain requires intentional neuroplastic stimulus and proper cellular nutrition.",
+    "title": "Essential Books",
+    "category": "Neuroplasticity & Literature",
+    "desc": "Personally read, vetted, and applied by Vera in her clinical practice and personal health recovery.",
+    "table_idx": 1,
+    "products": [
+      {
+        "name": "Grow A New Brain",
+        "link": "https://amzn.to/45bIAHP",
+        "reason": "Learn how to improve and reverse damage to the brain with Neuroplasticity, nutrition and supplements",
+        "image": "/products/grow-a-new-brain.jpg"
+      },
+      {
+        "name": "Quench",
+        "link": "https://amzn.to/4xiwB77",
+        "reason": "Hydration contributes to many falls for older people, due to confusion the first symptom and dizziness the next, loss of strength next and possible kidney problems",
+        "image": "/products/quench.jpg"
+      },
+      {
+        "name": "Eat To Beat Disease",
+        "link": "https://amzn.to/45gwXPZ",
+        "reason": "I have used this book’s advice for my own chronic lymphocytic leukemia and have been able to reduce the number and keep them stable.",
+        "image": "/products/eat-to-beat-disease.jpg"
+      },
+      {
+        "name": "10 Day Detox Diet",
+        "link": "https://amzn.to/3TFdcPn",
+        "reason": "Detoxing is a major contribution to reducing what is called “inflammaging” which is your body system fighting with itself (and it may be in your brain too).",
+        "image": "/products/10-day-detox-diet.jpg"
+      },
+      {
+        "name": "17 Day Plan To Stop Aging",
+        "link": "https://amzn.to/4qe6KLA",
+        "reason": "The book has a 4-step approach; it is simple, and the suggestions are worth considering always using what resonates; it will give better results.",
+        "image": "/products/17-day-plan-to-stop-aging.jpg"
+      },
+      {
+        "name": "You Can Heal Your Life",
+        "link": "https://amzn.to/4gssG15",
+        "reason": "You can heal your life is an alternative view of illness and symptoms.  It may make you think of a different perspective for your life.",
+        "image": "/products/you-can-heal-your-life.jpg"
+      },
+      {
+        "name": "Stop Walking On Eggs",
+        "link": "https://amzn.to/3RIHhx3",
+        "reason": "This book helps one deal with someone that has a condition to deal with. When they create drama excessively and help one set boundaries.",
+        "image": "/products/stop-walking-on-eggs.jpg"
+      },
+      {
+        "name": "The Natural Mind",
+        "link": "https://amzn.to/45j9AFu",
+        "reason": "Dr Weil has been a leader in integrative medicine and natural means to heal. I have followed his advice also on the inflammaging issue.",
+        "image": "/products/the-natural-mind.jpg"
+      },
+      {
+        "name": "Christian Contemplative Self Care",
+        "link": "https://amzn.to/4guTttF",
+        "reason": "We received a gift of life, make it work for you and optimize the best of it.",
+        "image": "/products/christian-contemplative-self-care.jpg"
+      },
+      {
+        "name": "Contemplative Self Care",
+        "link": "https://amzn.to/4xtZFJ0",
+        "reason": "Self care is a gift you give your self for continuing to try.",
+        "image": "/products/contemplative-self-care.jpg"
+      },
+      {
+        "name": "Workout Journal",
+        "link": "https://amzn.to/4x0r9X4",
+        "reason": "A journal helps you track notice and use the forward propulsion to get beyond getting stuck",
+        "image": "/products/workout-journal.jpg"
+      }
+    ]
+  },
+  {
+    "id": "supplements",
+    "bannerImage": "/cat-supplements.jpg",
+    "quote": "I have relied on cellular electrolytes and mitochondrial nutrients for nearly 30 years to sustain high vitality.",
+    "title": "Supplements & Herbs",
+    "category": "Metabolic Cellular Health",
+    "desc": "Active botanicals and cellular nutrients used by Vera for nearly thirty years to sustain clean energy.",
+    "table_idx": 3,
+    "products": [
+      {
+        "name": "Bodyhealth Electrolytes",
+        "link": "https://amzn.to/3RWRypp",
+        "reason": "Electrolytes are the enhancement of water, keeping the body hydrated longer, and providing more energy. I have used it for nearly 30 years.",
+        "image": "/products/bodyhealth-electrolytes.jpg"
+      },
+      {
+        "name": "Bodyhealth Creatine",
+        "link": "https://amzn.to/4wEHlMJ",
+        "reason": "Creatine is a muscle builder, and can help prevent muscle loss, as one age. We loose several % of muscle over the years. One needs them to stay mobile!",
+        "image": "/products/bodyhealth-creatine.jpg"
+      },
+      {
+        "name": "Sports Research Collagen",
+        "link": "https://amzn.to/4qbBTPx",
+        "reason": "Collagen supports hair, nails, joint function, and skin. It helps recover after a workout. It helps to keep the skin a little plumper too.",
+        "image": "/products/sports-research-collagen.jpg"
+      },
+      {
+        "name": "Bodyhealth Multi",
+        "link": "https://amzn.to/4xwEc27",
+        "reason": "Multi vitamins/mineral can help one delay 2-5 years, sometimes even more of decline in body function and dementia. I have been using one since I was 15 years old",
+        "image": "/products/bodyhealth-multi.jpg"
+      },
+      {
+        "name": "Bodyhealth Gut Restore",
+        "link": "https://amzn.to/4fPf9RY",
+        "reason": "Our microbiome is considered our second brain; it affects our mood, energy, sleep, and digestive processes.",
+        "image": "/products/bodyhealth-gut-restore.jpg"
+      },
+      {
+        "name": "Bodyhealth Cardio Vascular",
+        "link": "https://amzn.to/4g3jBvj",
+        "reason": "This has some very valuable ingredients, like coq 10, nicotinamide, resveratrol, and more. I used to take these separately until I found this product.",
+        "image": "/products/bodyhealth-cardio-vascular.jpg"
+      },
+      {
+        "name": "Bodyhealth Calm",
+        "link": "https://amzn.to/4cxcfPw",
+        "reason": "Body calm is helpful for sleep and full body relaxation for more energy and focus the next day. Also, may prevent cramps.",
+        "image": "/products/bodyhealth-calm.jpg"
+      },
+      {
+        "name": "Krill Oil Omega 3",
+        "link": "https://amzn.to/4g9nWwZ",
+        "reason": "Krill oil omega 3 is more potent and beneficial for the brain, crosses the blood brain barrier. Bronson brand is tested for metal. Omega 3 is the potent inflammation reducing supplement.",
+        "image": "/products/krill-oil-omega-3.jpg"
+      },
+      {
+        "name": "Berberine",
+        "link": "https://amzn.to/4fQU35O",
+        "reason": "Berberine has many health benefits; an important one is that it helps to keep the metabolic process at a healthier level.",
+        "image": "/products/berberine.jpg"
+      },
+      {
+        "name": "Strontium",
+        "link": "https://amzn.to/4xE6Zlz",
+        "reason": "Strontium helps bone health and density and contributes to healthy bone aging.",
+        "image": "/products/strontium.jpg"
+      },
+      {
+        "name": "Hyaluronic Acid",
+        "link": "https://amzn.to/4fLVH8I",
+        "reason": "HYDRATION & ELASTICITY - Our hyaluronic acid maintains elasticity and hydration, with a recognized absorption and uptake.",
+        "image": "/products/hyaluronic-acid.jpg"
+      },
+      {
+        "name": "Tart Cherry",
+        "link": "https://amzn.to/3UpfX7G",
+        "reason": "Tart cherry has a list of health benefits it includes contributing to better sleep.",
+        "image": "/products/tart-cherry.jpg"
+      },
+      {
+        "name": "Bergamot",
+        "link": "https://amzn.to/4wTpmTC",
+        "reason": "Bergamo is good for heart health it helps to reduce cholesterol, support for your overall well-being, vitality, and balanced lifestyle.",
+        "image": "/products/bergamot.jpg"
+      },
+      {
+        "name": "Menopause Support",
+        "link": "https://amzn.to/4wW4R8K",
+        "reason": "This supplement helps balance hormones, reduce discomfort, and promote overall well-being. This herbal menopause relief supplement provides ease from hot flashes, night sweats, mood swings, & irritability.",
+        "image": "/products/menopause-support.jpg"
+      },
+      {
+        "name": "Nad, Urolithin",
+        "link": "https://amzn.to/4g4Xp3V",
+        "reason": "Cellular Energy & NAD+ Synergy – NAD+, CoQ10, Resveratrol, and Urolithin A support cellular energy production and mitochondrial function alongside herbal components. The mitochondrial support is extremely beneficial for energy & new cell building.",
+        "image": "/products/nad-urolithin.jpg"
+      }
+    ]
+  },
+  {
+    "id": "nutrition",
+    "bannerImage": "/cat-nutrition.jpg",
+    "quote": "Detoxing and anti-inflammatory whole-food fuel form the clinical frontline against inflammaging.",
+    "title": "Clean Nutrition & Fuel",
+    "category": "Anti-Inflammatory Food",
+    "desc": "Whole organic proteins, mushrooms, greens, and mineral hydration that form the basis of the cellular protocol.",
+    "table_idx": 5,
+    "products": [
+      {
+        "name": "Sockeye Salmon",
+        "link": "https://amzn.to/4wVICjk",
+        "reason": "Wild sockeye salmon is high in omega 3 reduces inflammation and protein helps to keep muscles strong.",
+        "image": "/products/sockeye-salmon.jpg"
+      },
+      {
+        "name": "Organic Boneless Chicken Breast",
+        "link": "https://amzn.to/4i0OyTh",
+        "reason": "Available next morning at 6-8 AM. Pick the amount.",
+        "image": "/products/organic-boneless-chicken-breast.jpg"
+      },
+      {
+        "name": "Organic Chicken Thighs",
+        "link": "https://amzn.to/4gqgwXm",
+        "reason": "Available next morning 6-8 Am Pick the amount",
+        "image": "/products/organic-chicken-thighs.jpg"
+      },
+      {
+        "name": "Top Sirloin Steak",
+        "link": "https://amzn.to/45RY3wR",
+        "reason": "Available next morning 6-8 Am Pick the amount",
+        "image": "/products/top-sirloin-steak.jpg"
+      },
+      {
+        "name": "Organic Geound Beef",
+        "link": "https://amzn.to/4g9MGVZ",
+        "reason": "Available next morning 6-8 Am Pick the amount",
+        "image": "/products/organic-geound-beef.jpg"
+      },
+      {
+        "name": "Organic Mushroom Mix",
+        "link": "https://amzn.to/45S66K2",
+        "reason": "Available next morning 6-8 Am Pick the amount",
+        "image": "/products/organic-mushroom-mix.jpg"
+      },
+      {
+        "name": "Organic Arugula & Baby Spinach",
+        "link": "https://amzn.to/4g6jq2r",
+        "reason": "Available next morning 6-8 Am Pick the amount",
+        "image": "/products/organic-arugula-baby-spinach.jpg"
+      },
+      {
+        "name": "Organic Beets",
+        "link": "https://amzn.to/45oo5HZ",
+        "reason": "Available next morning 6-8 Am Pick the amount",
+        "image": "/products/organic-beets.jpg"
+      },
+      {
+        "name": "Sliced Beets",
+        "link": "https://amzn.to/4gpF0QB",
+        "reason": "Available next morning 6-8 Am Pick the amount",
+        "image": "/products/sliced-beets.jpg"
+      },
+      {
+        "name": "Broccoli Sprouts",
+        "link": "https://amzn.to/4go1IIO",
+        "reason": "Available next morning 6-8 Am Pick the amount",
+        "image": "/products/broccoli-sprouts.jpg"
+      },
+      {
+        "name": "Sourdough Bread",
+        "link": "https://amzn.to/4g1SyQX",
+        "reason": "Available next morning 6-8 Am Pick the amount",
+        "image": "/products/sourdough-bread.jpg"
+      },
+      {
+        "name": "Tri Color Quinoa",
+        "link": "https://amzn.to/4xzjGOs",
+        "reason": "Available next morning 6-8 Am Pick the amount",
+        "image": "/products/tri-color-quinoa.jpg"
+      },
+      {
+        "name": "White Eggs",
+        "link": "https://amzn.to/4cfZCs5",
+        "reason": "Available next morning 6-8 Am Pick the amount",
+        "image": "/products/white-eggs.jpg"
+      },
+      {
+        "name": "Brown Eggs",
+        "link": "https://amzn.to/4i1i4sa",
+        "reason": "Available next morning 6-8 Am Pick the amount",
+        "image": "/products/brown-eggs.jpg"
+      },
+      {
+        "name": "Coffee",
+        "link": "https://amzn.to/4wS7HLZ",
+        "reason": "Available next morning 6-8 Am Pick the amount",
+        "image": "/products/coffee.jpg"
+      },
+      {
+        "name": "Coffee With Mushroom",
+        "link": "https://amzn.to/4fSSLY4",
+        "reason": "Available next morning 6-8 Am Pick the amount",
+        "image": "/products/coffee-with-mushroom.jpg"
+      },
+      {
+        "name": "Rooibos Tea",
+        "link": "https://amzn.to/3S5rzMl",
+        "reason": "Available next morning 6-8 Am Pick the amount Helps with bone density",
+        "image": "/products/rooibos-tea.jpg"
+      }
+    ]
+  },
+  {
+    "id": "fitness",
+    "bannerImage": "/cat-fitness.jpg",
+    "quote": "Grip strength, fascia mobilization, and balance are the strongest predictors of lifelong independence.",
+    "title": "Fitness & Neuromuscular",
+    "category": "Movement & Balance Tools",
+    "desc": "Specialized bands, weights, balance platforms, and red light recovery tested for daily capability.",
+    "table_idx": 7,
+    "products": [
+      {
+        "name": "Ankle/Wrist Weights",
+        "link": "https://amzn.to/4q6fe7b",
+        "reason": "Chose the weight you want; start with 8 repetitions, then 12, then 15 twice to build strength",
+        "image": "/products/ankle-wrist-weights.jpg"
+      },
+      {
+        "name": "Resistance Bands",
+        "link": "https://amzn.to/4wiK3ao",
+        "reason": "Switch between resistance work up to more resistance",
+        "image": "/products/resistance-bands.jpg"
+      },
+      {
+        "name": "Weighted Vest",
+        "link": "https://amzn.to/4wjtbA6",
+        "reason": "Start with a short time 30 minutes and add as comfortable",
+        "image": "/products/weighted-vest.jpg"
+      },
+      {
+        "name": "Looped Band",
+        "link": "https://amzn.to/4qcnFhB",
+        "reason": "Looped for stretching, physical therapy, The strap does not stretch, so there’s no bounce and no sudden “give.” You can pull to the angle you need and it stays there, helping you move slowly and safely—especially after knee replacement or hip replacement recovery.",
+        "image": "/products/looped-band.jpg"
+      },
+      {
+        "name": "Ez Pik Grabber",
+        "link": "https://amzn.to/4g4VIn0",
+        "reason": "Reach safely",
+        "image": "/products/ez-pik-grabber.jpg"
+      },
+      {
+        "name": "Balance Cushion",
+        "link": "https://amzn.to/45g2Ub4",
+        "reason": "Use this near a place you can hold on for balance, try to stand on one leg after well acquainted with the feel.",
+        "image": "/products/balance-cushion.jpg"
+      },
+      {
+        "name": "Comfytemp Red Light Therapy",
+        "link": "https://amzn.to/4xrLHr4",
+        "reason": "Very helpful for recovery. Comfytemp recommends using the red-light mat for 20 minutes per day. Note: wear clothes with different textures or thickness may cause some light to be wasted.",
+        "image": "/products/comfytemp-red-light-therapy.jpg"
+      },
+      {
+        "name": "Trx Exercise Helper",
+        "link": "https://amzn.to/45j8l9h",
+        "reason": "Trx lets you do deep knee squats without injuring you knee, holds you when you stretch and lean without falling, relax into the move!",
+        "image": "/products/trx-exercise-helper.jpg"
+      },
+      {
+        "name": "Vibration Plate",
+        "link": "https://amzn.to/4g8H12v",
+        "reason": "Vibration helps to move lymph fluid and helps bone density.",
+        "image": "/products/vibration-plate.jpg"
+      },
+      {
+        "name": "Fascia Roller",
+        "link": "https://amzn.to/4fTRO1t",
+        "reason": "Rolling the fascia over the muscles helps to get a better stretch and better body function",
+        "image": "/products/fascia-roller.jpg"
+      },
+      {
+        "name": "Grip Strengthener",
+        "link": "https://amzn.to/4fTTvw1",
+        "reason": "Grip strength is a determinant for healthy Longevity.",
+        "image": "/products/grip-strengthener.jpg"
+      }
+    ]
+  },
+  {
+    "id": "adjuncts",
+    "bannerImage": "/cat-recovery.jpg",
+    "quote": "Targeted TENS electro-stimulation and fall mitigation kept me active through injury recovery—now I ski at 86.",
+    "title": "Recovery & Gadgets",
+    "category": "Clinical Recovery & Safety",
+    "desc": "Targeted TENS electro-stimulation, skin hygiene, and waterproof fall detection gear.",
+    "table_idx": 9,
+    "products": [
+      {
+        "name": "Tens Unit",
+        "link": "https://amzn.to/45nlfD3",
+        "reason": "In my experience tens unit kept me walking with low back pain and knee injury for years before I had back surgery and knees replaced, now I ski again at 86.",
+        "image": "/products/tens-unit.jpg"
+      },
+      {
+        "name": "Electric Foot Callus Remover",
+        "link": "https://amzn.to/4cBMr4S",
+        "reason": "Using an electric sanding style callus remover will prevent cuts and infection.",
+        "image": "/products/electric-foot-callus-remover.jpg"
+      },
+      {
+        "name": "Callus Remover Gel",
+        "link": "https://amzn.to/4x4ZVOT",
+        "reason": "After using the electric remover use the gel to soften and prevent future growth",
+        "image": "/products/callus-remover-gel.jpg"
+      },
+      {
+        "name": "Fitness & Fall Detection",
+        "link": "https://amzn.to/4gbMky1",
+        "reason": "Waterproof, gives all the basic needs to keep safe",
+        "image": "/products/fitness-fall-detection.jpg"
+      }
+    ]
+  },
+  {
+    "id": "lifestyle",
+    "bannerImage": "/cat-lifestyle.jpg",
+    "quote": "Practical, high-performing skincare and apparel that elevate daily vitality without fuss.",
+    "title": "Everyday Vitality & Apparel",
+    "category": "Skin Health & Travel Gear",
+    "desc": "Clean dermatological skincare and versatile travel wear tested in Vera’s active lifestyle.",
+    "table_idx": 11,
+    "products": [
+      {
+        "name": "Lancome Waterproof Mascara",
+        "link": "https://amzn.to/4gs2Vio",
+        "reason": "Lancome waterproof does not smear or flake, and it does not make my eyes water. It really makes the long and strong",
+        "image": "/products/lancome-waterproof-mascara.jpg"
+      },
+      {
+        "name": "Eye Liner Waterproof",
+        "link": "https://amzn.to/4wPtljP",
+        "reason": "I like to line my water line it makes my eyes pop.",
+        "image": "/products/eye-liner-waterproof.jpg"
+      },
+      {
+        "name": "Roc Facial Cleanser",
+        "link": "https://amzn.to/4fTkZSs",
+        "reason": "A client dermatologist told me years ago to use Roc products that they were equal to prescription. I have had good results with anything in the product line",
+        "image": "/products/roc-facial-cleanser.jpg"
+      },
+      {
+        "name": "Sugar Scrub",
+        "link": "https://amzn.to/4wVEdg4",
+        "reason": "Sugar scrub is exfoliating and leaves moisture on the skin.",
+        "image": "/products/sugar-scrub.jpg"
+      },
+      {
+        "name": "Sunscreen",
+        "link": "https://amzn.to/45X9jIk",
+        "reason": "This is a tinted so pick your shade when you order. I have used it for years it helps to hide my vitiligo loss of melatonin in my skin. I eliminate foundations, etc.",
+        "image": "/products/sunscreen.jpg"
+      },
+      {
+        "name": "Ladies Blouse",
+        "link": "https://amzn.to/4gcZyL2",
+        "reason": "Various shades and sizes, nice material, a nice cut for most shapes.",
+        "image": "/products/ladies-blouse.jpg"
+      },
+      {
+        "name": "Ladies Matching Set",
+        "link": "https://amzn.to/4hwlt2a",
+        "reason": "Lovely color choice and the slant cut top is sliming.",
+        "image": "/products/ladies-matching-set.jpg"
+      },
+      {
+        "name": "Ladies Travel Pants",
+        "link": "https://amzn.to/4x28V7q",
+        "reason": "Really nice cut, also versatile for sport and comfort without losing style.",
+        "image": "/products/ladies-travel-pants.jpg"
+      },
+      {
+        "name": "Ladies Summer Dress",
+        "link": "https://amzn.to/3S3RbJJ",
+        "reason": "Very attractive pattern and style flattering for most ladies shape.",
+        "image": "/products/ladies-summer-dress.jpg"
+      }
+    ]
+  }
+];

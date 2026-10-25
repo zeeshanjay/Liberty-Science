@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Metabolic Switching Evidence Brief & Clinical Diet Protocol — Liberty Science</title>
+  <style>
+    @page {
+      size: letter;
+      margin: 18mm 16mm 18mm 16mm;
+      @bottom-right {
+        content: counter(page) " of " counter(pages);
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        font-size: 8pt;
+        color: #64748b;
+      }
+    }
+    
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 10pt;
+      line-height: 1.55;
+      color: #1e293b;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Masthead Header */
+    .masthead {
+      border-bottom: 2px solid #b45309;
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+    }
+    
+    .masthead-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .brand-title {
+      font-size: 18pt;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #0f172a;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .brand-subtitle {
+      font-size: 8.5pt;
+      font-weight: 600;
+      color: #b45309;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .practice-meta {
+      text-align: right;
+      font-size: 8pt;
+      color: #475569;
+      line-height: 1.4;
+      font-family: 'SF Mono', Menlo, Consolas, monospace;
+    }
+
+    .taxonomy-pill {
+      display: inline-block;
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 7.5pt;
+      margin-top: 3px;
+    }
+
+    .document-title {
+      font-size: 16pt;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 12px 0 4px 0;
+      line-height: 1.25;
+    }
+
+    .document-deck {
+      font-size: 10pt;
+      color: #334155;
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+
+    .clinician-byline {
+      font-size: 8.5pt;
+      font-weight: 600;
+      color: #0f172a;
+      background: #f8fafc;
+      border-left: 3px solid #b45309;
+      padding: 6px 12px;
+      margin: 10px 0 16px 0;
+    }
+
+    /* Core Sections */
+    h2 {
+      font-size: 12pt;
+      font-weight: 700;
+      color: #0f172a;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 4px;
+      margin: 18px 0 8px 0;
+      page-break-after: avoid;
+    }
+
+    h3 {
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: #1e293b;
+      margin: 12px 0 4px 0;
+      page-break-after: avoid;
+    }
+
+    p {
+      margin: 0 0 8px 0;
+      text-align: justify;
+    }
+
+    /* Two Halves Callout Grid */
+    .halves-grid {
+      display: flex;
+      gap: 12px;
+      margin: 12px 0 16px 0;
+    }
+
+    .half-card {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 9pt;
+      line-height: 1.45;
+    }
+
+    .challenge-card {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-top: 3px solid #d97706;
+    }
+
+    .recovery-card {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-top: 3px solid #16a34a;
+    }
+
+    .half-title {
+      font-weight: 800;
+      font-size: 9.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .challenge-title { color: #92400e; }
+    .recovery-title { color: #166534; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 16px 0;
+      font-size: 8.5pt;
+      page-break-inside: avoid;
+    }
+
+    th {
+      background: #1e293b;
+      color: #ffffff;
+      font-weight: 700;
+      text-align: left;
+      padding: 7px 10px;
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    td {
+      padding: 7px 10px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+      line-height: 1.4;
+    }
+
+    tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    .claim-cell {
+      font-weight: 700;
+      color: #0f172a;
+      width: 25%;
+    }
+
+    /* Alert / Safety Box */
+    .safety-box {
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      border-left: 4px solid #e11d48;
+      border-radius: 4px;
+      padding: 10px 14px;
+      margin: 14px 0;
+      font-size: 8.5pt;
+      line-height: 1.45;
+      page-break-inside: avoid;
+    }
+
+    .safety-title {
+      font-weight: 800;
+      color: #9f1239;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 9pt;
+      margin-bottom: 5px;
+    }
+
+    .safety-list {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .safety-list li {
+      margin-bottom: 4px;
+    }
+
+    /* Micro / Macro Protocol Box */
+    .protocol-box {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin: 14px 0;
+      page-break-inside: avoid;
+    }
+
+    .protocol-header {
+      font-weight: 700;
+      color: #0f172a;
+      font-size: 9.5pt;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px dashed #cbd5e1;
+      padding-bottom: 4px;
+    }
+
+    /* Bibliography */
+    .biblio-list {
+      font-size: 7.5pt;
+      color: #475569;
+      line-height: 1.4;
+      margin: 0;
+      padding-left: 16px;
+    }
+
+    .biblio-list li {
+      margin-bottom: 3px;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      padding-top: 10px;
+      border-top: 1px solid #cbd5e1;
+      font-size: 7.5pt;
+      color: #64748b;
+      text-align: center;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Masthead -->
+  <div class="masthead">
+    <div class="masthead-top">
+      <div>
+        <h1 class="brand-title">Liberty Science Coaching</h1>
+        <div class="brand-subtitle">Life · Business · Health Advisory • Metabolic Neuroplasticity</div>
+      </div>
+      <div class="practice-meta">
+        <div>12995 N Oracle Rd #141-135</div>
+        <div>Tucson, AZ 85737 • (520) 275-8755</div>
+        <div>libertysciencecoaching.com</div>
+        <div class="taxonomy-pill">Taxonomy: 71400000X</div>
+      </div>
+    </div>
+
+    <div class="document-title">EVIDENCE BRIEF: Metabolic Switching — The Clinical Benefits</div>
+    <div class="document-deck">What the cycle actually does, graded by human clinical evidence. Micro moves and macro design: challenge, then recover.</div>
+    <div class="clinician-byline">
+      Authored by: Vera Shury, MS · ACE Certified Health Coach · HeartMath Certified Practitioner · PWR!Moves Instructor
+    </div>
+  </div>
+
+  <!-- Section 1 -->
+  <h2>1. What “The Switch” Is</h2>
+  <p>
+    After liver glycogen runs down — typically 12 or more hours without food in most adults, sooner if accompanied by structured movement — the body transitions from glucose utilization to fat oxidation and the ketone <strong>β-hydroxybutyrate (BHB)</strong>. That transition is the metabolic switch.
+  </p>
+  <p>
+    <strong>Intermittent metabolic switching</strong>, or <em>cyclic metabolic switching</em> in Prof. Mark Mattson’s 2025 Nature Metabolism framework, is the repeated oscillation between the challenge state and the fed recovery state so that synaptic and cellular growth pathways are activated.
+  </p>
+
+  <div class="halves-grid">
+    <div class="half-card challenge-card">
+      <div class="half-title challenge-title">Challenge Half (Cellular Housekeeping)</div>
+      <div>
+        • AMPK &amp; Sirtuins (SIRT1/SIRT3) activation<br>
+        • Autophagy &amp; damaged protein clearance<br>
+        • β-hydroxybutyrate (BHB) fuel &amp; epigenetic signaling<br>
+        • Down-regulated insulin and quiet mTOR
+      </div>
+    </div>
+    <div class="half-card recovery-card">
+      <div class="half-title recovery-title">Recovery Half (Synaptic Construction)</div>
+      <div>
+        • Food, restorative rest, and deep sleep<br>
+        • mTOR &amp; muscle/brain protein synthesis rise<br>
+        • Mitochondrial biogenesis (PGC-1α)<br>
+        • New synaptic connections consolidated
+      </div>
+    </div>
+  </div>
+
+  <p>
+    <em>Clinical Note:</em> A continuous ketogenic diet or an unbroken calorie restriction lowers weight without giving the cell both halves. The scientific literature confirms: <strong>the cycle is the point.</strong>
+  </p>
+
+  <!-- Section 2 -->
+  <h2>2. Evidence Hierarchy &amp; Grading Standards</h2>
+  <p>To preserve clinical integrity and protect patients from online wellness exaggerations, findings are graded as follows:</p>
+  <ul style="margin: 0 0 10px 0; padding-left: 20px; font-size: 8.5pt; line-height: 1.45;">
+    <li><strong>Human, repeated:</strong> Supported by multiple randomized controlled trials (RCTs) or umbrella meta-analyses.</li>
+    <li><strong>Human, emerging:</strong> Genuine human trials with smaller sample sizes, showing measurable biomarker signals.</li>
+    <li><strong>Animal or mechanism:</strong> Conclusive in cell or rodent models; explicitly never marketed as a guaranteed human outcome.</li>
+    <li><strong>Not shown or oversold:</strong> Claims of human immortal longevity, "prevents Alzheimer's," or multi-week starvation.</li>
+  </ul>
+
+  <!-- Section 3 -->
+  <h2>3. Benefits with Repeated Human Clinical Support</h2>
+  
+  <h3>A. Adiposity &amp; Visceral Fat Reduction</h3>
+  <p>
+    Umbrella reviews of RCTs demonstrate consistent reductions in body weight, BMI, and fat mass under intermittent fasting protocols versus standard care. Alternate-day fasting frequently reduces caloric intake more than time-restricted eating and mobilizes visceral adipose tissue. Time-restricted eating (12–16 hour windows) demonstrates substantially superior long-term adherence.
+  </p>
+
+  <h3>B. Insulin Sensitivity &amp; Metabolic Flexibility</h3>
+  <p>
+    Metabolic switching represents biological practice at utilizing fat reserves immediately following glucose depletion. Human trials confirm substantial drops in fasting insulin and improved HOMA-IR in overweight and insulin-resistant cohorts. The seminal Sutton et al. (Cell Metabolism) early time-restricted feeding study demonstrated dramatic improvements in insulin sensitivity, β-cell responsiveness, and blood pressure over five weeks <em>completely independent of weight loss</em>.
+  </p>
+
+  <h3>C. Blood Pressure, Vascular Tone, and Lipid Profiles</h3>
+  <p>
+    Meta-analyses report average reductions in systolic and diastolic arterial pressure, paired with reductions in circulating triglycerides and LDL particles during structured fasting windows.
+  </p>
+
+  <h3>D. Exercise Flips the Same Switch</h3>
+  <p>
+    Sustained or interval movement depletes glycogen, elevates serum BHB and lactate, and upregulates BDNF and PGC-1α without requiring a patient to skip dinner. For executive coaching and neurological patients, <strong>movement plus an overnight gap plus restorative sleep</strong> provides the widest safety margin.
+  </p>
+
+  <!-- Removed forced page-break to allow natural, dense publication flow -->
+
+  <!-- Page 2 Header -->
+  <div style="border-bottom: 1px solid #cbd5e1; padding-bottom: 6px; margin-bottom: 14px; font-size: 8pt; color: #64748b; display: flex; justify-content: space-between;">
+    <span>LIBERTY SCIENCE COACHING • CLINICAL EVIDENCE BRIEF</span>
+    <span>METABOLIC SWITCHING &amp; DIET PROTOCOLS</span>
+  </div>
+
+  <!-- Section 4 -->
+  <h2>4. Benefits That Are Real but Mixed in Humans</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Clinical Domain</th>
+        <th>What the Human Clinical Data Actually Show</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="claim-cell">BDNF (Brain-Derived Neurotrophic Factor)</td>
+        <td>
+          A 2024 systematic review of 16 human IF/CR trials showed: 5 raised BDNF, 5 lowered it, 6 were neutral. Massive animal hippocampal surges (50–400%) do not reliably manifest in serum. BDNF elevation is achieved far more predictably by combining <strong>HeartMath coherence + PWR!Moves exercise</strong>.
+        </td>
+      </tr>
+      <tr>
+        <td class="claim-cell">Cognitive Acuity &amp; Executive Focus</td>
+        <td>
+          In older insulin-resistant adults, 8 weeks of 5:2 and a Healthy Living diet both improved memory and executive scores. A 15-day complete fast actually impaired attention metrics. Overnight 12–14 hr fasting windows paired with walks protect focus without cognitive penalties.
+        </td>
+      </tr>
+      <tr>
+        <td class="claim-cell">Mood &amp; Emotional Regulation</td>
+        <td>
+          Patients typically report clarity post-adaptation. However, initial days may present hunger and irritability (de Cabo &amp; Mattson, NEJM). This is why Liberty Science initiates clients with autonomic coherence and post-meal walks rather than aggressive 20-hour fasts.
+        </td>
+      </tr>
+      <tr>
+        <td class="claim-cell">Gut-Brain Axis &amp; Microbiota</td>
+        <td>
+          In obesity trials, cyclic fasting altered gut microbial diversity and correlated with improved executive scores. Microglial inflammatory tone is mitigated in animal models. Promising emerging science.
+        </td>
+      </tr>
+      <tr>
+        <td class="claim-cell">Autophagy in Human Tissue</td>
+        <td>
+          A 2025 fasting-mimicking diet trial verified measurable peripheral autophagy flux, paired with improved ketone generation and insulin sensitivity. Legitimate biological signal.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Section 5 -->
+  <h2>5. Clinical Safety &amp; Non-Candidates</h2>
+  <div class="safety-box">
+    <div class="safety-title">Contraindications — Who Should NOT Use Fasting as the Primary Switch:</div>
+    <ul class="safety-list">
+      <li><strong>Pregnancy, breastfeeding, or trying to conceive:</strong> Always clinician first; fasting is not indicated.</li>
+      <li><strong>History of eating disorders:</strong> Skipping meals can be an illness wearing a wellness disguise.</li>
+      <li><strong>Insulin-treated diabetes or hypoglycemia:</strong> Meal timing drastically alters insulin clearance. Medical supervision mandatory.</li>
+      <li><strong>Complex medications:</strong> Anticoagulants, bipolar medications (asenapine), or pyridostigmine-type drugs require precise food timing.</li>
+      <li><strong>Frailty, severe sarcopenia, or active oncology therapy:</strong> Lean body mass and bone density are primary preservation imperatives.</li>
+    </ul>
+  </div>
+
+  <!-- Section 6: Protocol & Diet Plan -->
+  <h2>6. Liberty Science Metabolic &amp; Dietary Protocol</h2>
+  <div class="protocol-box">
+    <div class="protocol-header">The Three-Pillar Protocol Sequence (Vera Shury Method)</div>
+    <p style="font-size: 8.5pt; margin-bottom: 6px;">
+      <strong>1. HeartMath Coherence First:</strong> Shift autonomic tone to 0.10 Hz HRV coherence. Chronic sympathetic overdrive blocks neuroplastic reorganization. Coherence establishes the baseline.
+    </p>
+    <p style="font-size: 8.5pt; margin-bottom: 6px;">
+      <strong>2. The Brain-Body Movement Loop:</strong> Functional neuromuscular training (Strength4Balance, PWR!Moves, Parkinson'strength™) delivers the biochemical triggers (BHB, lactate, PGC-1α) that prime motor circuits.
+    </p>
+    <p style="font-size: 8.5pt; margin-bottom: 0;">
+      <strong>3. Metabolic Switching &amp; Nutrition Plan:</strong> An overnight 12 to 14-hour "kitchen-closed" window, accompanied by whole anti-inflammatory foods, adequate high-leucine protein during the recovery half, and objective supplement audits.
+    </p>
+  </div>
+
+  <!-- Peer-Reviewed References -->
+  <h2>7. Peer-Reviewed Citations &amp; Bibliography</h2>
+  <ol class="biblio-list">
+    <li>Mattson MP et al. <em>Intermittent metabolic switching, neuroplasticity and brain health.</em> Nat Rev Neurosci. 2018.</li>
+    <li>Mattson MP. <em>The cyclic metabolic switching theory of intermittent fasting.</em> Nature Metabolism. 2025.</li>
+    <li>de Cabo R, Mattson MP. <em>Effects of intermittent fasting on health, aging, and disease.</em> New England Journal of Medicine. 2019.</li>
+    <li>Sutton EF et al. <em>Early time-restricted feeding improves insulin sensitivity, blood pressure, and oxidative stress even without weight loss.</em> Cell Metabolism. 2018.</li>
+    <li>Kapogiannis D et al. <em>Brain responses to intermittent fasting and the Healthy Living diet in older adults.</em> Cell Metabolism. 2024.</li>
+    <li>Patikorn C et al. <em>Intermittent fasting and obesity-related health outcomes: umbrella review of meta-analyses of RCTs.</em> JAMA Network Open. 2021.</li>
+    <li>Alkurd R et al. <em>Effect of calorie restriction and intermittent fasting on BDNF and cognition in humans: systematic review.</em> 2024.</li>
+  </ol>
+
+  <div class="footer-note">
+    © Liberty Science Coaching LLC • Educational and Clinical Briefing Only. Not a substitute for primary medical care.<br>
+    Healthcare Provider Inquiries: vera@libertysciencecoaching.com • (520) 275-8755 • Tucson, Arizona
+  </div>
+
+</body>
+</html>
