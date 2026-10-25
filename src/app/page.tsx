@@ -12,7 +12,7 @@ import {
   type Variants,
 } from "framer-motion";
 import { ArrowUpRight, ArrowDownRight, Check, Activity } from "lucide-react";
-import { useLenis } from "@studio-freight/react-lenis";
+import { useLenis } from "lenis/react";
 import { CoherenceCanvas } from "@/components/CoherenceCanvas";
 import { Header } from "@/components/Header";
 import { MethodologyLoop } from "@/components/MethodologyLoop";

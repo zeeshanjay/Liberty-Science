@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { ReactLenis } from "@studio-freight/react-lenis";
+import { ReactLenis } from "lenis/react";
 
 interface SmoothScrollProviderProps {
   children: ReactNode;
@@ -18,7 +18,6 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
         wheelMultiplier: 0.95,
       }}
     >
-      {/* @ts-expect-error React 19 / react-lenis children type compatibility */}
       {children}
     </ReactLenis>
   );
