@@ -758,8 +758,8 @@ export default function AboutPage() {
                 Phone: 520-275-8755
               </a>
               <span>•</span>
-              <a href="mailto:vera@libertyscience.com" className="hover:text-slate-950 font-semibold">
-                vera@libertyscience.com
+              <a href="mailto:vera@libertysciencecoaching.com" className="hover:text-slate-950 font-semibold">
+                vera@libertysciencecoaching.com
               </a>
             </div>
           </div>

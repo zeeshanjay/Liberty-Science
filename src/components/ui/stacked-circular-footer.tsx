@@ -188,10 +188,10 @@ function StackedCircularFooter() {
             </a>
             <span className="text-stone-300">•</span>
             <a
-              href="mailto:vera@libertyscience.com"
+              href="mailto:vera@libertysciencecoaching.com"
               className="hover:text-primary transition-colors"
             >
-              <span className="text-slate-400">Email:</span> vera@libertyscience.com
+              <span className="text-slate-400">Email:</span> vera@libertysciencecoaching.com
             </a>
             <span className="text-stone-300">•</span>
             <span>

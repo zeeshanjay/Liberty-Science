@@ -19,7 +19,7 @@ export function SchemaJsonLd() {
         "logo": "https://libertyscience.com/logo.png",
         "image": "https://libertyscience.com/curated-hero.jpg",
         "telephone": "+1-520-275-8755",
-        "email": "vera@libertyscience.com",
+        "email": "vera@libertysciencecoaching.com",
         "priceRange": "$$$",
         "taxID": "71400000X",
         "description":

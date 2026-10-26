@@ -20,8 +20,9 @@ export const SENDER_EMAIL =
 export const SENDER_FALLBACK = "Liberty Science Coaching <onboarding@resend.dev>";
 
 // Primary notification recipients (Vera Shury / Practice Admin)
+// Vera uses a designated Gmail label for vera@libertysciencecoaching.com
 export const NOTIFICATION_RECIPIENT =
-  process.env.NOTIFICATION_EMAIL || "vera@libertyscience.com";
+  process.env.NOTIFICATION_EMAIL || "vera@libertysciencecoaching.com";
 
 export interface ContactNotificationPayload {
   fullName: string;
