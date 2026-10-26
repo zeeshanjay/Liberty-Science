@@ -665,7 +665,7 @@ Recommended Retainer: ${recommendedProgram.name} (${recommendedProgram.investmen
                       value={candidateName}
                       onChange={(e) => setCandidateName(e.target.value)}
                       placeholder="e.g. Eleanor Vance"
-                      className="w-full h-9 rounded-lg border border-slate-200 px-3 text-xs text-slate-900 focus:outline-none focus:border-slate-900 shadow-2xs"
+                      className="w-full h-11 sm:h-9 rounded-xl sm:rounded-lg border border-slate-200 px-3.5 text-[16px] sm:text-xs text-slate-900 focus:outline-none focus:border-slate-900 shadow-2xs transition-colors"
                     />
                   </div>
 
@@ -679,7 +679,7 @@ Recommended Retainer: ${recommendedProgram.name} (${recommendedProgram.investmen
                       value={candidateEmail}
                       onChange={(e) => setCandidateEmail(e.target.value)}
                       placeholder="e.g. eleanor@vanceholdings.com"
-                      className="w-full h-9 rounded-lg border border-slate-200 px-3 text-xs text-slate-900 focus:outline-none focus:border-slate-900 shadow-2xs"
+                      className="w-full h-11 sm:h-9 rounded-xl sm:rounded-lg border border-slate-200 px-3.5 text-[16px] sm:text-xs text-slate-900 focus:outline-none focus:border-slate-900 shadow-2xs transition-colors"
                     />
                   </div>
 
@@ -692,7 +692,7 @@ Recommended Retainer: ${recommendedProgram.name} (${recommendedProgram.investmen
                       value={candidateNote}
                       onChange={(e) => setCandidateNote(e.target.value)}
                       placeholder="e.g. Preserving skiing balance, post-surgical stiffness, or executive burnout..."
-                      className="w-full rounded-lg border border-slate-200 p-2.5 text-xs text-slate-900 focus:outline-none focus:border-slate-900 resize-none shadow-2xs"
+                      className="w-full rounded-xl sm:rounded-lg border border-slate-200 p-3 text-[16px] sm:text-xs text-slate-900 focus:outline-none focus:border-slate-900 resize-none shadow-2xs transition-colors"
                     />
                   </div>
 

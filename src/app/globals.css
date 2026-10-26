@@ -20,6 +20,15 @@
     background-color: #ffffff;
     color: #090d16;
     overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* iOS Dynamic Island & Bottom Bar safe area utilities */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 16px);
+  }
+  .pt-safe {
+    padding-top: env(safe-area-inset-top, 16px);
   }
 
   ::selection {

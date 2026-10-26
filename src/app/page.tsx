@@ -457,20 +457,22 @@ export default function LibertyScienceLandingPage() {
                   initial="hidden"
                   animate="visible"
                   variants={fadeUpVariant}
-                  className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4"
+                  className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"
                 >
-                  <PremiumCtaButton
-                    href={CALENDAR_URL}
-                    variant="primary"
-                    size="lg"
-                  >
-                    Book Readiness Consultation
-                  </PremiumCtaButton>
+                  <div className="w-full sm:w-auto">
+                    <PremiumCtaButton
+                      href={CALENDAR_URL}
+                      variant="primary"
+                      size="lg"
+                    >
+                      Book Readiness Consultation
+                    </PremiumCtaButton>
+                  </div>
 
                   <button
                     type="button"
                     onClick={() => setIsReadinessModalOpen(true)}
-                    className="group inline-flex h-12 sm:h-13 items-center gap-2.5 rounded-full border border-slate-300/90 bg-white/90 px-5 sm:px-6 text-xs sm:text-[13px] font-semibold text-slate-800 shadow-2xs backdrop-blur-md hover:border-slate-900 hover:bg-slate-900 hover:text-white transition-all duration-300 cursor-pointer"
+                    className="group inline-flex h-12 sm:h-13 w-full sm:w-auto items-center justify-center gap-2.5 rounded-full border border-slate-300/90 bg-white/90 px-5 sm:px-6 text-xs sm:text-[13px] font-semibold text-slate-800 shadow-2xs backdrop-blur-md hover:border-slate-900 hover:bg-slate-900 hover:text-white transition-all duration-300 cursor-pointer active:scale-98"
                   >
                     <Activity className="h-4 w-4 text-[#ea580c] transition-colors group-hover:text-white" />
                     <span>Check Your Readiness (45s)</span>
@@ -482,30 +484,30 @@ export default function LibertyScienceLandingPage() {
                   initial="hidden"
                   animate="visible"
                   variants={fadeUpVariant}
-                  className="mt-8 grid grid-cols-3 gap-4 border-t border-slate-200/90 pt-5"
+                  className="mt-8 grid grid-cols-3 gap-2 sm:gap-4 border-t border-slate-200/90 pt-5"
                 >
                   <div>
-                    <div className="text-xl font-semibold text-[#635bff] sm:text-2xl">
+                    <div className="text-base font-semibold text-[#635bff] sm:text-2xl">
                       HeartMath®
                     </div>
-                    <div className="mt-0.5 text-xs text-slate-600">
+                    <div className="mt-0.5 text-[10px] sm:text-xs text-slate-600 leading-snug">
                       Autonomic HRV Coherence
                     </div>
                   </div>
                   <div>
-                    <div className="text-xl font-semibold text-[#1d4ed8] sm:text-2xl">
+                    <div className="text-base font-semibold text-[#1d4ed8] sm:text-2xl">
                       PWR!Moves®
                     </div>
-                    <div className="mt-0.5 text-xs text-slate-600">
+                    <div className="mt-0.5 text-[10px] sm:text-xs text-slate-600 leading-snug">
                       Neuromuscular Plasticity
                     </div>
                   </div>
                   <div>
-                    <div className="text-xl font-semibold text-[#ea580c] sm:text-2xl">
+                    <div className="text-base font-semibold text-[#ea580c] sm:text-2xl">
                       Metabolic Diet
                     </div>
-                    <div className="mt-0.5 text-xs text-slate-600">
-                      Cyclic Switching &amp; Nutrition
+                    <div className="mt-0.5 text-[10px] sm:text-xs text-slate-600 leading-snug">
+                      Cyclic Switching &amp; Fuel
                     </div>
                   </div>
                 </motion.div>

@@ -175,7 +175,7 @@ export function ContactSection() {
                       onChange={(e) =>
                         setFormData({ ...formData, fullName: e.target.value })
                       }
-                      className="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:bg-white focus:outline-none transition-colors"
+                      className="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-[16px] sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:bg-white focus:outline-none transition-colors"
                     />
                   </div>
 
@@ -197,7 +197,7 @@ export function ContactSection() {
                         onChange={(e) =>
                           setFormData({ ...formData, email: e.target.value })
                         }
-                        className="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:bg-white focus:outline-none transition-colors"
+                        className="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-[16px] sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:bg-white focus:outline-none transition-colors"
                       />
                     </div>
 
@@ -219,7 +219,7 @@ export function ContactSection() {
                         onChange={(e) =>
                           setFormData({ ...formData, phone: e.target.value })
                         }
-                        className="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:bg-white focus:outline-none transition-colors"
+                        className="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-[16px] sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:bg-white focus:outline-none transition-colors"
                       />
                     </div>
                   </div>
@@ -227,8 +227,7 @@ export function ContactSection() {
                   {/* Field 4: Primary Stall / Inquiry (Exact Wording from Brief) */}
                   <div>
                     <label className="block text-xs font-semibold text-slate-800 leading-snug">
-                      Tell me where the stall is showing up — life, business, or
-                      body?
+                      Tell me where the stall is showing up — life, business, or body?
                     </label>
 
                     {/* 3-Pill Selector */}
@@ -241,7 +240,7 @@ export function ContactSection() {
                             type="button"
                             onClick={() => setSelectedStall(pill)}
                             className={cn(
-                              "flex items-center justify-center rounded-xl py-2 px-3 text-xs font-semibold transition-all duration-200 cursor-pointer border",
+                              "flex items-center justify-center rounded-xl py-3 px-3 text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer border active:scale-98",
                               isSelected
                                 ? "bg-slate-900 text-white border-slate-900 shadow-xs"
                                 : "bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-100"
@@ -262,7 +261,7 @@ export function ContactSection() {
                         onChange={(e) =>
                           setFormData({ ...formData, notes: e.target.value })
                         }
-                        className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:bg-white focus:outline-none transition-colors resize-none"
+                        className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-[16px] sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:bg-white focus:outline-none transition-colors resize-none"
                       />
                     </div>
                   </div>
@@ -271,15 +270,14 @@ export function ContactSection() {
                   <div className="pt-2">
                     <button
                       type="submit"
-                      className="group flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#ea580c] hover:shadow-md cursor-pointer"
+                      className="group flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-4 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#ea580c] hover:shadow-md cursor-pointer active:scale-98"
                     >
                       <span>Send Confidential Inquiry</span>
                       <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </button>
 
                     <p className="mt-2.5 text-center text-[11px] text-slate-400">
-                      100% confidential. No spam, automated marketing, or list
-                      sharing.
+                      100% confidential. No spam, automated marketing, or list sharing.
                     </p>
                   </div>
                 </form>

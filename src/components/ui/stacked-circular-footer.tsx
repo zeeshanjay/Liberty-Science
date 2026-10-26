@@ -32,7 +32,7 @@ function StackedCircularFooter() {
   };
 
   return (
-    <footer className="relative z-10 border-t border-stone-200/80 bg-background py-16">
+    <footer className="relative z-10 border-t border-stone-200/80 bg-background pt-14 pb-20 sm:py-16 pb-safe">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col items-center">
           {/* Circular Brand Mark Pill */}

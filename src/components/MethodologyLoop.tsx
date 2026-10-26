@@ -57,8 +57,8 @@ function FramelessMotionGraphic({
 }) {
   if (type === "coherence") {
     return (
-      <div className="relative flex h-64 w-full flex-col justify-center px-2 sm:h-72">
-        <div className="mb-4 flex items-baseline justify-between">
+      <div className="relative flex h-44 sm:h-64 lg:h-72 w-full flex-col justify-center px-1 sm:px-2">
+        <div className="mb-2 sm:mb-4 flex items-baseline justify-between">
           <span className="text-xs font-medium tracking-wide text-slate-400">
             Autonomic Resonance
           </span>
@@ -126,7 +126,7 @@ function FramelessMotionGraphic({
 
   if (type === "loop") {
     return (
-      <div className="relative flex h-64 w-full items-center justify-center sm:h-72">
+      <div className="relative flex h-44 sm:h-64 lg:h-72 w-full items-center justify-center">
         {/* Frameless Orbital Brain-Body Loop SVG */}
         <svg viewBox="0 0 360 220" className="h-full w-full overflow-visible">
           <defs>
@@ -217,7 +217,7 @@ function FramelessMotionGraphic({
   }
 
   return (
-    <div className="relative flex h-64 w-full flex-col justify-center px-2 sm:h-72">
+    <div className="relative flex h-44 sm:h-64 lg:h-72 w-full flex-col justify-center px-1 sm:px-2">
       <div className="mb-5 flex items-baseline justify-between">
         <span className="text-xs font-medium tracking-wide text-slate-400">
           Cellular Timing
@@ -294,13 +294,13 @@ function StickyMethodologyCard({
     <div
       className="sticky mx-auto w-full max-w-5xl"
       style={{
-        top: `${112 + index * 24}px`,
+        top: `clamp(72px, 12vh, 112px)`,
         zIndex: index + 10,
       }}
     >
       <motion.div
         style={{ scale, y: yOffset }}
-        className="origin-top overflow-hidden rounded-[28px] border border-slate-200/90 bg-white/95 px-6 py-8 shadow-[0_1px_3px_rgba(0,0,0,0.02),0_20px_50px_-20px_rgba(15,23,42,0.08)] backdrop-blur-xl sm:px-10 sm:py-10"
+        className="origin-top overflow-hidden rounded-[22px] sm:rounded-[28px] border border-slate-200/90 bg-white/95 px-4 py-6 sm:px-10 sm:py-10 shadow-[0_1px_3px_rgba(0,0,0,0.02),0_20px_50px_-20px_rgba(15,23,42,0.08)] backdrop-blur-xl"
       >
         <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
           {/* Left Column: Frameless Animated Graphic (No Background Container) */}

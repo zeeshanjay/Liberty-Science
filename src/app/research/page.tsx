@@ -222,7 +222,7 @@ export default function ResearchMonographPage() {
                     "Liberty_Science_Metabolic_Switching_Diet_Plan.pdf"
                   )
                 }
-                className="shrink-0 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-semibold text-xs tracking-wider uppercase transition-all duration-200 flex items-center gap-2 shadow-sm shadow-amber-900/10 cursor-pointer"
+                className="w-full sm:w-auto shrink-0 px-4 py-3 sm:py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-semibold text-xs tracking-wider uppercase transition-all duration-200 flex items-center justify-center gap-2 shadow-sm shadow-amber-900/10 cursor-pointer active:scale-98"
               >
                 <Download className="h-4 w-4 text-black" />
                 <span>Unlock &amp; Download PDF</span>

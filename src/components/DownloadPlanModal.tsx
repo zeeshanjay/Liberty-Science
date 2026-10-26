@@ -141,7 +141,7 @@ export function DownloadPlanModal({
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="e.g. Eleanor Vance"
-                      className="w-full h-10 rounded-xl border border-slate-200 px-3.5 text-xs text-slate-900 focus:outline-none focus:border-slate-900 shadow-2xs"
+                      className="w-full h-11 sm:h-10 rounded-xl border border-slate-200 px-3.5 text-[16px] sm:text-xs text-slate-900 focus:outline-none focus:border-slate-900 shadow-2xs transition-colors"
                     />
                   </div>
 
@@ -155,7 +155,7 @@ export function DownloadPlanModal({
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="name@executivehealth.com"
-                      className="w-full h-10 rounded-xl border border-slate-200 px-3.5 text-xs text-slate-900 focus:outline-none focus:border-slate-900 shadow-2xs"
+                      className="w-full h-11 sm:h-10 rounded-xl border border-slate-200 px-3.5 text-[16px] sm:text-xs text-slate-900 focus:outline-none focus:border-slate-900 shadow-2xs transition-colors"
                     />
                   </div>
 

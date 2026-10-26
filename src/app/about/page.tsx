@@ -361,7 +361,7 @@ export default function AboutPage() {
               </div>
 
               <div className="lg:col-span-5">
-                <div className="rounded-3xl border border-slate-200/90 bg-white p-8 sm:p-10 shadow-xs relative overflow-hidden">
+                <div className="rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-white p-5 sm:p-8 lg:p-10 shadow-xs relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-orange-100/50 rounded-full blur-3xl -z-10" />
 
                   <span className="text-4xl font-serif text-[#ea580c] select-none block leading-none mb-3">
@@ -437,7 +437,7 @@ export default function AboutPage() {
               return (
                 <div
                   key={pillar.id}
-                  className={`rounded-3xl border ${pillar.border} bg-white p-7 sm:p-8 shadow-xs flex flex-col justify-between hover:shadow-md transition-all duration-300 relative overflow-hidden`}
+                  className={`rounded-2xl sm:rounded-3xl border ${pillar.border} bg-white p-5 sm:p-8 shadow-xs flex flex-col justify-between hover:shadow-md transition-all duration-300 relative overflow-hidden`}
                 >
                   <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${pillar.color} rounded-bl-full pointer-events-none`} />
 

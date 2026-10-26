@@ -181,7 +181,7 @@ export default function CuratedToolsPage() {
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-5">
               {/* Category Pills (Clean scroll with zero native scrollbar) */}
               <div className="relative flex-1 min-w-0">
-                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden py-0.5">
+                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden py-1" style={{ WebkitOverflowScrolling: "touch" }}>
                   <button
                     type="button"
                     onClick={() => setSelectedCategory("all")}
@@ -346,7 +346,7 @@ export default function CuratedToolsPage() {
                     )}
 
                     {/* Product Cards Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                       {line.products.map((product, pIdx) => (
                         <motion.div
                           key={product.name + pIdx}
