@@ -1,7 +1,18 @@
 import { Resend } from "resend";
 
-const resendApiKey = process.env.RESEND_API_KEY || "";
-export const resend = new Resend(resendApiKey);
+// Helper for lazy client instantiation so build-time static evaluation never fails if API key is not yet set
+function getResendClient(): Resend | null {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey || !apiKey.trim()) {
+    return null;
+  }
+  try {
+    return new Resend(apiKey.trim());
+  } catch (err) {
+    console.error("Failed to initialize Resend client:", err);
+    return null;
+  }
+}
 
 // Resend sender configuration - using a real name signals direct 1-to-1 communication to Gmail algorithms
 export const SENDER_EMAIL =
@@ -286,6 +297,12 @@ export async function sendAssessmentNotification(payload: AssessmentNotification
  * Robust email delivery with verified domain & fallback handling
  */
 async function sendResendEmail(options: { subject: string; html: string; replyTo?: string }) {
+  const resend = getResendClient();
+  if (!resend) {
+    console.warn("Resend email dispatch skipped: RESEND_API_KEY is not configured.");
+    return { data: null, error: null };
+  }
+
   const recipients = [NOTIFICATION_RECIPIENT];
 
   try {
