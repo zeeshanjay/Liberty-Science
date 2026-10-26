@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
+import { sendContactInquiryNotification } from "@/lib/email";
 
 export async function POST(req: Request) {
   try {
@@ -23,6 +24,17 @@ export async function POST(req: Request) {
     } else {
       console.log("✓ Successfully saved contact inquiry to Supabase:", email);
     }
+
+    // Trigger instant email notification (non-blocking)
+    sendContactInquiryNotification({
+      fullName,
+      email,
+      phone,
+      notes,
+      domain,
+    }).catch((emailErr) => {
+      console.error("Non-blocking email notification error:", emailErr);
+    });
 
     return NextResponse.json({ success: true, message: "Inquiry registered successfully" });
   } catch (err: unknown) {

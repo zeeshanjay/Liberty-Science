@@ -2,11 +2,12 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import { supabaseAdmin } from "@/lib/supabase";
+import { sendAssessmentNotification } from "@/lib/email";
 
 export async function POST(req: Request) {
   try {
     const data = await req.json();
-    const { name, email, note, answers, recommendedProgram } = data;
+    const { name, email, phone, note, answers, recommendedProgram, score, tier } = data;
 
     if (!name || !email) {
       return NextResponse.json(
@@ -19,6 +20,7 @@ export async function POST(req: Request) {
       timestamp: new Date().toISOString(),
       name,
       email,
+      phone: phone || null,
       note: note || "None provided",
       recommendedProgram: recommendedProgram?.name,
       investment: recommendedProgram?.investment,
@@ -53,6 +55,23 @@ export async function POST(req: Request) {
     } catch (sbErr) {
       console.error("Supabase connection error:", sbErr);
     }
+
+    // 2. Trigger instant email dispatch to Vera Shury (non-blocking)
+    sendAssessmentNotification({
+      fullName: name,
+      email,
+      phone: phone || null,
+      score: score || 85,
+      tier: tier || "High Readiness",
+      recommendedProgram: recommendedProgram?.name,
+      investment: recommendedProgram?.investment,
+      primaryDomain: answers?.domain?.label,
+      urgencyPriority: answers?.priority?.label,
+      coreGap: answers?.gap?.label,
+      targetOutcome: answers?.outcome?.label,
+    }).catch((emailErr) => {
+      console.error("Non-blocking assessment email error:", emailErr);
+    });
 
     // 2. Backup to local storage for failover resilience
     try {
