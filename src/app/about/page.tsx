@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -22,11 +23,16 @@ import {
   MapPin,
   Flame,
   Zap,
+  Layers,
+  TrendingUp,
+  Stethoscope,
+  Target,
 } from "lucide-react";
 import { Header } from "@/components/Header";
 import { StackedCircularFooter } from "@/components/ui/stacked-circular-footer";
 import { PremiumCtaButton } from "@/components/ui/PremiumCtaButton";
 import { InstitutionalTrustMarquee } from "@/components/InstitutionalTrustMarquee";
+import { NeuralModel3D } from "@/components/NeuralModel3D";
 
 const CALENDAR_URL = "https://calendar.app.google/8Gt1wf6dzY3ki8xy7";
 
@@ -171,7 +177,33 @@ const PROGRAM_SPECTRUM = [
   },
 ];
 
+const STALL_VECTORS = [
+  {
+    id: "body",
+    title: "Body & Motor Stall",
+    indicator: "Tremor onset, loss of balance, rigidity, chronic fatigue",
+    desc: "The motor cortex and vestibular pathways require progressive amplitude loading and metabolic fuel, not passive retreat. We restore high-velocity neuromuscular reflexes.",
+    action: "Evaluate Motor Recruitment",
+  },
+  {
+    id: "business",
+    title: "Business & Leadership Stall",
+    indicator: "Founder bottleneck, decision fatigue, scaling friction",
+    desc: "Enterprises stall when the leader's cognitive bandwidth collapses. We apply the 4,000% scaling model to preserve stamina and delegate without operational decay.",
+    action: "Evaluate Enterprise Capacity",
+  },
+  {
+    id: "life",
+    title: "Executive Life & Guilt Stall",
+    indicator: "Sacrificial wellness model, treating health as an afterthought",
+    desc: "Sacrificing your biology for commercial or family duty is a mathematical failure. Self-care is the non-negotiable prerequisite to running what you built.",
+    action: "Evaluate Readiness Baseline",
+  },
+];
+
 export default function AboutPage() {
+  const [selectedStall, setSelectedStall] = useState<string>("body");
+
   return (
     <div className="relative min-h-screen bg-white text-slate-900 selection:bg-[#635bff] selection:text-white">
       {/* Global Header */}
@@ -199,11 +231,7 @@ export default function AboutPage() {
               transition={{ duration: 0.5 }}
               className="lg:col-span-7"
             >
-              <span className="text-[11px] font-mono uppercase tracking-widest text-[#ea580c] font-bold">
-                FOUNDER &amp; PRINCIPAL ADVISOR · TUCSON, ARIZONA
-              </span>
-
-              <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-extrabold tracking-tight text-slate-900 mt-3 leading-[1.08]">
+              <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-extrabold tracking-tight text-slate-900 leading-[1.08]">
                 Your Brain Is Still Generating.{" "}
                 <span className="font-serif italic font-normal bg-gradient-to-r from-[#635bff] via-[#8b5cf6] to-[#ea580c] bg-clip-text text-transparent">
                   Living Evidence at 86.
@@ -302,7 +330,7 @@ export default function AboutPage() {
                       Life · Business · Health Advisory
                     </span>
                     <p className="text-[11px] text-slate-300 mt-2 leading-relaxed">
-                      &ldquo;Your brain is still hiring new capacity. Here is the job description: pair fuel, movement, and attention so the loop never stalls.&rdquo;
+                      &ldquo;Adult neurogenesis is not theoretical. When you give your physiology the proper fuel, autonomic coherence, and motor recruitment, the loop never stalls.&rdquo;
                     </p>
                   </div>
                 </div>
@@ -318,10 +346,7 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               <div className="lg:col-span-7">
-                <span className="text-[11px] font-mono uppercase tracking-widest text-[#ea580c] font-bold">
-                  THE CRUCIBLE MOMENT
-                </span>
-                <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900 mt-2">
+                <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
                   When Sacrificial Endurance{" "}
                   <span className="font-serif italic font-normal text-slate-600">
                     Failed.
@@ -375,9 +400,10 @@ export default function AboutPage() {
 
                   {/* Vera's Operating Credo */}
                   <div className="mt-6 pt-6 border-t border-slate-100">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#ea580c] font-bold block mb-2">
-                      Vera&apos;s Personal Operating Credo
-                    </span>
+                    <div className="text-xs font-semibold text-slate-900 mb-2 flex items-center gap-1.5">
+                      <ShieldCheck className="w-4 h-4 text-[#ea580c]" />
+                      <span>Vera&apos;s Personal Operating Credo (5:5 Adversity Rule)</span>
+                    </div>
                     <p className="text-xs sm:text-sm text-slate-700 italic leading-relaxed bg-orange-50/60 p-4 rounded-xl border border-orange-100">
                       &ldquo;No matter what is, I am going to make it work for me. If someone does something bad to me, I will do 5 good things for other businesses or people, and 5 good things for myself.&rdquo;
                     </p>
@@ -385,9 +411,10 @@ export default function AboutPage() {
 
                   {/* Reproducible Reality, Not An Anomaly */}
                   <div className="mt-4 pt-4 border-t border-slate-100">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#635bff] font-bold block mb-1">
-                      A Trainable System — Not An Anomaly
-                    </span>
+                    <div className="text-xs font-semibold text-slate-900 mb-1 flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-[#635bff]" />
+                      <span>A Trainable System — Not An Anomaly</span>
+                    </div>
                     <p className="text-xs text-slate-600 leading-relaxed">
                       Scaling a practice 4,000% since 2012, maintaining leukemic stability, and alpine skiing in Taos at 86 are not genetic anomalies. They are the output of a trainable, reproducible neuro-metabolic protocol anyone can execute.
                     </p>
@@ -417,10 +444,7 @@ export default function AboutPage() {
            ========================================================= */}
         <section className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-[11px] font-mono uppercase tracking-widest text-[#635bff] font-bold">
-              CORE PRACTICE ARCHITECTURE
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 mt-2">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900">
               Three Advisory Pillars.{" "}
               <span className="font-serif italic font-normal text-[#ea580c]">
                 One Coherent Loop.
@@ -487,102 +511,74 @@ export default function AboutPage() {
         </section>
 
         {/* =========================================================
-            4. THE METABOLIC NEUROPLASTICITY JOB DESCRIPTION
+            4. THE NEURO-METABOLIC 3D ARCHITECTURE SECTION
            ========================================================= */}
-        <section className="border-t border-slate-100 bg-slate-900 text-white py-16 lg:py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-              <div className="lg:col-span-5 space-y-5">
-                <span className="text-[11px] font-mono uppercase tracking-widest text-[#ea580c] font-bold">
-                  THE PRINCIPLE OF NO STAGNANCY
-                </span>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
-                  Your Brain Is Still Hiring.{" "}
-                  <span className="font-serif italic font-normal text-amber-300 block">
-                    Here Is the Job Description.
+        <section className="border-t border-slate-800 bg-[#070b14] text-white py-16 lg:py-24 relative overflow-hidden">
+          {/* Subtle background glow */}
+          <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#635bff]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#ea580c]/10 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              {/* Left Column: Scientific Rationale */}
+              <div className="lg:col-span-5 space-y-6">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-[1.12]">
+                  The Biological Architecture of{" "}
+                  <span className="font-serif italic font-normal bg-gradient-to-r from-amber-200 via-orange-300 to-amber-400 bg-clip-text text-transparent block mt-1">
+                    Adult Neuroplasticity.
                   </span>
                 </h2>
+
                 <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-                  Adult hippocampal neurogenesis is not a luxury reserved for the young. Your nervous system continually produces new neurons—provided you give it the specific biological rationale to hire them.
+                  Adult hippocampal neurogenesis is not a luxury reserved for the young. Your nervous system continually produces new neurons and consolidates synaptogenesis—provided you supply the three biological signals that keep cortical mapping alive.
                 </p>
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 text-xs text-slate-300 space-y-2">
-                  <div className="font-bold text-white flex items-center gap-2">
-                    <Zap className="w-4 h-4 text-amber-400" />
-                    <span>The Three-Signal Rule:</span>
+
+                {/* The Tripartite Clinical Sequence */}
+                <div className="space-y-3 pt-2">
+                  <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-2.5 text-xs font-bold text-amber-300 mb-1">
+                      <Flame className="w-4 h-4 text-[#ea580c]" />
+                      <span>01 · Fuel: Cyclic Metabolic Switching</span>
+                    </div>
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      A structured 12–14 hour daily fasting window triggers hepatic ketone generation, directly upregulating Brain-Derived Neurotrophic Factor (BDNF) and stimulating cellular autophagy.
+                    </p>
                   </div>
-                  <p className="leading-relaxed">
-                    1. Movement drives the neurogenic signal.<br />
-                    2. Attention (HeartMath coherence) directs the synaptic wiring.<br />
-                    3. Fuel (cyclic metabolic switching) provides the cellular building blocks.
-                  </p>
+
+                  <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-2.5 text-xs font-bold text-emerald-300 mb-1">
+                      <Zap className="w-4 h-4 text-emerald-400" />
+                      <span>02 · Load: High-Amplitude Neuro-Motor Recruitment</span>
+                    </div>
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      PWR!Moves® and vestibular balance drills demand maximal intentional amplitude, actively resisting cortical disuse atrophy and reinforcing motor maps.
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-2.5 text-xs font-bold text-indigo-300 mb-1">
+                      <Heart className="w-4 h-4 text-[#635bff]" />
+                      <span>03 · Steer: Autonomic Coherence at 0.10 Hz</span>
+                    </div>
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      HeartMath® biofeedback downregulates chronic sympathetic overdrive, ensuring newly sprouted synapses consolidate into permanent functional stamina.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-2 flex items-center gap-4">
+                  <PremiumCtaButton href={CALENDAR_URL} variant="primary" size="md">
+                    Discuss Clinical Assessment
+                  </PremiumCtaButton>
+                  <span className="text-xs text-slate-400 font-mono">
+                    Evidence-Based Protocol
+                  </span>
                 </div>
               </div>
 
-              {/* The Job Description Dossier Card */}
+              {/* Right Column: 3D Model Visual / Interactive Canvas */}
               <div className="lg:col-span-7">
-                <div className="rounded-3xl border border-white/15 bg-white/10 backdrop-blur-md p-6 sm:p-8 space-y-5 shadow-2xl">
-                  <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                    <div>
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold">
-                        POSITION REQUISITION #MN-2026
-                      </span>
-                      <h3 className="text-xl font-bold text-white mt-0.5">
-                        Senior Synaptic Builder &amp; Motor Navigator
-                      </h3>
-                    </div>
-                    <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-mono font-semibold">
-                      Full-Time / Lifelong
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                    <div className="space-y-1">
-                      <span className="text-slate-400 font-mono text-[10px] uppercase">Employer:</span>
-                      <div className="text-white font-semibold">Your Human Nervous System</div>
-                    </div>
-                    <div className="space-y-1">
-                      <span className="text-slate-400 font-mono text-[10px] uppercase">Department:</span>
-                      <div className="text-white font-semibold">Hippocampus &amp; Motor Cortex</div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3 pt-2">
-                    <span className="text-[11px] font-mono uppercase text-amber-300 font-bold block">
-                      Core Duties &amp; Responsibilities:
-                    </span>
-                    <ul className="space-y-2 text-xs text-slate-200">
-                      <li className="flex items-start gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                        <span><strong>Autonomic Calibration:</strong> Shift out of fight-or-flight into 0.10 Hz HeartMath coherence before any physical or business challenge.</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                        <span><strong>Neuro-Motor Recruitment:</strong> Perform high-amplitude PWR!Moves, dual-task coordination, and vestibular balance drills to protect cortical motor maps.</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                        <span><strong>Mitochondrial Fueling:</strong> Practice 12–14 hour cyclic metabolic switching to trigger ketone generation, BDNF, and autophagy.</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                        <span><strong>Zero Stagnancy Mandate:</strong> Eliminate guilt surrounding biological self-care so you remain capable of running the practice and family you built.</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div className="border-t border-white/10 pt-4 flex items-center justify-between text-xs">
-                    <div className="text-slate-300">
-                      <strong>Compensation:</strong> 10–25 year younger functional neurocognitive stamina.
-                    </div>
-                    <Link
-                      href={CALENDAR_URL}
-                      target="_blank"
-                      className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition-all shadow-sm shrink-0"
-                    >
-                      Apply Now (Book Call)
-                    </Link>
-                  </div>
-                </div>
+                <NeuralModel3D staticImageSrc="/neural-3d-model.jpg" />
               </div>
             </div>
           </div>
@@ -595,10 +591,7 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
               <div className="lg:col-span-6">
-                <span className="text-[11px] font-mono uppercase tracking-widest text-[#ea580c] font-bold">
-                  EMPIRICAL VITALITY
-                </span>
-                <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 mt-2">
+                <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
                   Rebuilding What Conventional Medicine{" "}
                   <span className="font-serif italic font-normal text-slate-600">
                     Gave Up On.
@@ -671,12 +664,9 @@ export default function AboutPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
                   <div className="absolute bottom-6 inset-x-6 text-white">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-amber-300 font-semibold">
-                      HIGH-ALTITUDE ALPINE ENDURANCE
-                    </span>
-                    <p className="text-sm font-medium text-white/95 mt-1">
+                    <p className="text-sm font-medium text-white/95">
                       Vera Shury on the alpine summit: Living evidence that the
-                      neuromuscular loop never expires.
+                      neuromuscular loop never expires when properly trained.
                     </p>
                   </div>
                 </div>
@@ -695,10 +685,7 @@ export default function AboutPage() {
            ========================================================= */}
         <section className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-14">
-            <span className="text-[11px] font-mono uppercase tracking-widest text-[#ea580c] font-bold">
-              CLINICAL ADVISORY TIERS
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 mt-2">
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
               Structured Engagement Spectrum.
             </h2>
             <p className="mt-3 text-sm sm:text-base text-slate-600">
@@ -784,10 +771,7 @@ export default function AboutPage() {
         <section className="border-t border-slate-100 bg-slate-50/50 py-16 lg:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-14">
-              <span className="text-[11px] font-mono uppercase tracking-widest text-[#ea580c] font-bold">
-                VERIFIED ACCREDITATIONS
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 mt-2">
+              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
                 The Clinical Credential Stack.
               </h2>
               <p className="mt-3 text-sm sm:text-base text-slate-600">
@@ -827,47 +811,131 @@ export default function AboutPage() {
         </section>
 
         {/* =========================================================
-            8. DIRECT CALL TO ACTION
+            8. THE STALL ARCHITECTURE: LIFE, BUSINESS, OR BODY?
            ========================================================= */}
-        <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 pb-10">
-          <div className="relative overflow-hidden rounded-3xl bg-slate-900 p-8 sm:p-12 lg:p-16 text-white shadow-2xl">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#635bff]/20 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#ea580c]/15 rounded-full blur-3xl pointer-events-none" />
+        <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-8 pb-10">
+          <div className="relative overflow-hidden rounded-3xl bg-[#090d16] border border-slate-800 p-8 sm:p-12 lg:p-16 text-white shadow-2xl">
+            {/* Cinematic background ambiance */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#635bff]/15 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[450px] h-[450px] bg-[#ea580c]/12 rounded-full blur-[120px] pointer-events-none" />
 
-            <div className="relative z-10 max-w-2xl">
-              <span className="text-[11px] font-mono uppercase tracking-widest text-[#ea580c] font-bold">
-                INITIATE THE LOOP
-              </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mt-3 leading-tight">
-                Tell me where the stall is showing up—
-                <span className="font-serif italic font-normal text-slate-300 block">
-                  life, business, or body?
-                </span>
-              </h2>
-              <p className="mt-5 text-sm sm:text-base leading-relaxed text-slate-300">
-                A 30-minute confidential consultation to review your current
-                baseline, identify cognitive or physical leakage points, and
-                determine your readiness for the Metabolic Neuroplasticity loop.
-              </p>
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              {/* Left Column: The Diagnostic Query */}
+              <div className="lg:col-span-7 space-y-6">
+                <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-extrabold tracking-tight text-white leading-[1.12]">
+                  Tell me where the stall is showing up—
+                  <span className="font-serif italic font-normal text-amber-200 block mt-1">
+                    life, business, or body?
+                  </span>
+                </h2>
 
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                <PremiumCtaButton href={CALENDAR_URL} variant="primary" size="lg">
-                  Book a Readiness Conversation
-                </PremiumCtaButton>
+                <p className="text-sm sm:text-base leading-relaxed text-slate-300 max-w-xl">
+                  Stalls in your physical stamina, enterprise decision velocity, or personal life are never isolated failures. They are interconnected biological leakage points that respond to a single, coherent protocol.
+                </p>
 
-                <a
-                  href="tel:520-275-8755"
-                  className="inline-flex h-12 items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 text-xs font-semibold text-white backdrop-blur-md hover:bg-white hover:text-slate-900 transition-all"
-                >
-                  <Phone className="h-4 w-4" />
-                  <span>Call 520-275-8755</span>
-                </a>
+                {/* Interactive Vector Switcher */}
+                <div className="space-y-3 pt-2 max-w-xl">
+                  {STALL_VECTORS.map((vec) => (
+                    <div
+                      key={vec.id}
+                      onClick={() => setSelectedStall(vec.id)}
+                      className={`p-4 rounded-2xl border cursor-pointer transition-all ${
+                        selectedStall === vec.id
+                          ? "bg-white/10 border-amber-300/40 shadow-lg"
+                          : "bg-white/[0.03] border-white/10 hover:border-white/20"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-white flex items-center gap-2">
+                          <span
+                            className={`w-2 h-2 rounded-full ${
+                              selectedStall === vec.id ? "bg-amber-400" : "bg-slate-600"
+                            }`}
+                          />
+                          {vec.title}
+                        </span>
+                        <span className="text-[11px] font-mono text-amber-300/90">
+                          {selectedStall === vec.id ? "Selected Diagnostic" : "Inspect"}
+                        </span>
+                      </div>
+                      <div className="text-xs text-slate-400 mt-1 font-mono">
+                        Indicators: {vec.indicator}
+                      </div>
+                      <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                        {vec.desc}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="pt-4 flex flex-wrap items-center gap-4">
+                  <PremiumCtaButton href={CALENDAR_URL} variant="primary" size="lg">
+                    Book a Readiness Conversation
+                  </PremiumCtaButton>
+
+                  <a
+                    href="tel:520-275-8755"
+                    className="inline-flex h-12 items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 text-xs font-semibold text-white backdrop-blur-md hover:bg-white hover:text-slate-900 transition-all"
+                  >
+                    <Phone className="h-4 w-4" />
+                    <span>Call 520-275-8755</span>
+                  </a>
+                </div>
+
+                <div className="flex items-center gap-6 text-xs font-mono text-slate-400 pt-2">
+                  <span>Direct Advisory Retainer</span>
+                  <span className="text-slate-600">•</span>
+                  <span>Tucson On-Site &amp; Worldwide Virtual</span>
+                </div>
               </div>
 
-              <div className="mt-8 flex items-center gap-6 text-xs font-mono text-slate-400">
-                <span>Direct Advisory Retainer</span>
-                <span className="text-slate-600">•</span>
-                <span>Tucson On-Site &amp; Worldwide Virtual</span>
+              {/* Right Column: Vera Advisory Context Card */}
+              <div className="lg:col-span-5">
+                <div className="relative rounded-3xl border border-white/15 bg-white/[0.06] backdrop-blur-xl p-6 sm:p-8 overflow-hidden shadow-2xl space-y-6">
+                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10">
+                    <Image
+                      src="/WhatsApp Image 2026-10-19 at 7.08.47 PM (8).jpeg"
+                      alt="Vera Shury conducting executive advisory consultation"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 420px"
+                      className="object-cover object-center"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                    <div className="absolute bottom-3 left-4 right-4 text-white">
+                      <div className="text-xs font-bold">Vera Shury, MS</div>
+                      <div className="text-[11px] text-slate-300 font-mono">
+                        Confidential 30-Minute Motivational Intake
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3 text-xs text-slate-300">
+                    <div className="flex items-start gap-2.5">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                      <span>Zero-obligation assessment of cognitive and physical baseline.</span>
+                    </div>
+                    <div className="flex items-start gap-2.5">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                      <span>Pinpoint whether the primary bottleneck is autonomic, metabolic, or enterprise structure.</span>
+                    </div>
+                    <div className="flex items-start gap-2.5">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                      <span>Direct actionable roadmap whether you proceed with formal coaching or not.</span>
+                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs">
+                    <span className="font-mono text-slate-400">Taxonomy: 71400000X</span>
+                    <Link
+                      href={CALENDAR_URL}
+                      target="_blank"
+                      className="text-amber-300 font-semibold hover:text-white flex items-center gap-1"
+                    >
+                      <span>Reserve Calendar Slot</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
