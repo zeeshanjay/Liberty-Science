@@ -357,7 +357,7 @@ export function NeuralModel3D({ staticImageSrc = "/neural-3d-model.jpg" }: { sta
           </span>
           <div>
             <div className="text-xs font-mono font-bold tracking-wider text-white uppercase">
-              Neuro-Metabolic Model 3D
+              Metabolic Neuroplasticity™ 3D Lattice
             </div>
             <div className="text-[11px] text-slate-400 font-mono">
               Adult Hippocampal &amp; Cortical Mapping

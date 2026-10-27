@@ -101,7 +101,7 @@ export default function ResearchMonographPage() {
                 type="button"
                 onClick={() =>
                   openDownload(
-                    "6-Day Habit Building Plan: Metabolic Neuroplasticity Template",
+                    "6-Day Habit Building Plan: Metabolic Neuroplasticity™ Template",
                     "Patient worksheet: Day 0 ACE readiness check, 6-day daily loop (Fuel + Movement + Attention), and reflection framework.",
                     "/documents/Liberty_Science_6Day_Habit_Plan.pdf",
                     "Liberty_Science_6Day_Habit_Plan.pdf"
@@ -144,7 +144,7 @@ export default function ResearchMonographPage() {
           </div>
 
           <h1 className="font-serif text-3xl sm:text-5xl font-semibold tracking-tight text-slate-950 leading-[1.16] max-w-4xl">
-            The Metabolic Neuroplasticity Protocol™
+            The Metabolic Neuroplasticity™ Protocol
           </h1>
 
           <p className="mt-4 font-serif italic text-lg sm:text-2xl text-slate-600 leading-snug max-w-3xl">
@@ -173,7 +173,7 @@ export default function ResearchMonographPage() {
         <div className="relative aspect-[21/9] w-full overflow-hidden rounded-2xl border border-slate-200/90 shadow-sm mb-12 bg-slate-950">
           <Image
             src="/research/metabolic-neuroplasticity-cover.jpg"
-            alt="Metabolic Neuroplasticity: The Biochemical Architecture of Neural Rewiring"
+            alt="Metabolic Neuroplasticity™: The Biochemical Architecture of Neural Rewiring"
             fill
             priority
             sizes="(max-width: 1200px) 100vw, 1100px"
@@ -315,6 +315,54 @@ export default function ResearchMonographPage() {
               </div>
             </section>
 
+            {/* Section: The Two Core Biological Mechanisms */}
+            <section id="mechanisms" className="space-y-6 pt-6 border-t border-slate-200">
+              <h2 className="font-serif text-2xl sm:text-3xl font-semibold tracking-tight text-slate-950">
+                The Two Core Biological Mechanisms of Metabolic Neuroplasticity™
+              </h2>
+              <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
+                The clinical durability of the Metabolic Neuroplasticity™ framework rests on two foundational, scientifically validated biological mechanisms operating in concert:
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
+                {/* Mechanism 1: Epigenetics */}
+                <div className="rounded-2xl border border-amber-200/90 bg-gradient-to-br from-amber-50/70 via-white to-amber-50/30 p-6 shadow-xs space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="h-7 w-7 rounded-lg bg-amber-500/10 text-[#ea580c] flex items-center justify-center font-bold text-xs font-mono">
+                      01
+                    </span>
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#ea580c]">
+                      Molecular Epigenetics
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 leading-snug">
+                    Cellular Fuel Altering Gene Expression
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Nutritional timing and metabolic switching are not simply caloric interventions—they serve as direct epigenetic signals that alter gene transcription. During structured 12–14 hour fasting intervals, hepatic production of beta-hydroxybutyrate (BHB) initiates a molecular cascade. BHB functions as an endogenous histone deacetylase (HDAC) inhibitor, remodeling chromatin to trigger the transcription of Brain-Derived Neurotrophic Factor (BDNF), PGC-1α (mitochondrial biogenesis), and cellular autophagy cascades. Cellular fuel directly alters gene expression to construct the physical biological substrate for adult neurogenesis.
+                  </p>
+                </div>
+
+                {/* Mechanism 2: Hebbian Neuroplasticity */}
+                <div className="rounded-2xl border border-indigo-200/90 bg-gradient-to-br from-indigo-50/70 via-white to-indigo-50/30 p-6 shadow-xs space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="h-7 w-7 rounded-lg bg-[#635bff]/10 text-[#635bff] flex items-center justify-center font-bold text-xs font-mono">
+                      02
+                    </span>
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#635bff]">
+                      Synaptic Hebbian Loops
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 leading-snug">
+                    &ldquo;What Fires Together Wires Together&rdquo; in 6-Day Micro-Loops
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Donald Hebb&apos;s neurobiological law dictates that synaptic connectivity strengthens through synchronized co-activation. Conventional rehabilitation fails because drills are performed under acute sympathetic cortisol stress, which disrupts Long-Term Potentiation (LTP). By synchronizing high-amplitude PWR!Moves® motor recruitments with HeartMath® 0.10 Hz autonomic coherence during the post-fasting ketone window, neural firing circuits achieve permanent synaptic consolidation. Vera anchors this protocol into disciplined <strong>6-Day Micro-Loops</strong>, allowing new motor, behavioral, and cognitive pathways to solidify before relapse can occur.
+                  </p>
+                </div>
+              </div>
+            </section>
+
             {/* Section 3: Observational Clinical Evidence */}
             <section id="evidence" className="space-y-4">
               <h2 className="font-serif text-2xl sm:text-3xl font-semibold tracking-tight text-slate-950">
@@ -360,7 +408,7 @@ export default function ResearchMonographPage() {
                 4. Translation into Clinical Retainer Practice
               </h2>
               <p>
-                The Metabolic Neuroplasticity Protocol™ is delivered through structured 1-on-1 advisory retainers tailored to individual physiology:
+                The Metabolic Neuroplasticity™ Protocol is delivered through structured 1-on-1 advisory retainers tailored to individual physiology:
               </p>
               <ul className="space-y-2 text-xs sm:text-sm text-slate-700">
                 <li className="flex items-start gap-2">
@@ -454,6 +502,9 @@ export default function ResearchMonographPage() {
                 <a href="#pillars" className="block text-slate-600 hover:text-slate-950 transition-colors">
                   2. Three Interdependent Pillars
                 </a>
+                <a href="#mechanisms" className="block text-slate-600 hover:text-slate-950 transition-colors">
+                  2b. Epigenetics &amp; Hebbian Loops
+                </a>
                 <a href="#evidence" className="block text-slate-600 hover:text-slate-950 transition-colors">
                   3. Clinical Outcomes &amp; Living Evidence
                 </a>
@@ -537,7 +588,7 @@ export default function ResearchMonographPage() {
                   <span className="text-[11px] font-mono text-slate-400">PDF • 257 KB</span>
                 </div>
                 <h3 className="font-serif text-lg font-bold text-slate-950 leading-snug">
-                  6-Day Habit Building Plan: Metabolic Neuroplasticity Template
+                  6-Day Habit Building Plan: Metabolic Neuroplasticity™ Template
                 </h3>
                 <p className="text-xs text-slate-600 leading-relaxed">
                   Fillable patient worksheet adaptable for ANY purpose (mobility, executive focus, self-care, or vitality). Features Day 0 ACE readiness check, 6-day daily loop cards, and reflection log.
@@ -553,7 +604,7 @@ export default function ResearchMonographPage() {
                   type="button"
                   onClick={() =>
                     openDownload(
-                      "6-Day Habit Building Plan: Metabolic Neuroplasticity Template",
+                      "6-Day Habit Building Plan: Metabolic Neuroplasticity™ Template",
                       "Fillable patient worksheet adaptable for ANY purpose. Features Day 0 ACE readiness check, 6-day daily loop cards, and reflection log.",
                       "/documents/Liberty_Science_6Day_Habit_Plan.pdf",
                       "Liberty_Science_6Day_Habit_Plan.pdf"

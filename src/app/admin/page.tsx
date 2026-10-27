@@ -163,7 +163,7 @@ export default function AdminPage() {
   const [clientStatus, setClientStatus] = useState<"active" | "paused" | "completed" | "archived">("active");
   const [clientStartDate, setClientStartDate] = useState(new Date().toISOString().slice(0, 10));
   const [clientDeliveryMode, setClientDeliveryMode] = useState("virtual");
-  const [clientPrimaryFocus, setClientPrimaryFocus] = useState("Metabolic Neuroplasticity");
+  const [clientPrimaryFocus, setClientPrimaryFocus] = useState("Metabolic Neuroplasticity™");
   const [clientNotes, setClientNotes] = useState("");
   const [clientSaving, setClientSaving] = useState(false);
   const [clientMessage, setClientMessage] = useState<{ text: string; isError: boolean } | null>(null);
@@ -274,7 +274,7 @@ export default function AdminPage() {
       const prog = initialLead.recommended_program || initialLead.recommended_retainer || "Signature Advisory Retainer";
       setClientProgram(prog);
       setClientMonthlyFee(prog.includes("1,275") ? "1275" : prog.includes("4,800") ? "4800" : "2400");
-      setClientPrimaryFocus(initialLead.primary_domain || initialLead.domain || "Metabolic Neuroplasticity");
+      setClientPrimaryFocus(initialLead.primary_domain || initialLead.domain || "Metabolic Neuroplasticity™");
       setClientNotes(initialLead.desired_outcome ? `Goal: ${initialLead.desired_outcome}` : "");
     } else {
       setClientName("");
@@ -282,7 +282,7 @@ export default function AdminPage() {
       setClientPhone("");
       setClientProgram("Signature Advisory Retainer");
       setClientMonthlyFee("2400");
-      setClientPrimaryFocus("Metabolic Neuroplasticity");
+      setClientPrimaryFocus("Metabolic Neuroplasticity™");
       setClientNotes("");
     }
 
@@ -302,7 +302,7 @@ export default function AdminPage() {
     setClientStatus(client.status);
     setClientStartDate(client.start_date || new Date().toISOString().slice(0, 10));
     setClientDeliveryMode(client.delivery_mode || "virtual");
-    setClientPrimaryFocus(client.primary_focus || "Metabolic Neuroplasticity");
+    setClientPrimaryFocus(client.primary_focus || "Metabolic Neuroplasticity™");
     setClientNotes(client.clinical_notes || "");
     setClientMessage(null);
     setIsClientModalOpen(true);
@@ -1117,7 +1117,7 @@ export default function AdminPage() {
                             </td>
                             <td className="py-4 px-4">
                               <span className="text-slate-800 text-xs font-medium">
-                                {client.primary_focus || "Metabolic Neuroplasticity"}
+                                {client.primary_focus || "Metabolic Neuroplasticity™"}
                               </span>
                               {client.clinical_notes && (
                                 <p className="text-slate-500 text-[11px] line-clamp-1 mt-0.5">
@@ -1685,7 +1685,7 @@ export default function AdminPage() {
                   </div>
                   <h4 className="text-base font-bold text-slate-950 mb-1">Research Monograph</h4>
                   <p className="text-xs text-slate-500 leading-relaxed mb-4">
-                    View the live metabolic neuroplasticity research paper and bibliography published for clinicians.
+                    View the live Metabolic Neuroplasticity™ research paper and bibliography published for clinicians.
                   </p>
                 </div>
                 <Link
@@ -1927,7 +1927,7 @@ export default function AdminPage() {
                 </label>
                 <input
                   type="text"
-                  placeholder="e.g. Metabolic Neuroplasticity &amp; PWR!Moves"
+                  placeholder="e.g. Metabolic Neuroplasticity™ &amp; PWR!Moves"
                   value={clientPrimaryFocus}
                   onChange={(e) => setClientPrimaryFocus(e.target.value)}
                   className="w-full px-3.5 py-2.5 bg-[#FAFAFA] border border-slate-200 rounded-xl text-slate-900 text-xs focus:outline-none focus:border-slate-900 shadow-2xs"

@@ -160,7 +160,7 @@ export default function CuratedToolsPage() {
                   Personally Applied Daily Regimens
                 </span>
                 <p className="text-xs sm:text-sm text-slate-300 mt-1 leading-relaxed">
-                  Metabolic Neuroplasticity tools selected solely for biological efficacy, cellular recovery, and lifelong autonomy.
+                  Metabolic Neuroplasticity™ tools selected solely for biological efficacy, cellular recovery, and lifelong autonomy.
                 </p>
               </div>
 

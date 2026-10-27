@@ -111,7 +111,7 @@ const THE_THREE_PILLARS = [
   {
     id: "health",
     title: "Health Advisory",
-    subtitle: "Metabolic Neuroplasticity & Parkinson'strength™",
+    subtitle: "Metabolic Neuroplasticity™ & Parkinson'strength™",
     icon: Activity,
     color: "from-blue-500/10 to-indigo-500/10",
     border: "border-blue-200",
@@ -132,7 +132,7 @@ const PROGRAM_SPECTRUM = [
     duration: "30 Minutes",
     investment: "Complimentary ($0)",
     focus: "Virtual Motivational Interview",
-    desc: "A focused, sensitive 30-minute brainstorm to evaluate your current baseline, identify whether the stall is showing up in life, business, or body, and determine readiness for the Metabolic Neuroplasticity loop.",
+    desc: "A focused, sensitive 30-minute brainstorm to evaluate your current baseline, identify whether the stall is showing up in life, business, or body, and determine readiness for the Metabolic Neuroplasticity™ loop.",
     highlight: false,
   },
   {
@@ -243,7 +243,7 @@ export default function AboutPage() {
                 At 86 years old, after bilateral knee replacements and spinal surgery,
                 Vera carves alpine black diamonds, advises business owners worldwide, and
                 coaches Parkinson&apos;s clients to reclaim motor agency through
-                <strong className="text-slate-900 font-semibold"> Metabolic Neuroplasticity</strong>.
+                <strong className="text-slate-900 font-semibold"> Metabolic Neuroplasticity™</strong>.
               </p>
 
               <div className="mt-6 flex flex-wrap items-center gap-2.5 text-xs font-mono text-slate-500">
@@ -525,12 +525,12 @@ export default function AboutPage() {
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-[1.12]">
                   The Biological Architecture of{" "}
                   <span className="font-serif italic font-normal bg-gradient-to-r from-amber-200 via-orange-300 to-amber-400 bg-clip-text text-transparent block mt-1">
-                    Adult Neuroplasticity.
+                    Metabolic Neuroplasticity™.
                   </span>
                 </h2>
 
                 <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-                  Adult hippocampal neurogenesis is not a luxury reserved for the young. Your nervous system continually produces new neurons and consolidates synaptogenesis—provided you supply the three biological signals that keep cortical mapping alive.
+                  Adult hippocampal neurogenesis is not a luxury reserved for the young. Your nervous system continually produces new neurons and consolidates synaptogenesis—driven by two biological mechanisms: <strong>epigenetics</strong> (cellular fuel altering gene expression) and <strong>Hebbian neuroplasticity</strong> (&ldquo;neurons that fire together wire together&rdquo; in 6-day micro-loops).
                 </p>
 
                 {/* The Tripartite Clinical Sequence */}
@@ -538,30 +538,30 @@ export default function AboutPage() {
                   <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-white/20 transition-all">
                     <div className="flex items-center gap-2.5 text-xs font-bold text-amber-300 mb-1">
                       <Flame className="w-4 h-4 text-[#ea580c]" />
-                      <span>01 · Fuel: Cyclic Metabolic Switching</span>
+                      <span>01 · Epigenetics &amp; Fuel: Cyclic Metabolic Switching</span>
                     </div>
                     <p className="text-xs text-slate-300 leading-relaxed">
-                      A structured 12–14 hour daily fasting window triggers hepatic ketone generation, directly upregulating Brain-Derived Neurotrophic Factor (BDNF) and stimulating cellular autophagy.
-                    </p>
-                  </div>
-
-                  <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-white/20 transition-all">
-                    <div className="flex items-center gap-2.5 text-xs font-bold text-emerald-300 mb-1">
-                      <Zap className="w-4 h-4 text-emerald-400" />
-                      <span>02 · Load: High-Amplitude Neuro-Motor Recruitment</span>
-                    </div>
-                    <p className="text-xs text-slate-300 leading-relaxed">
-                      PWR!Moves® and vestibular balance drills demand maximal intentional amplitude, actively resisting cortical disuse atrophy and reinforcing motor maps.
+                      A structured 12–14 hour daily fasting window triggers hepatic ketone bodies that directly alter gene expression, upregulating Brain-Derived Neurotrophic Factor (BDNF) and activating mitochondrial autophagy.
                     </p>
                   </div>
 
                   <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-white/20 transition-all">
                     <div className="flex items-center gap-2.5 text-xs font-bold text-indigo-300 mb-1">
                       <Heart className="w-4 h-4 text-[#635bff]" />
-                      <span>03 · Steer: Autonomic Coherence at 0.10 Hz</span>
+                      <span>02 · Autonomic Steer: 0.10 Hz HeartMath® Coherence</span>
                     </div>
                     <p className="text-xs text-slate-300 leading-relaxed">
-                      HeartMath® biofeedback downregulates chronic sympathetic overdrive, ensuring newly sprouted synapses consolidate into permanent functional stamina.
+                      Real-time HRV biofeedback downregulates chronic sympathetic overdrive and calms amygdala cortisol, establishing the receptive baseline necessary for synaptogenesis.
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-2.5 text-xs font-bold text-emerald-300 mb-1">
+                      <Zap className="w-4 h-4 text-emerald-400" />
+                      <span>03 · Hebbian Neuroplasticity: 6-Day Micro-Loops</span>
+                    </div>
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      &ldquo;What fires together wires together.&rdquo; High-amplitude PWR!Moves® drills executed during the primed ketone window consolidate motor maps into durable 6-day habit loops.
                     </p>
                   </div>
                 </div>

@@ -737,7 +737,7 @@ export default function LibertyScienceLandingPage() {
                       neuromuscular conditioning, Parkinson’s motor research,
                       black-diamond alpine skiing, snowboarding, and
                       kite-surfing, her nervous system is living verification of
-                      metabolic neuroplasticity.
+                      Metabolic Neuroplasticity™.
                     </p>
 
                     {/* Dual Action Photo Showcase: Black Diamond Trail Sign + Snowboarding */}

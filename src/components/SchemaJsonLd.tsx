@@ -12,7 +12,7 @@ export function SchemaJsonLd() {
           "Liberty Science",
           "Liberty Science LLC",
           "Vera Shury Coaching",
-          "Metabolic Neuroplasticity Tucson",
+          "Metabolic Neuroplasticity™ System Tucson",
           "Parkinson'strength"
         ],
         "url": "https://libertyscience.com",
@@ -23,7 +23,7 @@ export function SchemaJsonLd() {
         "priceRange": "$$$",
         "taxID": "71400000X",
         "description":
-          "Liberty Science Coaching is a premier life, business, and health advisory in Tucson, Arizona, founded by Vera Shury, MS. Specializing in Metabolic Neuroplasticity, HeartMath HRV coherence, PWR!Moves for Parkinson's, and executive longevity coaching so business owners, caregivers, and active adults stay capable of running what they built. No stagnancy.",
+          "Liberty Science Coaching is a premier life, business, and health advisory in Tucson, Arizona, founded by Vera Shury, MS. Specializing in the Metabolic Neuroplasticity™ System, HeartMath HRV coherence, PWR!Moves for Parkinson's, and executive longevity coaching so business owners, caregivers, and active adults stay capable of running what they built. No stagnancy.",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "12995 N Oracle Rd #141-135",
@@ -89,7 +89,7 @@ export function SchemaJsonLd() {
             }
           ],
           "knowsAbout": [
-            "Metabolic Neuroplasticity",
+            "Metabolic Neuroplasticity™",
             "Adult Hippocampal Neurogenesis",
             "HeartMath HRV Coherence",
             "PWR!Moves for Parkinson's Disease",
@@ -108,7 +108,7 @@ export function SchemaJsonLd() {
         "availableService": [
           {
             "@type": "MedicalTherapy",
-            "name": "Metabolic Neuroplasticity Coaching",
+            "name": "Metabolic Neuroplasticity™ System Coaching",
             "description": "Pairing HeartMath coherence, brain-body neuromuscular recruitment, and cyclic metabolic switching fuel so the brain-body loop keeps hiring."
           },
           {
@@ -144,10 +144,10 @@ export function SchemaJsonLd() {
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "What is Metabolic Neuroplasticity coaching in Tucson?",
+            "name": "What is Metabolic Neuroplasticity™ coaching in Tucson?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Metabolic Neuroplasticity is an evidence-based clinical modality created by Vera Shury, MS at Liberty Science Coaching in Tucson, Arizona. It pairs targeted metabolic nutrition (cyclic 12–14 hour fasting and ketone switching), high-amplitude neuromuscular movement (PWR!Moves and Strength4Balance), and regulated emotional attention (HeartMath HRV coherence) to activate Brain-Derived Neurotrophic Factor (BDNF) and adult hippocampal neurogenesis."
+              "text": "Metabolic Neuroplasticity™ is an evidence-based clinical modality created by Vera Shury, MS at Liberty Science Coaching in Tucson, Arizona. It pairs targeted metabolic nutrition (cyclic 12–14 hour fasting and ketone switching), high-amplitude neuromuscular movement (PWR!Moves and Strength4Balance), and regulated emotional attention (HeartMath HRV coherence) to activate Brain-Derived Neurotrophic Factor (BDNF) and adult hippocampal neurogenesis."
             }
           },
           {

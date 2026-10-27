@@ -16,7 +16,7 @@ interface DownloadPlanModalProps {
 export function DownloadPlanModal({
   isOpen,
   onClose,
-  documentTitle = "6-Day Habit Building Plan: Metabolic Neuroplasticity Template",
+  documentTitle = "6-Day Habit Building Plan: Metabolic Neuroplasticity™ Template",
   documentDescription = "Fillable worksheet: Day 0 ACE readiness check, 6-day daily loop (Fuel + Movement + Attention), and reflection framework.",
   pdfUrl = "/documents/Liberty_Science_6Day_Habit_Plan.pdf",
   fileName = "Liberty_Science_6Day_Habit_Plan.pdf",

@@ -170,7 +170,7 @@ const QUESTIONS: Question[] = [
         label: "The Full Triad: Fuel + Movement + Attention",
         detail:
           "A structured protocol combining anti-inflammatory nutrition, neuro-motor drills, and focus.",
-        tag: "Metabolic Neuroplasticity",
+        tag: "Metabolic Neuroplasticity™",
       },
     ],
   },
@@ -333,7 +333,7 @@ export function ReadinessAssessmentModal({
         name: "12-Month Beating Resistance Retainer",
         investment: "$4,800",
         cadence: "Annual Advisory Partnership",
-        desc: "Full-spectrum metabolic neuroplasticity protocol integrating physical, emotional, and operational balance with permanent relapse prevention.",
+        desc: "Full-spectrum Metabolic Neuroplasticity™ protocol integrating physical, emotional, and operational balance with permanent relapse prevention.",
       };
     } else {
       return {

@@ -19,51 +19,38 @@ export function FeaturedMonographSection() {
           <div className="relative z-10 grid grid-cols-1 items-center gap-10 lg:grid-cols-12">
             {/* Left Narrative Column (7 Cols) */}
             <div className="lg:col-span-7 space-y-5">
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400 block">
-                Clinical Monograph Series · Monograph 01
-              </span>
-
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-[42px] font-semibold tracking-tight text-white leading-[1.15]">
-                The Metabolic Neuroplasticity Protocol™
+                The Metabolic Neuroplasticity™ Protocol
               </h2>
 
               <p className="font-serif italic text-base sm:text-lg text-slate-300 leading-snug">
-                Why lasting neural rewiring begins with cellular fuel, not just practice: resolving the 70% relapse bottleneck of standard rehabilitation.
+                Why lasting neural rewiring begins with cellular fuel, not just practice: resolving the 70% relapse bottleneck through epigenetics and Hebbian micro-loops.
               </p>
 
               <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-                In this foundational clinical monograph, <strong>Vera Shury, C.H.C.</strong>, synthesizes 20+ years of clinical practice into a three-stage bioenergetic model. By aligning mitochondrial substrate and HeartMath® autonomic coherence before executing high-amplitude PWR!Moves drills, synaptic connections consolidate with permanent retention.
+                In this foundational clinical monograph, <strong>Vera Shury, C.H.C.</strong>, synthesizes 20+ years of clinical practice into a bioenergetic model driven by two validated mechanisms: <strong>epigenetics</strong> (cellular fuel triggering BDNF gene expression) and <strong>Hebbian neuroplasticity</strong> (&ldquo;neurons that fire together wire together&rdquo; locked into disciplined 6-day micro-loops). By establishing mitochondrial substrate and HeartMath® autonomic coherence before executing high-amplitude motor drills, synaptic pathways consolidate permanently.
               </p>
 
-              {/* Three Clinical Pillars */}
+              {/* Three Clinical Pillars & Mechanisms */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs">
                 <div className="rounded-xl border border-slate-800 bg-slate-900/80 p-3.5">
-                  <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block mb-1">
-                    Pillar I · Fuel
-                  </span>
-                  <div className="font-bold text-white">Cellular Priming</div>
-                  <p className="text-[11px] text-slate-400 mt-1 leading-snug">
-                    Glycemic stability &amp; mitochondrial ATP flux.
+                  <div className="font-bold text-amber-400">01 · Epigenetics</div>
+                  <p className="text-[11px] text-slate-300 mt-1 leading-snug">
+                    Cellular fuel altering gene expression &amp; BDNF upregulation.
                   </p>
                 </div>
 
                 <div className="rounded-xl border border-slate-800 bg-slate-900/80 p-3.5">
-                  <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block mb-1">
-                    Pillar II · Frequency
-                  </span>
-                  <div className="font-bold text-white">0.1 Hz Coherence</div>
-                  <p className="text-[11px] text-slate-400 mt-1 leading-snug">
-                    HeartMath® vagal calming to quiet amygdala fear.
+                  <div className="font-bold text-indigo-300">02 · Coherence</div>
+                  <p className="text-[11px] text-slate-300 mt-1 leading-snug">
+                    0.10 Hz HeartMath® vagal calming to silence fear-based cortisol.
                   </p>
                 </div>
 
                 <div className="rounded-xl border border-slate-800 bg-slate-900/80 p-3.5">
-                  <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block mb-1">
-                    Pillar III · Signal
-                  </span>
-                  <div className="font-bold text-white">Neuro-Drills</div>
-                  <p className="text-[11px] text-slate-400 mt-1 leading-snug">
-                    PWR!Moves reactive motor-map consolidation.
+                  <div className="font-bold text-emerald-400">03 · Hebbian Loops</div>
+                  <p className="text-[11px] text-slate-300 mt-1 leading-snug">
+                    PWR! high-amplitude drills locked in 6-day habit micro-loops.
                   </p>
                 </div>
               </div>
@@ -97,7 +84,7 @@ export function FeaturedMonographSection() {
               >
                 <Image
                   src="/research/metabolic-neuroplasticity-cover.jpg"
-                  alt="Metabolic Neuroplasticity Clinical Cover Illustration"
+                  alt="Metabolic Neuroplasticity™ Clinical Cover Illustration"
                   fill
                   sizes="(max-width: 1024px) 100vw, 500px"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"

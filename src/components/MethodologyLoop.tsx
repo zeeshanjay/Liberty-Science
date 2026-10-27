@@ -22,31 +22,31 @@ interface MethodologyCardData {
 
 const METHODOLOGY_CARDS: MethodologyCardData[] = [
   {
-    id: "coherence-first",
-    title: "HeartMath Coherence First",
+    id: "cellular-fuel",
+    title: "Epigenetics & Cellular Fuel",
     summary:
-      "Reducing systemic nervous stress and elevating Heart Rate Variability (HRV) so neuroplastic wiring is biologically unlocked.",
+      "Cyclic 12–14 hr metabolic switching produces ketones that alter gene expression, upregulating BDNF and mitochondrial biogenesis to unlock neuroplasticity.",
+    ctaLabel: "Start Assessment",
+    visualType: "nutrition",
+    accentHex: "#ea580c",
+  },
+  {
+    id: "coherence-first",
+    title: "HeartMath® Coherence First",
+    summary:
+      "Vagal nerve calibration at 0.10 Hz heart-rate variability (HRV) quiets amygdala fear and sympathetic stress so synaptic wiring can consolidate.",
     ctaLabel: "Book Consultation",
     visualType: "coherence",
     accentHex: "#635bff",
   },
   {
     id: "brain-body-loop",
-    title: "The Brain-Body Loop",
+    title: "Hebbian Neuroplasticity & Drills",
     summary:
-      "Fuel, movement, and deliberate cortical attention paired in real time for neuromuscular re-education, balance, and cognitive stamina.",
+      "What fires together wires together: high-amplitude PWR!Moves® paired with cortical attention in structured 6-day micro-loops for durable motor retention.",
     ctaLabel: "Explore Protocol",
     visualType: "loop",
     accentHex: "#1d4ed8",
-  },
-  {
-    id: "cellular-fuel",
-    title: "Nutrition & Cellular Fuel",
-    summary:
-      "Anti-inflammatory metabolic protocols and circadian cellular timing engineered to sustain clean energy and daily neurogenesis.",
-    ctaLabel: "Start Assessment",
-    visualType: "nutrition",
-    accentHex: "#ea580c",
   },
 ];
 
@@ -209,7 +209,7 @@ function FramelessMotionGraphic({
             textAnchor="middle"
             className="fill-slate-900 font-serif text-[22px] italic"
           >
-            Neuroplasticity
+            Metabolic Neuroplasticity™
           </text>
         </svg>
       </div>

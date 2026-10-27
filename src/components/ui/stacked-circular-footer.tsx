@@ -202,7 +202,7 @@ function StackedCircularFooter() {
           {/* Copyright & Discreet Credits */}
           <div className="border-t border-stone-200/80 pt-8 w-full max-w-3xl text-center">
             <p className="text-xs text-slate-500">
-              © {new Date().getFullYear()} Liberty Science Coaching · Vera Shury, C.H.C. All rights reserved.
+              © 2026 Liberty Science Coaching. All Rights Reserved. Metabolic Neuroplasticity™ is a proprietary clinical framework.
             </p>
             <p className="mt-1 text-[11px] text-slate-400">
               <a
@@ -222,7 +222,7 @@ function StackedCircularFooter() {
               >
                 Astraventa
               </a>{" "}
-              · Metabolic Neuroplasticity Architecture
+              · Metabolic Neuroplasticity™ Architecture
             </p>
           </div>
         </div>
