@@ -6,18 +6,18 @@ export function SchemaJsonLd() {
     "@graph": [
       {
         "@type": ["HealthAndBeautyBusiness", "MedicalBusiness", "ProfessionalService"],
-        "@id": "https://libertyscience.com/#organization",
-        "name": "Liberty Science Coaching",
+        "@id": "https://libertysciencecoaching.com/#organization",
+        "name": "Liberty Science",
         "alternateName": [
-          "Liberty Science",
+          "Liberty Science Coaching",
           "Liberty Science LLC",
           "Vera Shury Coaching",
           "Metabolic Neuroplasticity™ System Tucson",
           "Parkinson'strength"
         ],
-        "url": "https://libertyscience.com",
-        "logo": "https://libertyscience.com/logo.png",
-        "image": "https://libertyscience.com/curated-hero.jpg",
+        "url": "https://libertysciencecoaching.com",
+        "logo": "https://libertysciencecoaching.com/logo.png",
+        "image": "https://libertysciencecoaching.com/curated-hero.jpg",
         "telephone": "+1-520-275-8755",
         "email": "vera@libertysciencecoaching.com",
         "priceRange": "$$$",
@@ -59,12 +59,18 @@ export function SchemaJsonLd() {
         ],
         "founder": {
           "@type": "Person",
-          "@id": "https://libertyscience.com/#founder",
+          "@id": "https://libertysciencecoaching.com/#founder",
           "name": "Vera Shury, MS",
+          "alternateName": ["Vera Shury", "Vera M. Shury", "Coach Vera Shury"],
           "jobTitle": "Chief Clinician, Health Coach & Neuro-Functional Longevity Advisor",
           "gender": "Female",
+          "url": "https://libertysciencecoaching.com/about",
+          "sameAs": [
+            "https://www.youtube.com/@LIBERTYSCIENCE",
+            "https://libertysciencecoaching.com/about"
+          ],
           "worksFor": {
-            "@id": "https://libertyscience.com/#organization"
+            "@id": "https://libertysciencecoaching.com/#organization"
           },
           "hasCredential": [
             {
@@ -130,17 +136,17 @@ export function SchemaJsonLd() {
       },
       {
         "@type": "WebSite",
-        "@id": "https://libertyscience.com/#website",
-        "url": "https://libertyscience.com",
-        "name": "Liberty Science Coaching",
+        "@id": "https://libertysciencecoaching.com/#website",
+        "url": "https://libertysciencecoaching.com",
+        "name": "Liberty Science",
         "publisher": {
-          "@id": "https://libertyscience.com/#organization"
+          "@id": "https://libertysciencecoaching.com/#organization"
         },
         "inLanguage": "en-US"
       },
       {
         "@type": "FAQPage",
-        "@id": "https://libertyscience.com/#faq",
+        "@id": "https://libertysciencecoaching.com/#faq",
         "mainEntity": [
           {
             "@type": "Question",

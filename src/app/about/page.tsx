@@ -689,7 +689,7 @@ export default function AboutPage() {
               Structured Engagement Spectrum.
             </h2>
             <p className="mt-3 text-sm sm:text-base text-slate-600">
-              Clear, transparent clinical agreements under Healthcare Taxonomy Code <strong>71400000X</strong> (Specialized Clinical Exercise &amp; Health Coaching), qualifying programs for medical tax deductibility.
+              Clear, transparent clinical agreements under Healthcare Taxonomy Code <strong>71400000X</strong> (Specialized Clinical Exercise &amp; Health Coaching), qualifying programs for medical tax deductibility and flexible monthly installments with <strong>Affirm</strong>.
             </p>
           </div>
 
@@ -717,8 +717,13 @@ export default function AboutPage() {
                     {prog.tier}
                   </h3>
 
-                  <div className="text-xl font-bold text-slate-900 mt-2 font-sans">
-                    {prog.investment}
+                  <div className="text-xl font-bold text-slate-900 mt-2 font-sans flex items-baseline justify-between">
+                    <span>{prog.investment}</span>
+                    {prog.investment.includes("$") && !prog.investment.includes("($0)") && (
+                      <span className="text-[10px] font-mono text-[#004f98] bg-blue-50 px-2 py-0.5 rounded border border-blue-200/80 font-bold">
+                        Affirm Available
+                      </span>
+                    )}
                   </div>
 
                   <div className="text-xs font-semibold text-[#ea580c] mt-1">

@@ -46,15 +46,15 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://libertyscience.com"),
+  metadataBase: new URL("https://libertysciencecoaching.com"),
   title: {
-    default: "Liberty Science Coaching | Life · Business · Health Advisory | Metabolic Neuroplasticity™ Tucson",
-    template: "%s | Liberty Science Coaching",
+    default: "Liberty Science | Life, Business, Health Advisory",
+    template: "%s | Liberty Science",
   },
   description:
-    "Life, business, and health advisory pairing the Metabolic Neuroplasticity™ System, HeartMath® coherence, and neuromuscular training so owners, caregivers, and active adults stay capable of running what they built. No stagnancy.",
-  applicationName: "Liberty Science Coaching",
-  authors: [{ name: "Vera Shury, MS", url: "https://libertyscience.com/about" }],
+    "Life, Business, Health Advisory by Vera Shury, MS. Pairing the Metabolic Neuroplasticity™ System, HeartMath® coherence, and neuromuscular training so business owners, caregivers, and active adults stay capable of running what they built. No stagnancy.",
+  applicationName: "Liberty Science",
+  authors: [{ name: "Vera Shury, MS", url: "https://libertysciencecoaching.com/about" }],
   generator: "Next.js",
   keywords: [
     "Metabolic Neuroplasticity™ System coaching Tucson",
@@ -84,20 +84,20 @@ export const metadata: Metadata = {
     telephone: true,
   },
   alternates: {
-    canonical: "https://libertyscience.com",
+    canonical: "https://libertysciencecoaching.com",
   },
   openGraph: {
-    title: "Liberty Science Coaching | Life · Business · Health Advisory | Tucson",
+    title: "Liberty Science | Life, Business, Health Advisory",
     description:
-      "Your brain is still generating. Metabolic Neuroplasticity™ System coaching pairing HeartMath® coherence, the brain-body loop, and cyclic nutrition so you stay able to run what you built.",
-    url: "https://libertyscience.com",
-    siteName: "Liberty Science Coaching",
+      "Your brain is still generating. Life, Business, Health Advisory pairing HeartMath® coherence, the brain-body loop, and the Metabolic Neuroplasticity™ System so you stay able to run what you built.",
+    url: "https://libertysciencecoaching.com",
+    siteName: "Liberty Science",
     images: [
       {
         url: "/curated-hero.jpg",
         width: 1200,
         height: 630,
-        alt: "Vera Shury, MS — Liberty Science Coaching | Metabolic Neuroplasticity™",
+        alt: "Vera Shury, MS — Liberty Science | Life, Business, Health Advisory",
       },
     ],
     locale: "en_US",
@@ -105,9 +105,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Liberty Science Coaching | Life · Business · Health Advisory",
+    title: "Liberty Science | Life, Business, Health Advisory",
     description:
-      "Your brain is still generating. Metabolic Neuroplasticity™ System coaching so business owners and active adults stay able to run what they built. No stagnancy.",
+      "Your brain is still generating. Life, Business, Health Advisory so business owners and active adults stay able to run what they built. No stagnancy.",
     images: ["/curated-hero.jpg"],
     creator: "@LibertyScience",
   },
