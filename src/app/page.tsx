@@ -982,7 +982,7 @@ export default function LibertyScienceLandingPage() {
         <TestimonialsSection />
 
         {/* =========================================================
-            6. CURATED RECOMMENDATIONS ("TRIED BY VERA")
+            6. CURATED TOOLS & PROTOCOLS (TESTED IN PRACTICE)
            ========================================================= */}
         <section id="resources" className="relative py-10 sm:py-14">
           <div id="curated" className="sr-only" />
@@ -994,13 +994,13 @@ export default function LibertyScienceLandingPage() {
               transition={{ duration: 0.65 }}
               className="overflow-hidden rounded-[32px] border border-slate-200/90 bg-white shadow-[0_20px_50px_-20px_rgba(15,23,42,0.06)]"
             >
-              {/* Top Curated Header + Authentic "Tried by Vera" QR Code Image */}
+              {/* Top Curated Header + Verified Clinical Protocol Image */}
               <div className="grid grid-cols-1 border-b border-slate-100 lg:grid-cols-12">
                 <div className="flex flex-col justify-center bg-white p-8 sm:p-12 lg:col-span-8 lg:border-r lg:border-slate-100">
                   <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl lg:text-[42px]">
-                    Curated Recommendations{" "}
+                    Curated Tools &amp; Protocols{" "}
                     <span className="font-serif italic font-normal bg-gradient-to-r from-[#635bff] to-[#ea580c] bg-clip-text text-transparent">
-                      (&ldquo;Tried by Vera&rdquo;)
+                      Tested in Daily Practice
                     </span>
                   </h2>
 
@@ -1022,7 +1022,7 @@ export default function LibertyScienceLandingPage() {
                   </div>
                 </div>
 
-                {/* Authentic "Tried by Vera" QR Code Image from public/ */}
+                {/* Verified Clinical Protocol Image from public/ */}
                 <div className="flex flex-col items-center justify-center bg-slate-50/60 p-8 lg:col-span-4">
                   <a
                     href={CALENDAR_URL}
@@ -1033,7 +1033,7 @@ export default function LibertyScienceLandingPage() {
                     <div className="relative h-44 w-44 sm:h-48 sm:w-48">
                       <Image
                         src="/WhatsApp Image 2026-10-19 at 7.08.47 PM (1).jpeg"
-                        alt="Tried by Vera Official QR Code Stamp"
+                        alt="Clinical Protocol Verification Stamp"
                         fill
                         sizes="192px"
                         className="object-contain"

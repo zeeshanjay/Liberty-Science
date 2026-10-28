@@ -444,7 +444,7 @@ export default function CuratedToolsPage() {
               <div className="relative h-20 w-20 overflow-hidden rounded-xl border border-slate-200 bg-white p-1">
                 <Image
                   src="/WhatsApp Image 2026-10-19 at 7.08.47 PM (1).jpeg"
-                  alt="Tried by Vera Official Seal"
+                  alt="Clinical Protocol Verification Stamp"
                   fill
                   sizes="80px"
                   className="object-contain"
