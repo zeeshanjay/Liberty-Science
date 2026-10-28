@@ -18,6 +18,16 @@ interface CertificateData {
 
 const CERTIFICATES: CertificateData[] = [
   {
+    id: "harvardx",
+    issuer: "HarvardX (Harvard University)",
+    title: "Technology Entrepreneurship",
+    subtitle: "Lab to Market · edX ID: 954e0f86",
+    holder: "Vera Shury",
+    accentGradient: "from-[#A51C30] via-rose-700 to-amber-700",
+    logoSrc: "/logos/harvardx.svg",
+    href: "https://courses.edx.org/certificates/954e0f86dfd74c74b05b4438674b7d07",
+  },
+  {
     id: "ace",
     issuer: "American Council on Exercise",
     title: "ACE Certified Life & Health Coach",
@@ -67,7 +77,7 @@ const CERTIFICATES: CertificateData[] = [
 
 export function CredentialCertificates() {
   return (
-    <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+    <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
       {CERTIFICATES.map((cert, idx) => {
         const CardContent = (
           <div className="relative flex h-full flex-col justify-between rounded-xl border border-slate-200/80 bg-white p-5 transition-all">

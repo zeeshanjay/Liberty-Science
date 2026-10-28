@@ -38,6 +38,14 @@ const CALENDAR_URL = "https://calendar.app.google/8Gt1wf6dzY3ki8xy7";
 
 const CREDENTIAL_STACK = [
   {
+    title: "Technology Entrepreneurship: Lab to Market",
+    code: "HarvardX Verified #954e0f86",
+    desc: "Executive credential in Technology Entrepreneurship from HarvardX (Harvard University), taught by Prof. Karim Lakhani (Harvard Business School) & Prof. Viswanathan Krishnan (UC San Diego).",
+    detail: "Translating technological innovation into scalable, sustainable business performance.",
+    link: "https://courses.edx.org/certificates/954e0f86dfd74c74b05b4438674b7d07",
+    linkText: "Verify edX Credential ↗",
+  },
+  {
     title: "Licensed Health Coach",
     code: "ACE Coach #W54776",
     desc: "National clinical accreditation for behavioral lifestyle change, risk mitigation, and executive longevity.",
@@ -67,12 +75,6 @@ const CREDENTIAL_STACK = [
     desc: "Integration of Shotokan discipline, SilverSneakers Yoga, Tai Chi, and proprioceptive agility.",
     detail: "Translating traditional physical wisdom into daily functional independence.",
   },
-  {
-    title: "Neuro-Anthropology Foundation",
-    code: "Behavioral Sciences & Tao in Business",
-    desc: "Academic grounding in human neuro-adaptation, habit formation, and sustainable enterprise balance.",
-    detail: "Equalizing physical stamina, cognitive bandwidth, and commercial execution.",
-  },
 ];
 
 const THE_THREE_PILLARS = [
@@ -100,8 +102,9 @@ const THE_THREE_PILLARS = [
     color: "from-emerald-500/10 to-teal-500/10",
     border: "border-emerald-200",
     badge: "text-emerald-800 bg-emerald-50",
-    desc: "Scaling an enterprise requires cognitive bandwidth and biological stamina—not burnout. Drawing from Vera's own 4,000% practice scaling since 2012 and her 'Spiritual Tao in Business' framework, she works with founders, women in business, and executives to unlock sustainable expansion, sharp decision velocity, and leadership succession without sacrificing physical vitality or life balance.",
+    desc: "Scaling an enterprise requires cognitive bandwidth and biological stamina—not burnout. Drawing from Vera's own 4,000% practice scaling and formal HarvardX certification in Technology Entrepreneurship (Lab to Market), she works with founders, women in business, and executives to unlock sustainable expansion, sharp decision velocity, and leadership succession without sacrificing physical vitality or life balance.",
     bullets: [
+      "HarvardX Technology Entrepreneurship (Lab to Market) framework translation",
       "Scaling without biological compromise (proven 4,000% practice growth model)",
       "Prefrontal executive stamina & high-velocity decision clarity under commercial pressure",
       "Spiritual Tao in Business framing: sustainable enterprise & life equilibrium",
@@ -804,10 +807,20 @@ export default function AboutPage() {
                       {cred.desc}
                     </p>
                   </div>
-                  <div className="mt-5 border-t border-slate-100 pt-3">
+                  <div className="mt-5 border-t border-slate-100 pt-3 flex flex-wrap items-center justify-between gap-2">
                     <span className="text-[11px] font-mono text-slate-400">
                       {cred.detail}
                     </span>
+                    {cred.link && (
+                      <a
+                        href={cred.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex shrink-0 items-center gap-1 text-[11px] font-bold text-[#A51C30] hover:underline"
+                      >
+                        <span>{cred.linkText || "Verify"}</span>
+                      </a>
+                    )}
                   </div>
                 </div>
               ))}

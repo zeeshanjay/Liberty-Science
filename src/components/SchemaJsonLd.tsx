@@ -75,6 +75,16 @@ export function SchemaJsonLd() {
           "hasCredential": [
             {
               "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "Certificate",
+              "name": "Technology Entrepreneurship: Lab to Market",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "HarvardX (Harvard University)"
+              },
+              "url": "https://courses.edx.org/certificates/954e0f86dfd74c74b05b4438674b7d07"
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
               "credentialCategory": "certification",
               "name": "ACE Licensed Health Coach #W54776"
             },
@@ -95,6 +105,7 @@ export function SchemaJsonLd() {
             }
           ],
           "knowsAbout": [
+            "Technology Entrepreneurship & Enterprise Scaling",
             "Metabolic Neuroplasticity™",
             "Adult Hippocampal Neurogenesis",
             "HeartMath HRV Coherence",

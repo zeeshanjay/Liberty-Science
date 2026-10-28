@@ -512,8 +512,8 @@ export default function LibertyScienceLandingPage() {
                   </div>
                 </motion.div>
 
-                {/* Direct Link to Dedicated About Page */}
-                <div className="mt-7">
+                {/* Direct Link to Dedicated About Page & Verified HarvardX Credential */}
+                <div className="mt-7 flex flex-wrap items-center gap-3">
                   <Link
                     href="/about"
                     className="group inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#ea580c] hover:text-[#c2410c] transition-colors"
@@ -521,6 +521,18 @@ export default function LibertyScienceLandingPage() {
                     <span>Read Vera&apos;s full story &amp; clinical journey</span>
                     <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </Link>
+
+                  <a
+                    href="https://courses.edx.org/certificates/954e0f86dfd74c74b05b4438674b7d07"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-rose-200/90 bg-rose-50/80 px-3 py-1 text-[11px] font-semibold text-rose-950 transition-all hover:bg-rose-100 hover:border-rose-300 shadow-2xs"
+                  >
+                    <span className="font-serif font-bold text-[#A51C30]">HARVARDx</span>
+                    <span className="text-rose-300">|</span>
+                    <span>Technology Entrepreneurship</span>
+                    <ArrowUpRight className="h-3 w-3 text-[#A51C30]" />
+                  </a>
                 </div>
               </div>
 
@@ -684,6 +696,29 @@ export default function LibertyScienceLandingPage() {
                             </li>
                           ))}
                         </ul>
+
+                        {pillar.id === "business-advisory" && (
+                          <div className="mt-5 rounded-2xl border border-rose-100 bg-rose-50/60 p-3.5">
+                            <div className="flex items-center justify-between gap-2">
+                              <div className="flex items-center gap-1.5">
+                                <span className="font-serif font-bold text-xs text-[#A51C30]">HARVARDx</span>
+                                <span className="text-[10px] font-semibold text-rose-900">Lab to Market</span>
+                              </div>
+                              <a
+                                href="https://courses.edx.org/certificates/954e0f86dfd74c74b05b4438674b7d07"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 text-[11px] font-bold text-[#A51C30] hover:underline"
+                              >
+                                <span>Verify Credential</span>
+                                <ArrowUpRight className="h-3 w-3" />
+                              </a>
+                            </div>
+                            <p className="mt-1.5 text-[11px] leading-relaxed text-slate-600">
+                              Backed by formal HarvardX certification in Technology Entrepreneurship (Lab to Market), translating complex innovation and behavioral science into scalable, sustainable business performance.
+                            </p>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>

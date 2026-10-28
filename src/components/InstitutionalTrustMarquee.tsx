@@ -37,6 +37,12 @@ const PARTNER_LOGOS: PartnerLogo[] = [
     height: 58,
   },
   {
+    name: "HarvardX - Harvard University Online Learning Initiative",
+    src: "/logos/harvardx.svg",
+    width: 120,
+    height: 40,
+  },
+  {
     name: "ACE Certified - American Council on Exercise",
     src: "/logos/ace.png",
     width: 110,
