@@ -33,6 +33,7 @@ import { StackedCircularFooter } from "@/components/ui/stacked-circular-footer";
 import { PremiumCtaButton } from "@/components/ui/PremiumCtaButton";
 import { InstitutionalTrustMarquee } from "@/components/InstitutionalTrustMarquee";
 import { NeuralModel3D } from "@/components/NeuralModel3D";
+import { AffirmPromo } from "@/components/AffirmPromo";
 
 const CALENDAR_URL = "https://calendar.app.google/8Gt1wf6dzY3ki8xy7";
 
@@ -150,6 +151,7 @@ const PROGRAM_SPECTRUM = [
     tier: "Basic Mini Programs",
     duration: "5 Sessions Total",
     investment: "$297",
+    amountCents: 29700,
     focus: "Targeted Clinical Modules",
     desc: "1 initial 60-min deep dive + 4 @ 45-min follow-ups. Focus areas include: Cooling Vitality, Reclaim Mobility, Bust Your Stress, Master Self-Regulation, Senior Posture Revival, or PWR! Parkinson's Power Up.",
     highlight: false,
@@ -158,6 +160,7 @@ const PROGRAM_SPECTRUM = [
     tier: "Quick Start Retainer",
     duration: "90 Days (~3 Months)",
     investment: "$1,275",
+    amountCents: 127500,
     focus: "Foundational Neuro-Habit Loop",
     desc: "Comprehensive research and protocol design to improve acute or chronic conditions. Covers breath mechanics, posture, nutrition, HeartMath HRV coherence, and structured relapse prevention.",
     highlight: false,
@@ -166,6 +169,7 @@ const PROGRAM_SPECTRUM = [
     tier: "Quality Goals Retainer",
     duration: "6 Months",
     investment: "$2,400",
+    amountCents: 240000,
     focus: "Signature Advisory Retainer",
     desc: "Deep integration across Life, Business, Work, and Recovery. Sensitive extended assessments of mind, body, and enterprise; neuroplastic habit maintenance, and permanent relapse aversion.",
     highlight: true,
@@ -174,6 +178,7 @@ const PROGRAM_SPECTRUM = [
     tier: "Beating Resistance",
     duration: "12 Months",
     investment: "$4,800",
+    amountCents: 480000,
     focus: "Platinum Master Retainer",
     desc: "Year-long executive partnership addressing deep-seated habit change with continuous scientific assessments, creative evidence-based modalities, relationship support, and total cognitive-motor vitality.",
     highlight: false,
@@ -720,12 +725,10 @@ export default function AboutPage() {
                     {prog.tier}
                   </h3>
 
-                  <div className="text-xl font-bold text-slate-900 mt-2 font-sans flex items-baseline justify-between">
-                    <span>{prog.investment}</span>
-                    {prog.investment.includes("$") && !prog.investment.includes("($0)") && (
-                      <span className="text-[10px] font-mono text-[#004f98] bg-blue-50 px-2 py-0.5 rounded border border-blue-200/80 font-bold">
-                        Affirm Available
-                      </span>
+                  <div className="mt-2 flex flex-wrap items-center justify-between gap-2 font-sans">
+                    <span className="text-xl font-bold text-slate-900">{prog.investment}</span>
+                    {prog.amountCents && (
+                      <AffirmPromo amountCents={prog.amountCents} compact={true} />
                     )}
                   </div>
 

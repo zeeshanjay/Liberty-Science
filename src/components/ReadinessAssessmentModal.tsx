@@ -14,6 +14,7 @@ import {
   Download,
   Sparkles,
 } from "lucide-react";
+import { AffirmPromo } from "@/components/AffirmPromo";
 
 const CALENDAR_URL = "https://calendar.app.google/8Gt1wf6dzY3ki8xy7";
 
@@ -325,6 +326,7 @@ export function ReadinessAssessmentModal({
       return {
         name: "90-Day Quick Start Protocol",
         investment: "$1,275",
+        amountCents: 127500,
         cadence: "90-Day Intensive Baseline Stabilization",
         desc: "High-intensity neuromuscular baseline stabilization pairing PWR!Moves/Strength4Balance drills with anti-inflammatory metabolic fuel.",
       };
@@ -332,6 +334,7 @@ export function ReadinessAssessmentModal({
       return {
         name: "12-Month Beating Resistance Retainer",
         investment: "$4,800",
+        amountCents: 480000,
         cadence: "Annual Advisory Partnership",
         desc: "Full-spectrum Metabolic Neuroplasticity™ protocol integrating physical, emotional, and operational balance with permanent relapse prevention.",
       };
@@ -339,6 +342,7 @@ export function ReadinessAssessmentModal({
       return {
         name: "6-Month Quality Goals Advisory",
         investment: "$2,400",
+        amountCents: 240000,
         cadence: "6-Month Strategic Advisory Horizon",
         desc: "Comprehensive executive partnership addressing decision stamina, HeartMath® HRV vagal regulation, and leadership continuity without burnout.",
       };
@@ -787,13 +791,18 @@ Recommended Retainer: ${recommendedProgram.name} (${recommendedProgram.investmen
 
                 {/* Recommended Retainer Card With Crystal-Clear Pricing & Value */}
                 <div className="mt-3 rounded-xl border border-slate-200 bg-white p-3.5 space-y-2">
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-wrap items-center justify-between gap-1.5">
                     <span className="text-[10px] uppercase tracking-wider text-slate-500 font-bold">
                       RECOMMENDED CLINICAL ADVISORY
                     </span>
-                    <span className="font-mono text-xs font-bold text-slate-900">
-                      {recommendedProgram.investment}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono text-xs font-bold text-slate-900">
+                        {recommendedProgram.investment}
+                      </span>
+                      {recommendedProgram.amountCents && (
+                        <AffirmPromo amountCents={recommendedProgram.amountCents} compact={true} />
+                      )}
+                    </div>
                   </div>
 
                   <div className="text-xs sm:text-sm font-bold text-slate-900">

@@ -26,6 +26,7 @@ import { ContactSection } from "@/components/ContactSection";
 import { StackedCircularFooter } from "@/components/ui/stacked-circular-footer";
 import { PremiumCtaButton } from "@/components/ui/PremiumCtaButton";
 import { ReadinessAssessmentModal } from "@/components/ReadinessAssessmentModal";
+import { AffirmPromo } from "@/components/AffirmPromo";
 import { cn } from "@/lib/utils";
 
 const CALENDAR_URL = "https://calendar.app.google/8Gt1wf6dzY3ki8xy7";
@@ -234,6 +235,7 @@ const ADVISORY_PROGRAMS = [
   {
     name: "90-Day Quickstart",
     price: "$1,275",
+    amountCents: 127500,
     cadence: "90 Days (~3 Months)",
     summary:
       "Extended Sensitive Motivational Interview and comprehensive research into acute or chronic challenges—integrating breath, posture, targeted nutrition, and durable relapse prevention.",
@@ -249,6 +251,7 @@ const ADVISORY_PROGRAMS = [
   {
     name: "6-Month Quality Goals",
     price: "$2,400",
+    amountCents: 240000,
     cadence: "6-Month Advisory",
     summary:
       "Comprehensive guidance for Life, Business, Work, Retirement & Recovery. Combines mind-body assessments with proven techniques for mental balance and lasting habit maintenance.",
@@ -265,6 +268,7 @@ const ADVISORY_PROGRAMS = [
   {
     name: "12-Month Beating Resistance",
     price: "$4,800",
+    amountCents: 480000,
     cadence: "Annual Advisory Retainer",
     summary:
       "A year-long advisory partnership providing scientific assessments of emotional, physical, and spiritual balance—dissolving deep-seated resistance with new evidence-based modalities.",
@@ -956,13 +960,18 @@ export default function LibertyScienceLandingPage() {
                       {program.summary}
                     </p>
 
-                    <div className="mt-6 flex items-baseline gap-2 border-b border-slate-100 pb-6">
-                      <span className="text-4xl sm:text-[42px] font-extrabold tracking-tight text-slate-900 font-mono">
-                        {program.price}
-                      </span>
-                      <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                        / {program.cadence}
-                      </span>
+                    <div className="mt-6 border-b border-slate-100 pb-5">
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-4xl sm:text-[42px] font-extrabold tracking-tight text-slate-900 font-mono">
+                          {program.price}
+                        </span>
+                        <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                          / {program.cadence}
+                        </span>
+                      </div>
+                      <div className="mt-3">
+                        <AffirmPromo amountCents={program.amountCents} />
+                      </div>
                     </div>
 
                     <div className="mt-6">

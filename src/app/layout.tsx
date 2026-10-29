@@ -9,6 +9,7 @@ import "./globals.css";
 import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import { PagePreloader } from "@/components/PagePreloader";
 import { SchemaJsonLd } from "@/components/SchemaJsonLd";
+import { AffirmScript } from "@/components/AffirmScript";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -151,6 +152,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-white font-sans text-slate-900 antialiased selection:bg-[#635bff] selection:text-white">
         <PagePreloader />
+        <AffirmScript />
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
     </html>
