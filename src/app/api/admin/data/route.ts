@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
+import Stripe from "stripe";
 
 export async function GET(request: Request) {
   try {
@@ -11,6 +12,86 @@ export async function GET(request: Request) {
         { success: false, error: "Invalid master authorization passcode." },
         { status: 401 }
       );
+    }
+
+    // 0. Auto-sync live Stripe paid sessions into Supabase practice_clients
+    const stripeKey = process.env.STRIPE_SECRET_KEY;
+    if (stripeKey) {
+      try {
+        const stripe = new Stripe(stripeKey);
+        const sessions = await stripe.checkout.sessions.list({ limit: 20 });
+        const paidSessions = sessions.data.filter(
+          (s) => s.payment_status === "paid" && (s.amount_total || 0) > 0
+        );
+
+        if (paidSessions.length > 0) {
+          const { data: currentRoster } = await supabaseAdmin
+            .from("practice_clients")
+            .select("*");
+
+          for (const sess of paidSessions) {
+            const alreadySynced = (currentRoster || []).some(
+              (c) => c.clinical_notes && c.clinical_notes.includes(sess.id)
+            );
+            if (alreadySynced) continue;
+
+            const amountDollars = Math.round((sess.amount_total || 0) / 100);
+            const email = (sess.customer_details?.email || "")
+              .trim()
+              .toLowerCase();
+            const name = (
+              sess.customer_details?.name ||
+              (email ? email.split("@")[0] : "Stripe Client")
+            ).trim();
+            const phone = sess.customer_details?.phone || "";
+            const dateStr = new Date(sess.created * 1000).toLocaleDateString(
+              "en-US",
+              { month: "short", day: "numeric", year: "numeric" }
+            );
+            const paymentNote = `✓ Verified Stripe Payment: $${amountDollars.toLocaleString()} on ${dateStr} (Ref: ${sess.id})`;
+
+            const matched = (currentRoster || []).find(
+              (c) =>
+                (email && c.email && c.email.toLowerCase() === email) ||
+                (name && c.name && c.name.toLowerCase() === name.toLowerCase())
+            );
+
+            if (matched) {
+              await supabaseAdmin
+                .from("practice_clients")
+                .update({
+                  monthly_fee:
+                    Number(matched.monthly_fee || 0) + amountDollars,
+                  status: "active",
+                  email: email || matched.email,
+                  phone: phone || matched.phone,
+                  clinical_notes: matched.clinical_notes
+                    ? `${paymentNote} | ${matched.clinical_notes}`
+                    : paymentNote,
+                  updated_at: new Date().toISOString(),
+                })
+                .eq("id", matched.id);
+            } else {
+              await supabaseAdmin.from("practice_clients").insert({
+                name,
+                email,
+                phone,
+                retainer_program: "90-Day Quickstart Retainer",
+                monthly_fee: amountDollars,
+                status: "active",
+                start_date: new Date(sess.created * 1000)
+                  .toISOString()
+                  .slice(0, 10),
+                primary_focus: "Metabolic Neuroplasticity™",
+                delivery_mode: "virtual",
+                clinical_notes: paymentNote,
+              });
+            }
+          }
+        }
+      } catch (stripeSyncErr) {
+        console.error("Admin Stripe live sync warning:", stripeSyncErr);
+      }
     }
 
     // 1. Fetch Assessment Leads
