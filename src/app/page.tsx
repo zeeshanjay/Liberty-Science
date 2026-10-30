@@ -1018,15 +1018,13 @@ export default function LibertyScienceLandingPage() {
                       Apply via Discovery Call
                     </PremiumCtaButton>
 
-                    <a
-                      href={program.stripeCheckoutUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex h-8 w-full items-center justify-center gap-1 text-[11px] font-semibold text-slate-500 hover:text-[#635bff] transition-colors"
-                    >
-                      <span>Already consulted? Pay via Stripe / Card</span>
-                      <ArrowUpRight className="h-3 w-3" />
-                    </a>
+                    <AffirmPromo
+                      amountCents={program.amountCents}
+                      programName={program.name}
+                      stripeUrl={program.stripeCheckoutUrl}
+                      variant="textLink"
+                      className="h-8 w-full"
+                    />
                   </div>
                 </motion.div>
               ))}
