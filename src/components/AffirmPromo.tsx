@@ -1,16 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowUpRight, ShieldCheck, Sparkles, X } from "lucide-react";
+import { ArrowUpRight, ShieldCheck, Sparkles, X, CreditCard, Calendar } from "lucide-react";
 
 interface AffirmPromoProps {
   amountCents: number;
+  programName?: string;
+  stripeUrl?: string;
   className?: string;
   compact?: boolean;
 }
 
 export function AffirmPromo({
   amountCents,
+  programName = "Executive Advisory Retainer",
+  stripeUrl,
   className = "",
   compact = false,
 }: AffirmPromoProps) {
@@ -18,13 +22,12 @@ export function AffirmPromo({
   const monthlyEst = Math.round(amountCents / 1200);
 
   useEffect(() => {
-    // When mounted, if Affirm SDK is ready, refresh promotional elements
     if (typeof window !== "undefined" && (window as any).affirm?.ui?.ready) {
       (window as any).affirm.ui.ready(() => {
         try {
           (window as any).affirm.ui.refresh();
         } catch {
-          // Silent fallback if Affirm script not initialized
+          // Silent fallback
         }
       });
     }
@@ -33,20 +36,6 @@ export function AffirmPromo({
   const handleTrigger = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-
-    // Trigger Affirm's native educational modal if Affirm SDK loaded
-    if (typeof window !== "undefined" && (window as any).affirm?.show) {
-      try {
-        (window as any).affirm.show({
-          page_type: "product",
-          amount: amountCents,
-        });
-        return;
-      } catch {
-        // Fallback to internal modal
-      }
-    }
-
     setIsModalOpen(true);
   };
 
@@ -56,17 +45,21 @@ export function AffirmPromo({
         <button
           type="button"
           onClick={handleTrigger}
-          className={`group/affirm inline-flex items-center gap-1.5 rounded-md border border-sky-200/90 bg-sky-50/70 px-2.5 py-1 text-[11px] font-medium text-sky-950 transition-all hover:bg-sky-100 hover:border-sky-300 ${className}`}
+          className={`group/affirm inline-flex items-center gap-1.5 rounded-md border border-sky-200/90 bg-sky-50/70 px-2.5 py-1 text-[11px] font-medium text-sky-950 transition-all hover:bg-sky-100 hover:border-sky-300 cursor-pointer ${className}`}
         >
           <span className="font-extrabold text-[#004f98] tracking-tight">affirm</span>
           <span className="text-sky-300">|</span>
-          <span>As low as <strong className="font-semibold text-slate-900">${monthlyEst}/mo</strong></span>
+          <span>
+            Pay <strong className="font-semibold text-slate-900">~${monthlyEst}/mo</strong>
+          </span>
           <ArrowUpRight className="h-3 w-3 text-[#004f98] transition-transform group-hover/affirm:translate-x-0.5 group-hover/affirm:-translate-y-0.5" />
         </button>
 
         {isModalOpen && (
-          <AffirmEducationalModal
+          <AffirmDirectCheckoutModal
             amountCents={amountCents}
+            programName={programName}
+            stripeUrl={stripeUrl}
             monthlyEst={monthlyEst}
             onClose={() => setIsModalOpen(false)}
           />
@@ -87,11 +80,11 @@ export function AffirmPromo({
               affirm
             </span>
             <span className="text-xs text-slate-700">
-              Pay over time with monthly plans
+              Split into monthly payments
             </span>
           </div>
           <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#004f98] group-hover/affirm:underline">
-            <span>Pre-qualify</span>
+            <span>Pay with Affirm</span>
             <ArrowUpRight className="h-3 w-3" />
           </span>
         </div>
@@ -103,15 +96,17 @@ export function AffirmPromo({
             data-amount={amountCents}
             data-affirm-type="text"
           >
-            Starting at ~${monthlyEst}/mo (3–12 months)
+            Starting at ~${monthlyEst}/mo (3, 6, or 12 months)
           </span>
           <span className="text-[10px] text-slate-600 font-mono">0–36% APR</span>
         </div>
       </div>
 
       {isModalOpen && (
-        <AffirmEducationalModal
+        <AffirmDirectCheckoutModal
           amountCents={amountCents}
+          programName={programName}
+          stripeUrl={stripeUrl}
           monthlyEst={monthlyEst}
           onClose={() => setIsModalOpen(false)}
         />
@@ -120,35 +115,140 @@ export function AffirmPromo({
   );
 }
 
-function AffirmEducationalModal({
+function AffirmDirectCheckoutModal({
   amountCents,
+  programName,
+  stripeUrl,
   monthlyEst,
   onClose,
 }: {
   amountCents: number;
+  programName: string;
+  stripeUrl?: string;
   monthlyEst: number;
   onClose: () => void;
 }) {
+  const [showCheckoutForm, setShowCheckoutForm] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [street, setStreet] = useState("");
+  const [city, setCity] = useState("");
+  const [stateCode, setStateCode] = useState("AZ");
+  const [zip, setZip] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [isLaunching, setIsLaunching] = useState(false);
+
   const totalDollars = (amountCents / 100).toLocaleString();
   const threeMo = Math.round(amountCents / 300);
   const sixMo = Math.round(amountCents / 600);
   const twelveMo = monthlyEst;
 
+  const handleStartAffirmCheckout = (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMsg("");
+
+    if (!firstName.trim() || !lastName.trim() || !email.trim() || !phone.trim() || !street.trim() || !city.trim() || !zip.trim()) {
+      setErrorMsg("Please complete all billing details so Affirm can verify your installment plan.");
+      return;
+    }
+
+    const affirmObj = typeof window !== "undefined" ? (window as any).affirm : null;
+    if (!affirmObj || typeof affirmObj.checkout !== "function") {
+      setErrorMsg("Affirm SDK is still initializing. Please wait 2 seconds or disable ad-blockers and try again.");
+      return;
+    }
+
+    setIsLaunching(true);
+    const origin = window.location.origin;
+    const orderId = `LSC-${Date.now()}`;
+
+    const checkoutPayload = {
+      merchant: {
+        user_confirmation_url: `${origin}/api/affirm/confirm`,
+        user_cancel_url: `${window.location.href}`,
+        user_confirmation_url_action: "POST",
+        name: "Liberty Science LLC",
+      },
+      shipping: {
+        name: { first: firstName.trim(), last: lastName.trim() },
+        address: {
+          line1: street.trim(),
+          city: city.trim(),
+          state: stateCode.trim().toUpperCase() || "AZ",
+          zipcode: zip.trim(),
+          country: "USA",
+        },
+        phone_number: phone.trim(),
+        email: email.trim(),
+      },
+      billing: {
+        name: { first: firstName.trim(), last: lastName.trim() },
+        address: {
+          line1: street.trim(),
+          city: city.trim(),
+          state: stateCode.trim().toUpperCase() || "AZ",
+          zipcode: zip.trim(),
+          country: "USA",
+        },
+        phone_number: phone.trim(),
+        email: email.trim(),
+      },
+      items: [
+        {
+          display_name: programName,
+          sku: programName.toUpperCase().replace(/[^A-Z0-9]/g, "-").slice(0, 24),
+          unit_price: amountCents,
+          qty: 1,
+          item_image_url: `${origin}/logo.png`,
+          item_url: `${origin}/about`,
+        },
+      ],
+      metadata: {
+        mode: "modal",
+        program: programName,
+      },
+      order_id: orderId,
+      currency: "USD",
+      shipping_amount: 0,
+      tax_amount: 0,
+      total: amountCents,
+    };
+
+    try {
+      affirmObj.checkout(checkoutPayload);
+      affirmObj.checkout.open({
+        onFail: () => {
+          setIsLaunching(false);
+          setErrorMsg("Affirm checkout could not be completed. Please verify your address and try again.");
+        },
+        onValidationError: () => {
+          setIsLaunching(false);
+          setErrorMsg("Please check that your US phone number and 5-digit ZIP code are valid.");
+        },
+      });
+    } catch {
+      setIsLaunching(false);
+      setErrorMsg("Unable to open Affirm checkout window. Please check your connection.");
+    }
+  };
+
   return (
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-xs animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-xs animate-in fade-in duration-200 overflow-y-auto"
       onClick={onClose}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-2xl"
+        className="relative my-8 w-full max-w-lg overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-2xl"
       >
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-5 top-5 rounded-full p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors"
+          className="absolute right-5 top-5 rounded-full p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors cursor-pointer"
           aria-label="Close"
         >
           <X className="h-5 w-5" />
@@ -159,87 +259,259 @@ function AffirmEducationalModal({
             affirm
           </span>
           <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-            Installment Financing
+            Official Liberty Science Financing
           </span>
         </div>
 
-        <h3 className="mt-3 text-2xl font-bold tracking-tight text-slate-900">
-          Split ${totalDollars} into monthly payments.
+        <h3 className="mt-3 text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+          {programName} — ${totalDollars}
         </h3>
-        <p className="mt-2 text-sm text-slate-600">
-          Make transparent monthly payments with no hidden fees, no compounding interest, and no penalties.
+        <p className="mt-1.5 text-xs sm:text-sm text-slate-600">
+          Split your advisory retainer into 3, 6, or 12 monthly payments with Affirm, or pay directly via Stripe.
         </p>
 
-        {/* Sample Payment Horizons */}
-        <div className="mt-6 space-y-3">
-          <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/70 p-4">
-            <div>
-              <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                3-Month Plan
+        {!showCheckoutForm ? (
+          <>
+            {/* Sample Payment Horizons */}
+            <div className="mt-5 space-y-2.5">
+              <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/70 p-3.5">
+                <div>
+                  <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
+                    3-Month Plan
+                  </div>
+                  <div className="text-base sm:text-lg font-bold text-slate-900">
+                    ~${threeMo} <span className="text-xs font-normal text-slate-500">/mo</span>
+                  </div>
+                </div>
+                <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-bold text-emerald-700 border border-emerald-200">
+                  0% APR Eligible
+                </span>
               </div>
-              <div className="text-lg font-bold text-slate-900">
-                ~${threeMo} <span className="text-xs font-normal text-slate-500">/mo</span>
+
+              <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/70 p-3.5">
+                <div>
+                  <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
+                    6-Month Plan
+                  </div>
+                  <div className="text-base sm:text-lg font-bold text-slate-900">
+                    ~${sixMo} <span className="text-xs font-normal text-slate-500">/mo</span>
+                  </div>
+                </div>
+                <span className="text-xs font-medium text-slate-600">6 Monthly Payments</span>
+              </div>
+
+              <div className="flex items-center justify-between rounded-xl border border-sky-300 bg-sky-50/50 p-3.5">
+                <div>
+                  <div className="text-[11px] font-semibold text-[#004f98] uppercase tracking-wider">
+                    12-Month Plan (Lowest Monthly)
+                  </div>
+                  <div className="text-base sm:text-lg font-bold text-slate-900">
+                    ~${twelveMo} <span className="text-xs font-normal text-slate-500">/mo</span>
+                  </div>
+                </div>
+                <span className="rounded-full bg-[#004f98] px-2.5 py-1 text-[11px] font-bold text-white">
+                  Most Popular
+                </span>
               </div>
             </div>
-            <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-bold text-emerald-700 border border-emerald-200">
-              0% APR Available
-            </span>
-          </div>
 
-          <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/70 p-4">
-            <div>
-              <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                6-Month Plan
+            {/* Value Props */}
+            <div className="mt-5 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4 text-xs text-slate-600">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4 text-emerald-600 shrink-0" />
+                <span>Checking eligibility won&apos;t affect credit</span>
               </div>
-              <div className="text-lg font-bold text-slate-900">
-                ~${sixMo} <span className="text-xs font-normal text-slate-500">/mo</span>
+              <div className="flex items-center gap-2">
+                <Sparkles className="h-4 w-4 text-[#004f98] shrink-0" />
+                <span>No hidden or late fees</span>
               </div>
             </div>
-            <span className="text-xs font-medium text-slate-600">Standard Horizon</span>
-          </div>
 
-          <div className="flex items-center justify-between rounded-xl border border-sky-300 bg-sky-50/50 p-4">
-            <div>
-              <div className="text-xs font-semibold text-[#004f98] uppercase tracking-wider">
-                12-Month Plan (Lowest Monthly)
+            {/* Action Buttons */}
+            <div className="mt-6 space-y-2.5">
+              <button
+                type="button"
+                onClick={() => setShowCheckoutForm(true)}
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-[#004f98] py-3 text-xs sm:text-sm font-semibold text-white shadow-md hover:bg-[#003d75] transition-all cursor-pointer"
+              >
+                <span>Pay Monthly with Affirm (~${twelveMo}/mo)</span>
+                <ArrowUpRight className="h-4 w-4" />
+              </button>
+
+              {stripeUrl && (
+                <a
+                  href={stripeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-full items-center justify-center gap-2 rounded-full border border-slate-300 bg-white py-2.5 text-xs font-semibold text-slate-800 hover:bg-slate-50 transition-all"
+                >
+                  <CreditCard className="h-3.5 w-3.5 text-[#635bff]" />
+                  <span>Or Pay via Stripe (Card / Klarna / Apple Pay)</span>
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+              )}
+
+              <a
+                href="https://calendar.app.google/8Gt1wf6dzY3ki8xy7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex w-full items-center justify-center gap-1.5 py-1.5 text-[11px] font-semibold text-slate-500 hover:text-slate-900 transition-colors"
+              >
+                <Calendar className="h-3 w-3 text-[#ea580c]" />
+                <span>Haven&apos;t spoken with Vera yet? Book Free 30-Min Call First ↗</span>
+              </a>
+            </div>
+          </>
+        ) : (
+          <form onSubmit={handleStartAffirmCheckout} className="mt-5 space-y-3">
+            <div className="rounded-xl bg-sky-50/80 border border-sky-200/80 p-3 text-xs text-sky-950">
+              Enter your details below to launch <strong>Affirm&apos;s secure installment checkout</strong> for <strong>${totalDollars}</strong>.
+            </div>
+
+            {errorMsg && (
+              <div className="rounded-xl bg-rose-50 border border-rose-200 p-3 text-xs text-rose-700 font-medium">
+                {errorMsg}
               </div>
-              <div className="text-lg font-bold text-slate-900">
-                ~${twelveMo} <span className="text-xs font-normal text-slate-500">/mo</span>
+            )}
+
+            <div className="grid grid-cols-2 gap-2.5">
+              <div>
+                <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                  First Name *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="Jane"
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs text-slate-900 focus:border-[#004f98] focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                  Last Name *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  placeholder="Doe"
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs text-slate-900 focus:border-[#004f98] focus:outline-none"
+                />
               </div>
             </div>
-            <span className="rounded-full bg-[#004f98] px-2.5 py-1 text-[11px] font-bold text-white">
-              Most Flexible
-            </span>
-          </div>
-        </div>
 
-        {/* Value Props */}
-        <div className="mt-6 grid grid-cols-2 gap-3 border-t border-slate-100 pt-5 text-xs text-slate-600">
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="h-4 w-4 text-emerald-600 shrink-0" />
-            <span>No effect on credit score to check</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Sparkles className="h-4 w-4 text-[#004f98] shrink-0" />
-            <span>Transparent, simple interest</span>
-          </div>
-        </div>
+            <div className="grid grid-cols-2 gap-2.5">
+              <div>
+                <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                  Email Address *
+                </label>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="jane@example.com"
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs text-slate-900 focus:border-[#004f98] focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                  Mobile Phone (US) *
+                </label>
+                <input
+                  type="tel"
+                  required
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="520-555-0199"
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs text-slate-900 focus:border-[#004f98] focus:outline-none"
+                />
+              </div>
+            </div>
 
-        {/* CTA */}
-        <div className="mt-6">
-          <a
-            href="https://calendar.app.google/8Gt1wf6dzY3ki8xy7"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex w-full items-center justify-center gap-2 rounded-full bg-[#004f98] py-3 text-sm font-semibold text-white shadow-md hover:bg-[#003d75] transition-all"
-          >
-            <span>Confirm Advisory &amp; Pay with Affirm</span>
-            <ArrowUpRight className="h-4 w-4" />
-          </a>
-          <p className="mt-2 text-center text-[11px] text-slate-600">
-            Payment options through Affirm are subject to eligibility and provided by LendingClub Bank, Member FDIC.
-          </p>
-        </div>
+            <div>
+              <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                Street Address *
+              </label>
+              <input
+                type="text"
+                required
+                value={street}
+                onChange={(e) => setStreet(e.target.value)}
+                placeholder="123 E Broadway Blvd"
+                className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs text-slate-900 focus:border-[#004f98] focus:outline-none"
+              />
+            </div>
+
+            <div className="grid grid-cols-3 gap-2.5">
+              <div>
+                <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                  City *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  placeholder="Tucson"
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs text-slate-900 focus:border-[#004f98] focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                  State *
+                </label>
+                <input
+                  type="text"
+                  required
+                  maxLength={2}
+                  value={stateCode}
+                  onChange={(e) => setStateCode(e.target.value)}
+                  placeholder="AZ"
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs uppercase text-slate-900 focus:border-[#004f98] focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                  ZIP Code *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={zip}
+                  onChange={(e) => setZip(e.target.value)}
+                  placeholder="85701"
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs text-slate-900 focus:border-[#004f98] focus:outline-none"
+                />
+              </div>
+            </div>
+
+            <div className="pt-2 flex flex-col gap-2">
+              <button
+                type="submit"
+                disabled={isLaunching}
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-[#004f98] py-3 text-xs sm:text-sm font-semibold text-white shadow-md hover:bg-[#003d75] transition-all cursor-pointer disabled:opacity-60"
+              >
+                <span>{isLaunching ? "Opening Affirm..." : "Continue to Live Affirm Checkout ↗"}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setShowCheckoutForm(false)}
+                className="text-xs font-medium text-slate-500 hover:text-slate-800 py-1 cursor-pointer"
+              >
+                ← Back to payment options
+              </button>
+            </div>
+          </form>
+        )}
+
+        <p className="mt-3 text-center text-[10px] text-slate-500 leading-normal">
+          Payment options through Affirm are subject to an eligibility check and are provided by these lending partners: affirm.com/lenders.
+        </p>
       </div>
     </div>
   );

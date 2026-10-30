@@ -733,8 +733,13 @@ export default function AboutPage() {
 
                   <div className="mt-2 flex flex-wrap items-center justify-between gap-2 font-sans">
                     <span className="text-xl font-bold text-slate-900">{prog.investment}</span>
-                    {prog.amountCents && (
-                      <AffirmPromo amountCents={prog.amountCents} compact={true} />
+                    {prog.amountCents && prog.amountCents >= 29700 && (
+                      <AffirmPromo
+                        amountCents={prog.amountCents}
+                        programName={prog.tier}
+                        stripeUrl={prog.checkoutUrl}
+                        compact={true}
+                      />
                     )}
                   </div>
 
@@ -747,18 +752,29 @@ export default function AboutPage() {
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-[11px] font-mono text-slate-400">
-                    Taxonomy: 71400000X
-                  </span>
-                  <a
-                    href={prog.checkoutUrl || CALENDAR_URL}
+                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
+                  <Link
+                    href={CALENDAR_URL}
                     target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-xs font-bold text-[#635bff] hover:text-[#4f46e5] transition-colors"
+                    className="inline-flex items-center gap-1 text-xs font-bold text-slate-800 hover:text-[#ea580c] transition-colors"
                   >
-                    <span>{prog.checkoutUrl ? "Enroll & Pay ↗" : "Book Call ↗"}</span>
-                  </a>
+                    <span>Book Call</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </Link>
+                  {prog.checkoutUrl ? (
+                    <a
+                      href={prog.checkoutUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs font-bold text-[#635bff] hover:text-[#4f46e5] transition-colors"
+                    >
+                      <span>Pay via Stripe ↗</span>
+                    </a>
+                  ) : (
+                    <span className="text-[11px] font-mono text-slate-400">
+                      Taxonomy: 71400000X
+                    </span>
+                  )}
                 </div>
               </div>
             ))}

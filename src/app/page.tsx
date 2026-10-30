@@ -973,7 +973,11 @@ export default function LibertyScienceLandingPage() {
                         </span>
                       </div>
                       <div className="mt-3">
-                        <AffirmPromo amountCents={program.amountCents} />
+                        <AffirmPromo
+                          amountCents={program.amountCents}
+                          programName={program.name}
+                          stripeUrl={program.stripeCheckoutUrl}
+                        />
                       </div>
                     </div>
 
@@ -1005,28 +1009,23 @@ export default function LibertyScienceLandingPage() {
                   </div>
 
                   <div className="mt-8 pt-2 flex flex-col gap-2.5">
+                    <PremiumCtaButton
+                      href={CALENDAR_URL}
+                      variant={program.highlight ? "primary" : "secondary"}
+                      size="md"
+                      className="w-full text-center"
+                    >
+                      Apply via Discovery Call
+                    </PremiumCtaButton>
+
                     <a
                       href={program.stripeCheckoutUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={cn(
-                        "inline-flex h-11 w-full items-center justify-center gap-2 rounded-full text-xs font-semibold shadow-xs transition-all",
-                        program.highlight
-                          ? "bg-[#635bff] text-white hover:bg-[#5349e0]"
-                          : "bg-slate-900 text-white hover:bg-slate-800"
-                      )}
+                      className="inline-flex h-8 w-full items-center justify-center gap-1 text-[11px] font-semibold text-slate-500 hover:text-[#635bff] transition-colors"
                     >
-                      <span>Enroll with Stripe / Affirm</span>
-                      <ArrowUpRight className="h-3.5 w-3.5" />
-                    </a>
-
-                    <a
-                      href={CALENDAR_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex h-9 w-full items-center justify-center text-[11px] font-semibold text-slate-500 hover:text-slate-900 transition-colors"
-                    >
-                      <span>Or Book Discovery Call First ↗</span>
+                      <span>Already consulted? Pay via Stripe / Card</span>
+                      <ArrowUpRight className="h-3 w-3" />
                     </a>
                   </div>
                 </motion.div>
