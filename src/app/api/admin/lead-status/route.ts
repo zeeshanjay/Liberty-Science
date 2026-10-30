@@ -1,17 +1,11 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
+import { verifyAdminRequest } from "@/lib/adminAuth";
 
 export async function POST(request: Request) {
   try {
-    const passcode = request.headers.get("x-admin-passcode");
-    const validPasscode = process.env.ADMIN_PASSCODE || "LIBERTY2026";
-
-    if (!passcode || passcode !== validPasscode) {
-      return NextResponse.json(
-        { success: false, error: "Invalid master authorization passcode." },
-        { status: 401 }
-      );
-    }
+    const authError = verifyAdminRequest(request);
+    if (authError) return authError;
 
     const { id, status, recommended_program } = await request.json();
 

@@ -1,17 +1,11 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
+import { verifyAdminRequest } from "@/lib/adminAuth";
 
 export async function GET(request: Request) {
   try {
-    const passcode = request.headers.get("x-admin-passcode");
-    const validPasscode = process.env.ADMIN_PASSCODE || "LIBERTY2026";
-
-    if (!passcode || passcode !== validPasscode) {
-      return NextResponse.json(
-        { success: false, error: "Invalid master authorization passcode." },
-        { status: 401 }
-      );
-    }
+    const authError = verifyAdminRequest(request);
+    if (authError) return authError;
 
     const { data: clients, error } = await supabaseAdmin
       .from("practice_clients")
@@ -33,15 +27,8 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
-    const passcode = request.headers.get("x-admin-passcode");
-    const validPasscode = process.env.ADMIN_PASSCODE || "LIBERTY2026";
-
-    if (!passcode || passcode !== validPasscode) {
-      return NextResponse.json(
-        { success: false, error: "Invalid master authorization passcode." },
-        { status: 401 }
-      );
-    }
+    const authError = verifyAdminRequest(request);
+    if (authError) return authError;
 
     const body = await request.json();
     const {
@@ -117,15 +104,8 @@ export async function POST(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
-    const passcode = request.headers.get("x-admin-passcode");
-    const validPasscode = process.env.ADMIN_PASSCODE || "LIBERTY2026";
-
-    if (!passcode || passcode !== validPasscode) {
-      return NextResponse.json(
-        { success: false, error: "Invalid master authorization passcode." },
-        { status: 401 }
-      );
-    }
+    const authError = verifyAdminRequest(request);
+    if (authError) return authError;
 
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");

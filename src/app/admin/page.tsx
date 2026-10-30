@@ -19,6 +19,7 @@ import {
   RefreshCw,
   LogOut,
   Eye,
+  EyeOff,
   Send,
   AlertCircle,
   Sparkles,
@@ -126,9 +127,13 @@ interface AdminMetrics {
 export default function AdminPage() {
   const [passcode, setPasscode] = useState("");
   const [inputPasscode, setInputPasscode] = useState("");
+  const [showPasscode, setShowPasscode] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authError, setAuthError] = useState("");
   const [isVerifying, setIsVerifying] = useState(false);
+  const [failedAttempts, setFailedAttempts] = useState(0);
+  const [lockoutUntil, setLockoutUntil] = useState<number | null>(null);
+  const [lockoutRemainingSec, setLockoutRemainingSec] = useState(0);
 
   // Practice Data states
   const [clients, setClients] = useState<PracticeClient[]>([]);
@@ -174,8 +179,25 @@ export default function AdminPage() {
   const [broadcastSending, setBroadcastSending] = useState(false);
   const [broadcastSuccess, setBroadcastSuccess] = useState<string | null>(null);
 
-  // Check saved session passcode
+  // Check saved session passcode & persisted brute-force lockout state
   useEffect(() => {
+    const savedLockout = localStorage.getItem("ls_admin_lockout_until");
+    const savedAttempts = localStorage.getItem("ls_admin_failed_attempts");
+    if (savedAttempts) {
+      setFailedAttempts(parseInt(savedAttempts, 10) || 0);
+    }
+    if (savedLockout) {
+      const until = parseInt(savedLockout, 10);
+      if (until > Date.now()) {
+        setLockoutUntil(until);
+        setLockoutRemainingSec(Math.ceil((until - Date.now()) / 1000));
+      } else {
+        localStorage.removeItem("ls_admin_lockout_until");
+        localStorage.removeItem("ls_admin_failed_attempts");
+        setFailedAttempts(0);
+      }
+    }
+
     const savedToken = sessionStorage.getItem("ls_admin_token");
     if (savedToken) {
       setPasscode(savedToken);
@@ -183,8 +205,53 @@ export default function AdminPage() {
     }
   }, []);
 
+  // Countdown timer when locked out after multiple failed attempts
+  useEffect(() => {
+    if (!lockoutUntil) {
+      setLockoutRemainingSec(0);
+      return;
+    }
+    const tick = () => {
+      const remaining = Math.ceil((lockoutUntil - Date.now()) / 1000);
+      if (remaining <= 0) {
+        setLockoutUntil(null);
+        setLockoutRemainingSec(0);
+        setFailedAttempts(0);
+        setAuthError("");
+        localStorage.removeItem("ls_admin_lockout_until");
+        localStorage.removeItem("ls_admin_failed_attempts");
+      } else {
+        setLockoutRemainingSec(remaining);
+      }
+    };
+    tick();
+    const timer = setInterval(tick, 1000);
+    return () => clearInterval(timer);
+  }, [lockoutUntil]);
+
+  // 30-Minute Inactivity Auto-Lock when authenticated
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    let inactivityTimer: ReturnType<typeof setTimeout>;
+    const resetTimer = () => {
+      clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(() => {
+        handleLogout();
+        setAuthError("Session automatically locked after 30 minutes of inactivity.");
+      }, 30 * 60 * 1000);
+    };
+    const events = ["mousedown", "keydown", "scroll", "touchstart"];
+    events.forEach((ev) => window.addEventListener(ev, resetTimer));
+    resetTimer();
+    return () => {
+      clearTimeout(inactivityTimer);
+      events.forEach((ev) => window.removeEventListener(ev, resetTimer));
+    };
+  }, [isAuthenticated]);
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (lockoutUntil && lockoutUntil > Date.now()) return;
     if (!inputPasscode.trim()) return;
     setIsVerifying(true);
     setAuthError("");
@@ -198,13 +265,40 @@ export default function AdminPage() {
 
       const data = await res.json();
       if (!res.ok || !data.success) {
-        setAuthError(data.error || "Access Denied. Invalid Passcode.");
+        const nextFailed =
+          typeof data.attemptsRemaining === "number"
+            ? 5 - data.attemptsRemaining
+            : failedAttempts + 1;
+        setFailedAttempts(nextFailed);
+        localStorage.setItem("ls_admin_failed_attempts", String(nextFailed));
+
+        if (res.status === 429 || data.lockedOut || nextFailed >= 5) {
+          const retrySec = data.retryAfterSeconds || 15 * 60;
+          const until = Date.now() + retrySec * 1000;
+          setLockoutUntil(until);
+          setLockoutRemainingSec(retrySec);
+          localStorage.setItem("ls_admin_lockout_until", String(until));
+          setInputPasscode("");
+        }
+
+        setAuthError(
+          data.error ||
+            `Invalid credentials. ${Math.max(0, 5 - nextFailed)} attempts remaining before 15-minute lockout.`
+        );
         setIsVerifying(false);
         return;
       }
 
-      setPasscode(inputPasscode.trim());
-      sessionStorage.setItem("ls_admin_token", inputPasscode.trim());
+      // Clear failed attempts on valid login
+      setFailedAttempts(0);
+      setLockoutUntil(null);
+      localStorage.removeItem("ls_admin_lockout_until");
+      localStorage.removeItem("ls_admin_failed_attempts");
+
+      const cleanToken = inputPasscode.trim();
+      setPasscode(cleanToken);
+      setInputPasscode("");
+      sessionStorage.setItem("ls_admin_token", cleanToken);
       setIsAuthenticated(true);
       setClients(data.data.clients || []);
       setLeads(data.data.leads || []);
@@ -671,6 +765,11 @@ export default function AdminPage() {
   // VIEW: LOCK SCREEN
   // ==========================================
   if (!isAuthenticated) {
+    const isLockedOut = Boolean(lockoutUntil && lockoutRemainingSec > 0);
+    const lockMinutes = Math.floor(lockoutRemainingSec / 60);
+    const lockSeconds = lockoutRemainingSec % 60;
+    const formattedCountdown = `${String(lockMinutes).padStart(2, "0")}:${String(lockSeconds).padStart(2, "0")}`;
+
     return (
       <div className="min-h-screen bg-[#F8FAFC] flex flex-col items-center justify-center p-4 relative font-sans text-slate-900 selection:bg-amber-500 selection:text-white">
         <div className="w-full max-w-md relative z-10">
@@ -689,31 +788,73 @@ export default function AdminPage() {
                 Liberty Science
               </h1>
               <p className="text-xs text-slate-500 mt-1.5 max-w-xs leading-relaxed">
-                Client management, retainers, and practice reports.
+                Authorized clinician portal — encrypted session &amp; brute-force protected.
               </p>
             </div>
 
-            <form onSubmit={handleLogin} className="space-y-4">
+            {isLockedOut && (
+              <div className="mb-5 p-4 rounded-xl bg-red-950 text-white border border-red-800 shadow-sm">
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-xs font-bold uppercase tracking-wider text-red-300 flex items-center gap-1.5">
+                    <Lock className="w-3.5 h-3.5" />
+                    Security Lockout Active
+                  </span>
+                  <span className="px-2 py-0.5 rounded-md bg-red-900 text-red-100 font-mono text-xs font-bold">
+                    {formattedCountdown}
+                  </span>
+                </div>
+                <p className="text-[11px] text-red-200 leading-relaxed">
+                  Multiple invalid access attempts detected. Sign-in is temporarily disabled until the security timer expires.
+                </p>
+              </div>
+            )}
+
+            <form onSubmit={handleLogin} className="space-y-4" autoComplete="off">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                  Practice Access Key
-                </label>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="block text-xs font-semibold text-slate-700">
+                    Clinician Passcode
+                  </label>
+                  {failedAttempts > 0 && !isLockedOut && (
+                    <span className="text-[11px] font-semibold text-amber-700">
+                      {Math.max(0, 5 - failedAttempts)} of 5 attempts left
+                    </span>
+                  )}
+                </div>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                     <KeyRound className="w-4 h-4 text-amber-600" />
                   </div>
                   <input
-                    type="password"
+                    type={showPasscode ? "text" : "password"}
                     value={inputPasscode}
                     onChange={(e) => setInputPasscode(e.target.value)}
-                    placeholder="Enter Access Key (e.g. LIBERTY2026)"
-                    className="w-full pl-10 pr-4 py-3 bg-[#FAFAFA] border border-slate-200 rounded-xl text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 transition-all font-sans"
+                    disabled={isLockedOut || isVerifying}
+                    placeholder="••••••••••••••••"
+                    autoComplete="current-password"
+                    spellCheck={false}
+                    autoCapitalize="off"
+                    className="w-full pl-10 pr-10 py-3 bg-[#FAFAFA] border border-slate-200 rounded-xl text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 transition-all font-sans disabled:opacity-50 disabled:cursor-not-allowed"
                     autoFocus
                   />
+                  <button
+                    type="button"
+                    tabIndex={-1}
+                    onClick={() => setShowPasscode((prev) => !prev)}
+                    disabled={isLockedOut}
+                    className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-700 transition-colors cursor-pointer disabled:opacity-40"
+                    title={showPasscode ? "Hide passcode" : "Show passcode"}
+                  >
+                    {showPasscode ? (
+                      <EyeOff className="w-4 h-4" />
+                    ) : (
+                      <Eye className="w-4 h-4" />
+                    )}
+                  </button>
                 </div>
               </div>
 
-              {authError && (
+              {authError && !isLockedOut && (
                 <div className="flex items-center gap-2 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-medium">
                   <AlertCircle className="w-4 h-4 shrink-0 text-red-600" />
                   <span>{authError}</span>
@@ -722,10 +863,15 @@ export default function AdminPage() {
 
               <button
                 type="submit"
-                disabled={isVerifying}
-                className="w-full py-3.5 px-4 bg-slate-950 hover:bg-slate-850 text-white font-semibold rounded-xl text-xs uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 shadow-sm disabled:opacity-50 cursor-pointer"
+                disabled={isVerifying || isLockedOut || !inputPasscode.trim()}
+                className="w-full py-3.5 px-4 bg-slate-950 hover:bg-slate-850 text-white font-semibold rounded-xl text-xs uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
-                {isVerifying ? (
+                {isLockedOut ? (
+                  <>
+                    <Lock className="w-4 h-4 text-red-400" />
+                    <span>Locked ({formattedCountdown})</span>
+                  </>
+                ) : isVerifying ? (
                   <>
                     <RefreshCw className="w-4 h-4 animate-spin text-white" />
                     <span>Verifying Access...</span>
@@ -742,9 +888,9 @@ export default function AdminPage() {
             <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
               <span className="flex items-center gap-1.5 text-slate-600 font-medium">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                Vera Shury, MS
+                SHA-256 Protected • Auto-Lock
               </span>
-              <span>Tucson, Arizona</span>
+              <span>Vera Shury, MS</span>
             </div>
           </div>
         </div>

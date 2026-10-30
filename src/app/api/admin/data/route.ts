@@ -1,18 +1,12 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
+import { verifyAdminRequest } from "@/lib/adminAuth";
 import Stripe from "stripe";
 
 export async function GET(request: Request) {
   try {
-    const passcode = request.headers.get("x-admin-passcode");
-    const validPasscode = process.env.ADMIN_PASSCODE || "LIBERTY2026";
-
-    if (!passcode || passcode !== validPasscode) {
-      return NextResponse.json(
-        { success: false, error: "Invalid master authorization passcode." },
-        { status: 401 }
-      );
-    }
+    const authError = verifyAdminRequest(request);
+    if (authError) return authError;
 
     // 0. Auto-sync live Stripe paid sessions into Supabase practice_clients
     const stripeKey = process.env.STRIPE_SECRET_KEY;
