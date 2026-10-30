@@ -236,6 +236,7 @@ const ADVISORY_PROGRAMS = [
     name: "90-Day Quickstart",
     price: "$1,275",
     amountCents: 127500,
+    stripeCheckoutUrl: "https://buy.stripe.com/7sY00k0yO6tEfTb0O843S00",
     cadence: "90 Days (~3 Months)",
     summary:
       "Extended Sensitive Motivational Interview and comprehensive research into acute or chronic challenges—integrating breath, posture, targeted nutrition, and durable relapse prevention.",
@@ -252,6 +253,7 @@ const ADVISORY_PROGRAMS = [
     name: "6-Month Quality Goals",
     price: "$2,400",
     amountCents: 240000,
+    stripeCheckoutUrl: "https://buy.stripe.com/3cI28s3L04lw8qJgN643S01",
     cadence: "6-Month Advisory",
     summary:
       "Comprehensive guidance for Life, Business, Work, Retirement & Recovery. Combines mind-body assessments with proven techniques for mental balance and lasting habit maintenance.",
@@ -269,6 +271,7 @@ const ADVISORY_PROGRAMS = [
     name: "12-Month Beating Resistance",
     price: "$4,800",
     amountCents: 480000,
+    stripeCheckoutUrl: "https://buy.stripe.com/9B67sMchw05ggXf9kE43S02",
     cadence: "Annual Advisory Retainer",
     summary:
       "A year-long advisory partnership providing scientific assessments of emotional, physical, and spiritual balance—dissolving deep-seated resistance with new evidence-based modalities.",
@@ -1001,15 +1004,30 @@ export default function LibertyScienceLandingPage() {
                     </div>
                   </div>
 
-                  <div className="mt-9 pt-2">
-                    <PremiumCtaButton
-                      href={CALENDAR_URL}
-                      variant={program.highlight ? "primary" : "secondary"}
-                      size="md"
-                      className="w-full text-center"
+                  <div className="mt-8 pt-2 flex flex-col gap-2.5">
+                    <a
+                      href={program.stripeCheckoutUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cn(
+                        "inline-flex h-11 w-full items-center justify-center gap-2 rounded-full text-xs font-semibold shadow-xs transition-all",
+                        program.highlight
+                          ? "bg-[#635bff] text-white hover:bg-[#5349e0]"
+                          : "bg-slate-900 text-white hover:bg-slate-800"
+                      )}
                     >
-                      Apply via Discovery Call
-                    </PremiumCtaButton>
+                      <span>Enroll with Stripe / Affirm</span>
+                      <ArrowUpRight className="h-3.5 w-3.5" />
+                    </a>
+
+                    <a
+                      href={CALENDAR_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex h-9 w-full items-center justify-center text-[11px] font-semibold text-slate-500 hover:text-slate-900 transition-colors"
+                    >
+                      <span>Or Book Discovery Call First ↗</span>
+                    </a>
                   </div>
                 </motion.div>
               ))}

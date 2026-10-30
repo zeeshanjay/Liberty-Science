@@ -143,6 +143,8 @@ const PROGRAM_SPECTRUM = [
     tier: "Explorer Session",
     duration: "60 Minutes",
     investment: "$75",
+    amountCents: 7500,
+    checkoutUrl: "https://buy.stripe.com/bJeaEYbds2do5ex7cw43S04",
     focus: "Diagnostic & Lifestyle Assessment",
     desc: "In-depth sensitive motivational interview, clinical risk assessment, rapport building, and co-creating a tailored strategic options roadmap that integrates with your demanding schedule.",
     highlight: false,
@@ -152,6 +154,7 @@ const PROGRAM_SPECTRUM = [
     duration: "5 Sessions Total",
     investment: "$297",
     amountCents: 29700,
+    checkoutUrl: "https://buy.stripe.com/7sYaEYa9o9FQfTb1Sc43S03",
     focus: "Targeted Clinical Modules",
     desc: "1 initial 60-min deep dive + 4 @ 45-min follow-ups. Focus areas include: Cooling Vitality, Reclaim Mobility, Bust Your Stress, Master Self-Regulation, Senior Posture Revival, or PWR! Parkinson's Power Up.",
     highlight: false,
@@ -161,6 +164,7 @@ const PROGRAM_SPECTRUM = [
     duration: "90 Days (~3 Months)",
     investment: "$1,275",
     amountCents: 127500,
+    checkoutUrl: "https://buy.stripe.com/7sY00k0yO6tEfTb0O843S00",
     focus: "Foundational Neuro-Habit Loop",
     desc: "Comprehensive research and protocol design to improve acute or chronic conditions. Covers breath mechanics, posture, nutrition, HeartMath HRV coherence, and structured relapse prevention.",
     highlight: false,
@@ -170,6 +174,7 @@ const PROGRAM_SPECTRUM = [
     duration: "6 Months",
     investment: "$2,400",
     amountCents: 240000,
+    checkoutUrl: "https://buy.stripe.com/3cI28s3L04lw8qJgN643S01",
     focus: "Signature Advisory Retainer",
     desc: "Deep integration across Life, Business, Work, and Recovery. Sensitive extended assessments of mind, body, and enterprise; neuroplastic habit maintenance, and permanent relapse aversion.",
     highlight: true,
@@ -179,6 +184,7 @@ const PROGRAM_SPECTRUM = [
     duration: "12 Months",
     investment: "$4,800",
     amountCents: 480000,
+    checkoutUrl: "https://buy.stripe.com/9B67sMchw05ggXf9kE43S02",
     focus: "Platinum Master Retainer",
     desc: "Year-long executive partnership addressing deep-seated habit change with continuous scientific assessments, creative evidence-based modalities, relationship support, and total cognitive-motor vitality.",
     highlight: false,
@@ -745,14 +751,14 @@ export default function AboutPage() {
                   <span className="text-[11px] font-mono text-slate-400">
                     Taxonomy: 71400000X
                   </span>
-                  <Link
-                    href={CALENDAR_URL}
+                  <a
+                    href={prog.checkoutUrl || CALENDAR_URL}
                     target="_blank"
-                    className="text-xs font-bold text-[#635bff] hover:text-[#4f46e5] flex items-center gap-1"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs font-bold text-[#635bff] hover:text-[#4f46e5] transition-colors"
                   >
-                    <span>Inquire</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </Link>
+                    <span>{prog.checkoutUrl ? "Enroll & Pay ↗" : "Book Call ↗"}</span>
+                  </a>
                 </div>
               </div>
             ))}
