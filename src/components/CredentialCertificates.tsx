@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, ShieldCheck, FileText, X, Download, ExternalLink } from "lucide-react";
@@ -112,6 +113,27 @@ export const CERTIFICATES: CertificateData[] = [
 
 export function CredentialCertificates() {
   const [activeModalCert, setActiveModalCert] = useState<CertificateData | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (activeModalCert) {
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") setActiveModalCert(null);
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [activeModalCert]);
 
   return (
     <>
@@ -219,96 +241,108 @@ export function CredentialCertificates() {
         })}
       </div>
 
-      {/* Official Certificate Verification Modal */}
-      <AnimatePresence>
-        {activeModalCert && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/70 backdrop-blur-sm">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-3xl overflow-hidden rounded-2xl bg-white shadow-2xl border border-slate-200"
-            >
-              {/* Modal Header */}
-              <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/70 px-6 py-4">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-[#A51C30] border border-red-100">
-                    <ShieldCheck className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-serif text-lg font-bold text-slate-900">
-                      {activeModalCert.title}
-                    </h3>
-                    <p className="text-xs text-slate-500 font-mono">
-                      {activeModalCert.issuer} · Recipient: {activeModalCert.holder}
-                    </p>
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => setActiveModalCert(null)}
-                  className="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors cursor-pointer"
-                  title="Close viewer"
+      {/* Official Certificate Verification Modal (Mounted at Root via Portal to Escape Stacking Context & Navbar) */}
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {activeModalCert && (
+              <div
+                role="dialog"
+                aria-modal="true"
+                onClick={() => setActiveModalCert(null)}
+                className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-sm overflow-y-auto"
+              >
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.96, y: 12 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.96, y: 12 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="relative w-full max-w-3xl overflow-hidden rounded-2xl bg-white shadow-[0_25px_70px_-15px_rgba(0,0,0,0.5)] border border-slate-200 my-auto"
                 >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
+                  {/* Modal Header */}
+                  <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/80 px-6 py-4">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-[#A51C30] border border-red-100 shrink-0">
+                        <ShieldCheck className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <h3 className="font-serif text-lg font-bold text-slate-900 leading-snug">
+                          {activeModalCert.title}
+                        </h3>
+                        <p className="text-xs text-slate-500 font-mono">
+                          {activeModalCert.issuer} · Recipient: {activeModalCert.holder}
+                        </p>
+                      </div>
+                    </div>
 
-              {/* Certificate Image Preview */}
-              <div className="relative max-h-[65vh] overflow-y-auto bg-slate-900/5 p-4 sm:p-6 flex items-center justify-center">
-                {activeModalCert.previewImg ? (
-                  <div className="relative overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg">
-                    <Image
-                      src={activeModalCert.previewImg}
-                      alt={activeModalCert.title}
-                      width={1200}
-                      height={900}
-                      className="h-auto max-h-[58vh] w-auto object-contain"
-                      priority
-                    />
+                    <button
+                      type="button"
+                      onClick={() => setActiveModalCert(null)}
+                      className="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors cursor-pointer shrink-0"
+                      title="Close viewer"
+                      aria-label="Close"
+                    >
+                      <X className="h-5 w-5" />
+                    </button>
                   </div>
-                ) : (
-                  <div className="p-8 text-center text-sm text-slate-500">
-                    Official certificate document available for direct verification.
+
+                  {/* Certificate Image Preview */}
+                  <div className="relative max-h-[60vh] sm:max-h-[65vh] overflow-y-auto bg-slate-950/5 p-4 sm:p-6 flex items-center justify-center">
+                    {activeModalCert.previewImg ? (
+                      <div className="relative overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg">
+                        <Image
+                          src={activeModalCert.previewImg}
+                          alt={activeModalCert.title}
+                          width={1200}
+                          height={900}
+                          className="h-auto max-h-[52vh] sm:max-h-[58vh] w-auto object-contain"
+                          priority
+                        />
+                      </div>
+                    ) : (
+                      <div className="p-8 text-center text-sm text-slate-500">
+                        Official certificate document available for direct verification.
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
 
-              {/* Modal Footer with Actions */}
-              <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 bg-white px-6 py-4">
-                <span className="text-xs text-slate-500 font-mono">
-                  Official Harvard-issued medical education document
-                </span>
+                  {/* Modal Footer with Actions */}
+                  <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 bg-white px-6 py-4">
+                    <span className="text-xs text-slate-500 font-mono">
+                      Official Harvard-issued medical education document
+                    </span>
 
-                <div className="flex items-center gap-2">
-                  {activeModalCert.pdfUrl && (
-                    <>
-                      <a
-                        href={activeModalCert.pdfUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-lg bg-slate-100 px-3.5 py-2 text-xs font-semibold text-slate-800 hover:bg-slate-200 transition-colors"
-                      >
-                        <ExternalLink className="h-3.5 w-3.5" />
-                        <span>Open Full PDF</span>
-                      </a>
-                      <a
-                        href={activeModalCert.pdfUrl}
-                        download
-                        className="inline-flex items-center gap-1.5 rounded-lg bg-[#A51C30] px-3.5 py-2 text-xs font-semibold text-white hover:bg-[#821424] transition-colors shadow-sm"
-                      >
-                        <Download className="h-3.5 w-3.5" />
-                        <span>Download Certificate</span>
-                      </a>
-                    </>
-                  )}
-                </div>
+                    <div className="flex items-center gap-2">
+                      {activeModalCert.pdfUrl && (
+                        <>
+                          <a
+                            href={activeModalCert.pdfUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 rounded-lg bg-slate-100 px-3.5 py-2 text-xs font-semibold text-slate-800 hover:bg-slate-200 transition-colors cursor-pointer"
+                          >
+                            <ExternalLink className="h-3.5 w-3.5" />
+                            <span>Open Full PDF</span>
+                          </a>
+                          <a
+                            href={activeModalCert.pdfUrl}
+                            download
+                            className="inline-flex items-center gap-1.5 rounded-lg bg-[#A51C30] px-3.5 py-2 text-xs font-semibold text-white hover:bg-[#821424] transition-colors shadow-sm cursor-pointer"
+                          >
+                            <Download className="h-3.5 w-3.5" />
+                            <span>Download Certificate</span>
+                          </a>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
               </div>
-            </motion.div>
-          </div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </>
   );
 }
