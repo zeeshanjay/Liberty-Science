@@ -154,9 +154,9 @@ export default function ResearchMonographPage() {
           {/* Academic Byline Block */}
           <div className="mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-6 border-t border-slate-200/90 text-sm">
             <div>
-              <div className="font-semibold text-slate-950">Vera Shury, C.H.C., L.B.H.C.</div>
+              <div className="font-semibold text-slate-950">Vera Shury, MS, LBHC</div>
               <div className="text-xs text-slate-600 mt-0.5">
-                ACE Certified Health Coach (#W54776) · HeartMath® Certified Practitioner · PWR!Moves® Certified Instructor
+                Licensed Board Certified Health Coach (LBHC #W54776) · HeartMath® Certified Practitioner · PWR!Moves® Certified Instructor
               </div>
               <div className="text-xs text-slate-500 mt-0.5">
                 Liberty Science Coaching · Tucson, Arizona · Clinical Taxonomy Code 71400000X
@@ -239,7 +239,7 @@ export default function ResearchMonographPage() {
                 Conventional neuroplasticity regimens—ranging from standard physical therapy to mindfulness and cognitive training apps—routinely suffer from a 60–70% long-term relapse rate. Practitioners assume repetition alone creates permanent synaptic pathways.
               </p>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Over 20+ years of clinical practice, <strong>Vera Shury, C.H.C.</strong>, demonstrated that this approach fails because it stimulates a brain locked in bioenergetic depletion and chronic sympathetic fight-or-flight. <strong>Metabolic Neuroplasticity™</strong> flips the paradigm: <em>cellular fuel and autonomic down-regulation must precede physical motor firing.</em> When precise metabolic substrate and HeartMath® coherence are established first, synaptic pruning accelerates and newly trained neural pathways lock into permanent retention.
+                Over 20+ years of clinical practice, <strong>Vera Shury, MS, LBHC</strong>, demonstrated that this approach fails because it stimulates a brain locked in bioenergetic depletion and chronic sympathetic fight-or-flight. <strong>Metabolic Neuroplasticity™</strong> flips the paradigm: <em>cellular fuel and autonomic down-regulation must precede physical motor firing.</em> When precise metabolic substrate and HeartMath® coherence are established first, synaptic pruning accelerates and newly trained neural pathways lock into permanent retention.
               </p>
             </section>
 
@@ -259,7 +259,7 @@ export default function ResearchMonographPage() {
               <div className="my-6 border-l-2 border-slate-900 pl-5 italic font-serif text-lg text-slate-900">
                 &ldquo;You cannot rewire a starved nervous system. Stimulating neurons without cellular fuel is like flooring the accelerator of an empty engine: lots of noise, zero durable forward propulsion.&rdquo;
                 <span className="block mt-2 font-sans text-xs font-normal not-italic text-slate-500">
-                  — Vera Shury, C.H.C., L.B.H.C.
+                  — Vera Shury, MS, LBHC
                 </span>
               </div>
             </section>

@@ -38,6 +38,7 @@ import { PremiumCtaButton } from "@/components/ui/PremiumCtaButton";
 import { InstitutionalTrustMarquee } from "@/components/InstitutionalTrustMarquee";
 import { NeuralModel3D } from "@/components/NeuralModel3D";
 import { AffirmPromo } from "@/components/AffirmPromo";
+import { SpecialtyProgramsGrid } from "@/components/SpecialtyProgramsGrid";
 
 const CALENDAR_URL = "https://calendar.app.google/8Gt1wf6dzY3ki8xy7";
 
@@ -142,10 +143,10 @@ const CREDENTIAL_STACK = [
     linkText: "Verify edX Credential ↗",
   },
   {
-    title: "Licensed Health Coach",
-    code: "ACE Coach #W54776",
+    title: "Licensed Board Certified Health Coach (LBHC)",
+    code: "National Board / ACE Coach #W54776",
     desc: "National clinical accreditation for behavioral lifestyle change, risk mitigation, and executive longevity.",
-    detail: "Medical Taxonomy Code: 71400000X (eligible for medical tax deduction).",
+    detail: "Medical Taxonomy Code: 71400000X (eligible for medical tax deduction / HSA / FSA).",
   },
   {
     title: "HeartMath® Certified Practitioner",
@@ -230,10 +231,10 @@ const THE_THREE_PILLARS = [
 const PROGRAM_SPECTRUM = [
   {
     tier: "Discovery Call",
-    duration: "30 Minutes",
+    duration: "15 Minutes",
     investment: "Complimentary ($0)",
     focus: "Virtual Motivational Interview",
-    desc: "A focused, sensitive 30-minute brainstorm to evaluate your current baseline, identify whether the stall is showing up in life, business, or body, and determine readiness for the Metabolic Neuroplasticity™ loop.",
+    desc: "A focused, sensitive 15-minute brainstorm to evaluate your current baseline, identify whether the stall is showing up in life, business, or body, and determine readiness for the Metabolic Neuroplasticity™ loop.",
     highlight: false,
   },
   {
@@ -247,13 +248,13 @@ const PROGRAM_SPECTRUM = [
     highlight: false,
   },
   {
-    tier: "Basic Mini Programs",
+    tier: "Specialty 5-Session Sprints",
     duration: "5 Sessions Total",
     investment: "$297",
     amountCents: 29700,
     checkoutUrl: "https://buy.stripe.com/7sYaEYa9o9FQfTb1Sc43S03",
-    focus: "Targeted Clinical Modules",
-    desc: "1 initial 60-min deep dive + 4 @ 45-min follow-ups. Focus areas include: Cooling Vitality, Reclaim Mobility, Bust Your Stress, Master Self-Regulation, Senior Posture Revival, or PWR! Parkinson's Power Up.",
+    focus: "Targeted Entry Horizons (Orig. $350)",
+    desc: "1 initial 60-min foundation + 4 follow-ups. Choose from 16 targeted programs across Life Advisory, Business Scaling, and Health Longevity (Bust Your Stress, Scale Up, Women Business Owners, Menopause, Bone Rebuilding, Senior Balance, and PWR! Parkinson's).",
     highlight: false,
   },
   {
@@ -457,10 +458,10 @@ export default function AboutPage() {
 
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-transparent p-6 text-white">
                     <span className="font-serif italic text-2xl text-white block">
-                      Vera Shury, MS
+                      Vera Shury, MS, LBHC
                     </span>
                     <span className="text-xs font-mono text-emerald-300 mt-0.5 block tracking-wide">
-                      Life · Business · Health Advisory
+                      Licensed Board Certified Health Coach · Life · Business · Health Advisory
                     </span>
                     <p className="text-[11px] text-slate-300 mt-2 leading-relaxed">
                       &ldquo;Adult neurogenesis is not theoretical. When you give your physiology the proper fuel, autonomic coherence, and motor recruitment, the loop never stalls.&rdquo;
@@ -556,10 +557,10 @@ export default function AboutPage() {
                   <div className="mt-6 pt-6 border-t border-slate-100 flex items-center justify-between">
                     <div>
                       <div className="text-sm font-bold text-slate-900">
-                        Vera Shury, MS
+                        Vera Shury, MS, LBHC
                       </div>
                       <div className="text-xs text-slate-500 font-mono mt-0.5">
-                        Founder, Liberty Science Coaching
+                        Licensed Board Certified Health Coach (LBHC) · Founder
                       </div>
                     </div>
                     <span className="h-8 w-8 rounded-full bg-orange-50 text-[#ea580c] flex items-center justify-center font-serif italic text-xs font-bold">
@@ -665,9 +666,9 @@ export default function AboutPage() {
                       &ldquo;Metabolic Neuroplasticity™ is the intentional orchestration of fuel, movement, and attention—rooted in the Hebbian principle that neurons that fire together, wire together. Fuel sets the cellular conditions; movement and attention write the durable pattern. By aligning these three biological vectors, we help people sustain their energy, physical agency, and lifelong mental capacity.&rdquo;
                     </blockquote>
                     <div className="mt-4 flex flex-wrap items-center gap-2 sm:gap-3">
-                      <span className="text-sm font-bold text-slate-900">Vera Shury, MS</span>
+                      <span className="text-sm font-bold text-slate-900">Vera Shury, MS, LBHC</span>
                       <span className="text-slate-300">•</span>
-                      <span className="text-xs text-slate-600 font-mono">Principal Clinician &amp; Founder</span>
+                      <span className="text-xs text-slate-600 font-mono">Licensed Board Certified Health Coach · Founder</span>
                       <span className="text-slate-300">•</span>
                       <span className="text-xs text-[#ea580c] font-semibold">Tucson, Arizona</span>
                     </div>
@@ -979,6 +980,9 @@ export default function AboutPage() {
             ))}
           </div>
 
+          {/* Detailed Interactive Specialty Programs Grid (16 Sprints + Search + Tabs) */}
+          <SpecialtyProgramsGrid />
+
           {/* Practice Location & Contact Details Bar */}
           <div className="mt-12 p-6 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-sans text-slate-600">
             <div className="flex items-center gap-2">
@@ -1288,9 +1292,9 @@ export default function AboutPage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
                     <div className="absolute bottom-3 left-4 right-4 text-white">
-                      <div className="text-xs font-bold">Vera Shury, MS</div>
+                      <div className="text-xs font-bold">Vera Shury, MS, LBHC</div>
                       <div className="text-[11px] text-slate-300 font-mono">
-                        Confidential 30-Minute Motivational Intake
+                        Confidential 15-Minute Motivational Intake
                       </div>
                     </div>
                   </div>

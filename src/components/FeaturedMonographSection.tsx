@@ -28,7 +28,7 @@ export function FeaturedMonographSection() {
               </p>
 
               <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-                In this foundational clinical monograph, <strong>Vera Shury, C.H.C.</strong>, synthesizes 20+ years of clinical practice into a bioenergetic model driven by two validated mechanisms: <strong>epigenetics</strong> (cellular fuel triggering BDNF gene expression) and <strong>Hebbian neuroplasticity</strong> (&ldquo;neurons that fire together wire together&rdquo; locked into disciplined 6-day micro-loops). By establishing mitochondrial substrate and HeartMath® autonomic coherence before executing high-amplitude motor drills, synaptic pathways consolidate permanently.
+                In this foundational clinical monograph, <strong>Vera Shury, MS, LBHC</strong>, synthesizes 20+ years of clinical practice into a bioenergetic model driven by two validated mechanisms: <strong>epigenetics</strong> (cellular fuel triggering BDNF gene expression) and <strong>Hebbian neuroplasticity</strong> (&ldquo;neurons that fire together wire together&rdquo; locked into disciplined 6-day micro-loops). By establishing mitochondrial substrate and HeartMath® autonomic coherence before executing high-amplitude motor drills, synaptic pathways consolidate permanently.
               </p>
 
               {/* Three Clinical Pillars & Mechanisms */}
@@ -94,7 +94,7 @@ export function FeaturedMonographSection() {
                     Clinical Taxonomy Code 71400000X
                   </div>
                   <div className="text-xs font-semibold text-white">
-                    Vera Shury, C.H.C. · Liberty Science Coaching
+                    Vera Shury, MS, LBHC · Liberty Science Coaching
                   </div>
                   <p className="text-[11px] text-slate-300 mt-0.5 line-clamp-1">
                     Peer-reviewed clinical practice foundation · Tucson, AZ

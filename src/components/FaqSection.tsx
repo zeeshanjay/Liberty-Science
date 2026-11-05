@@ -49,7 +49,7 @@ const RIGHT_FAQS: FaqItem[] = [
     id: "privacy-confidentiality",
     question: "Are executive and health advisory engagements confidential?",
     answer:
-      "100% private. All health assessments, succession discussions, and autonomic telemetry remain strictly confidential between you and Vera Shury, C.H.C.",
+      "100% private. All health assessments, succession discussions, and autonomic telemetry remain strictly confidential between you and Vera Shury, MS, LBHC.",
   },
 ];
 

@@ -165,7 +165,7 @@ export default function CuratedToolsPage() {
               </div>
 
               <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-slate-300 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/15">
-                <span>Vera Shury, C.H.C.</span>
+                <span>Vera Shury, MS, LBHC</span>
                 <span className="text-slate-500">•</span>
                 <span className="text-amber-300">Tucson, AZ</span>
               </div>
@@ -291,7 +291,7 @@ export default function CuratedToolsPage() {
                                   &ldquo;{line.quote}&rdquo;
                                 </p>
                                 <span className="block mt-1.5 text-[10px] font-sans font-bold uppercase tracking-wider text-slate-400">
-                                  — Vera Shury, C.H.C.
+                                  — Vera Shury, MS, LBHC
                                 </span>
                               </div>
                             )}
@@ -383,7 +383,7 @@ export default function CuratedToolsPage() {
                                   &ldquo;{product.reason}&rdquo;
                                 </p>
                                 <span className="mt-1.5 block text-[10px] font-sans font-semibold uppercase tracking-wider text-slate-400">
-                                  — Vera Shury, C.H.C.
+                                  — Vera Shury, MS, LBHC
                                 </span>
                               </div>
                             ) : (

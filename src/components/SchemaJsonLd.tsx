@@ -60,9 +60,9 @@ export function SchemaJsonLd() {
         "founder": {
           "@type": "Person",
           "@id": "https://libertysciencecoaching.com/#founder",
-          "name": "Vera Shury, MS",
-          "alternateName": ["Vera Shury", "Vera M. Shury", "Coach Vera Shury"],
-          "jobTitle": "Chief Clinician, Health Coach & Neuro-Functional Longevity Advisor",
+          "name": "Vera Shury, MS, LBHC",
+          "alternateName": ["Vera Shury", "Vera M. Shury", "Coach Vera Shury", "Vera Shury, LBHC"],
+          "jobTitle": "Licensed Board Certified Health Coach (LBHC) & Life, Business, Health Advisor",
           "gender": "Female",
           "url": "https://libertysciencecoaching.com/about",
           "sameAs": [

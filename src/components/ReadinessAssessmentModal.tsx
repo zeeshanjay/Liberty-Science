@@ -369,7 +369,7 @@ Clinical Stage: ${priorityTag} · ${domainTag}
 Identified Gap: ${gapTag} (${answers.gap?.label || "N/A"})
 Target Outcome: ${outcomeTag} (${answers.outcome?.label || "N/A"})
 Recommended Retainer: ${recommendedProgram.name} (${recommendedProgram.investment})
-30-Min Intake Status: Complimentary Readiness Consultation with Vera Shury, C.H.C.`;
+30-Min Intake Status: Complimentary Readiness Consultation with Vera Shury, MS, LBHC`;
 
     navigator.clipboard.writeText(summary);
     setCopied(true);
@@ -451,9 +451,6 @@ Recommended Retainer: ${recommendedProgram.name} (${recommendedProgram.investmen
                           {currentStep < QUESTIONS.length
                             ? `Step 0${currentStep + 1} of 0${QUESTIONS.length}`
                             : "Evaluation"}
-                        </span>
-                        <span className="text-[11px] font-mono text-slate-400 hidden sm:inline">
-                          45-Second Readiness Screen
                         </span>
                       </div>
 

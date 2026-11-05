@@ -92,7 +92,7 @@ export function ContactSection() {
             {/* Direct Phone & SMS Card */}
             <div className="mt-4 rounded-2xl border border-slate-200/80 bg-slate-50/60 p-6">
               <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                Direct Line · Vera Shury, C.H.C.
+                Direct Line · Vera Shury, MS, LBHC
               </div>
 
               <div className="mt-2 text-2xl font-bold tracking-tight text-slate-900 font-mono">

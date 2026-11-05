@@ -55,7 +55,7 @@ function StackedCircularFooter() {
               <span className="italic text-[#e85d26]">Coaching</span>
             </h3>
             <p className="mt-1.5 text-xs font-medium uppercase tracking-[0.18em] text-slate-500">
-              Vera Shury, C.H.C. · Life · Business · Health Advisory
+              Vera Shury, MS, LBHC · Life · Business · Health Advisory
             </p>
           </div>
 

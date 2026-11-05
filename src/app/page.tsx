@@ -22,6 +22,7 @@ import { FeaturedMonographSection } from "@/components/FeaturedMonographSection"
 import { FaqSection } from "@/components/FaqSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { StripeBannerCards } from "@/components/StripeBannerCards";
+import { SpecialtyProgramsGrid } from "@/components/SpecialtyProgramsGrid";
 import { ContactSection } from "@/components/ContactSection";
 import { StackedCircularFooter } from "@/components/ui/stacked-circular-footer";
 import { PremiumCtaButton } from "@/components/ui/PremiumCtaButton";
@@ -554,7 +555,7 @@ export default function LibertyScienceLandingPage() {
                   <div className="relative aspect-[4/4.5] overflow-hidden rounded-[28px] border-2 border-white bg-gradient-to-b from-[#0f6e68]/20 via-stone-200 to-[#ea580c]/20 shadow-[0_24px_60px_-15px_rgba(15,110,104,0.22)]">
                     <Image
                       src="/WhatsApp Image 2026-10-19 at 7.08.47 PM (3).jpeg"
-                      alt="Vera Shury, C.H.C. — Founder of Liberty Science Coaching"
+                      alt="Vera Shury, MS, LBHC — Founder of Liberty Science Coaching"
                       fill
                       sizes="(max-width: 1024px) 100vw, 460px"
                       className="object-cover object-top"
@@ -564,10 +565,10 @@ export default function LibertyScienceLandingPage() {
                       <div className="flex items-end justify-between gap-4">
                         <div>
                           <div className="font-script text-2xl text-[#ff9f68] sm:text-3xl">
-                            Vera Shury, C.H.C.
+                            Vera Shury, MS, LBHC
                           </div>
                           <div className="mt-0.5 text-xs font-medium text-emerald-100 sm:text-sm">
-                            Principal Neuro-Functional &amp; Executive Advisor
+                            Licensed Board Certified Health Coach · Life, Business, Health Advisory
                           </div>
                         </div>
                         <div className="hidden shrink-0 items-center gap-2.5 rounded-xl border border-white/15 bg-white/10 p-2 backdrop-blur-md sm:flex">
@@ -881,10 +882,10 @@ export default function LibertyScienceLandingPage() {
                         </div>
                         <div>
                           <div className="text-sm font-semibold text-slate-900">
-                            Vera Shury, C.H.C.
+                            Vera Shury, MS, LBHC
                           </div>
                           <div className="text-xs text-slate-500">
-                            Founder, Liberty Science Coaching · Tucson, AZ
+                            Licensed Board Certified Health Coach (LBHC) · Life, Business, Health Advisory
                           </div>
                         </div>
                       </div>
@@ -1070,8 +1071,8 @@ export default function LibertyScienceLandingPage() {
               ))}
             </div>
 
-            {/* Stripe-Grade Entry Offering Banner Cards */}
-            <StripeBannerCards />
+            {/* Specialty Entry Programs Grid — 16 Five-Session Sprints + Explorer + Discovery Call */}
+            <SpecialtyProgramsGrid />
           </div>
         </section>
 

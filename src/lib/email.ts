@@ -93,8 +93,8 @@ function emailLayout(content: string): string {
           <!-- Established Executive Footer -->
           <tr>
             <td style="padding-top: 28px; border-top: 1px solid #e5e7eb; font-size: 11px; line-height: 1.6; color: #9ca3af;">
-              <span style="font-weight: 600; color: #6b7280;">Liberty Science Coaching</span> &middot; Vera Shury, MS<br>
-              ACE Certified Health Coach #W54776 &middot; Certified PWR!Moves &middot; HeartMath Coach<br>
+              <span style="font-weight: 600; color: #6b7280;">Liberty Science Coaching</span> &middot; Vera Shury, MS, LBHC<br>
+              Licensed Board Certified Health Coach (#W54776) &middot; Certified PWR!Moves &middot; HeartMath Coach<br>
               Healthcare Taxonomy Code: 71400000X &middot; Tucson, AZ 85737
             </td>
           </tr>

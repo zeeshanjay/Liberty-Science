@@ -890,7 +890,7 @@ export default function AdminPage() {
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
                 SHA-256 Protected • Auto-Lock
               </span>
-              <span>Vera Shury, MS</span>
+              <span>Vera Shury, MS, LBHC</span>
             </div>
           </div>
         </div>
@@ -928,7 +928,7 @@ export default function AdminPage() {
                   </span>
                 </div>
                 <div className="text-xs text-slate-500 flex items-center gap-2">
-                  <span>Vera Shury, MS</span>
+                  <span>Vera Shury, MS, LBHC</span>
                   <span className="text-slate-300">•</span>
                   <span>Tucson, Arizona</span>
                 </div>
@@ -2046,8 +2046,8 @@ export default function AdminPage() {
                 </div>
                 <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
                   <div className="text-slate-400 text-[10px] uppercase font-semibold">CHIEF CLINICIAN</div>
-                  <div className="text-slate-950 font-bold text-sm mt-1">Vera Shury, MS</div>
-                  <div className="text-slate-500 text-[11px] mt-0.5">ACE Health Coach · PWR!Moves · HeartMath</div>
+                  <div className="text-slate-950 font-bold text-sm mt-1">Vera Shury, MS, LBHC</div>
+                  <div className="text-slate-500 text-[11px] mt-0.5">Licensed Board Certified Health Coach · PWR!Moves · HeartMath</div>
                 </div>
                 <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
                   <div className="text-slate-400 text-[10px] uppercase font-semibold">PRACTICE STRUCTURE</div>

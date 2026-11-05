@@ -97,7 +97,7 @@ export function PagePreloader() {
               transition={{ duration: 0.4, delay: 0.3 }}
               className="mt-3 flex items-center gap-2 font-mono text-[9px] uppercase tracking-widest text-slate-500"
             >
-              <span>Vera Shury, C.H.C.</span>
+              <span>Vera Shury, MS, LBHC</span>
               <span className="text-slate-700">·</span>
               <span className="text-[#ea580c] font-semibold">0.10 Hz Coherence</span>
             </motion.div>
