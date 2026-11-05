@@ -13,6 +13,24 @@ interface PartnerLogo {
 
 const PARTNER_LOGOS: PartnerLogo[] = [
   {
+    name: "Harvard Medical School - Continuing Medical Education",
+    src: "/logos/harvard-medical-school.svg",
+    width: 140,
+    height: 42,
+  },
+  {
+    name: "Harvard Health Publishing · HMS",
+    src: "/logos/harvard-health.svg",
+    width: 140,
+    height: 42,
+  },
+  {
+    name: "HarvardX - Harvard University Online Learning Initiative",
+    src: "/logos/harvardx.svg",
+    width: 120,
+    height: 40,
+  },
+  {
     name: "RenewActive by UnitedHealthcare",
     src: "/logos/renewactive.png",
     width: 175,
@@ -35,12 +53,6 @@ const PARTNER_LOGOS: PartnerLogo[] = [
     src: "/logos/orovalley.png",
     width: 55,
     height: 58,
-  },
-  {
-    name: "HarvardX - Harvard University Online Learning Initiative",
-    src: "/logos/harvardx.svg",
-    width: 120,
-    height: 40,
   },
   {
     name: "ACE Certified - American Council on Exercise",
@@ -71,18 +83,6 @@ const PARTNER_LOGOS: PartnerLogo[] = [
     src: "/logos/silverfit.png",
     width: 125,
     height: 60,
-  },
-  {
-    name: "Oro Valley United Church of Christ",
-    src: "/logos/ucc.png",
-    width: 80,
-    height: 70,
-  },
-  {
-    name: "FLEX Outside The Gym",
-    src: "/logos/flex.png",
-    width: 85,
-    height: 70,
   },
   {
     name: "Peak Waves Studio",

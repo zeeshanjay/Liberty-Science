@@ -75,6 +75,36 @@ export function SchemaJsonLd() {
           "hasCredential": [
             {
               "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "Medical CME Certificate",
+              "name": "Stem Cell Medicine: Parkinson's Disease (2.00 AMA PRA Category 1 Credits™)",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "Harvard Medical School"
+              },
+              "url": "https://libertysciencecoaching.com/documents/certificates/Harvard_Medical_School_Stem_Cell_Medicine_Parkinsons_Vera_Shury.pdf"
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "Curriculum Certificate",
+              "name": "Cognitive Fitness (Credential ID: 0253a695-5736-43ba-94c3-0b23acb91f51)",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "Harvard Health Publishing (Harvard Medical School)"
+              },
+              "url": "https://libertysciencecoaching.com/documents/certificates/Harvard_Health_Cognitive_Fitness_Vera_Shury.pdf"
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "Curriculum Certificate",
+              "name": "Food Is Medicine (Credential ID: 6a037053-6f5a-4828-8651-cec1b6dbe965)",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "Harvard Health Publishing (Harvard Medical School)"
+              },
+              "url": "https://libertysciencecoaching.com/documents/certificates/Harvard_Health_Food_Is_Medicine_Vera_Shury.pdf"
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
               "credentialCategory": "Certificate",
               "name": "Technology Entrepreneurship: Lab to Market",
               "recognizedBy": {

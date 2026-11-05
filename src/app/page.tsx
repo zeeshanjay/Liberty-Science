@@ -519,7 +519,7 @@ export default function LibertyScienceLandingPage() {
                   </div>
                 </motion.div>
 
-                {/* Direct Link to Dedicated About Page & Verified HarvardX Credential */}
+                {/* Direct Link to Dedicated About Page & Verified Harvard Credentials */}
                 <div className="mt-7 flex flex-wrap items-center gap-3">
                   <Link
                     href="/about"
@@ -529,17 +529,15 @@ export default function LibertyScienceLandingPage() {
                     <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </Link>
 
-                  <a
-                    href="https://courses.edx.org/certificates/954e0f86dfd74c74b05b4438674b7d07"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    href="/about"
                     className="inline-flex items-center gap-1.5 rounded-full border border-rose-200/90 bg-rose-50/80 px-3 py-1 text-[11px] font-semibold text-rose-950 transition-all hover:bg-rose-100 hover:border-rose-300 shadow-2xs"
                   >
-                    <span className="font-serif font-bold text-[#A51C30]">HARVARDx</span>
+                    <span className="font-serif font-bold text-[#A51C30]">HARVARD MEDICAL SCHOOL</span>
                     <span className="text-rose-300">|</span>
-                    <span>Technology Entrepreneurship</span>
+                    <span>Verified CME &amp; Curriculum Credentials</span>
                     <ArrowUpRight className="h-3 w-3 text-[#A51C30]" />
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -723,6 +721,48 @@ export default function LibertyScienceLandingPage() {
                             </div>
                             <p className="mt-1.5 text-[11px] leading-relaxed text-slate-600">
                               Backed by formal HarvardX certification in Technology Entrepreneurship (Lab to Market), translating complex innovation and behavioral science into scalable, sustainable business performance.
+                            </p>
+                          </div>
+                        )}
+
+                        {pillar.id === "health-advisory" && (
+                          <div className="mt-5 rounded-2xl border border-rose-100 bg-rose-50/60 p-3.5">
+                            <div className="flex items-center justify-between gap-2">
+                              <div className="flex items-center gap-1.5">
+                                <span className="font-serif font-bold text-xs text-[#A51C30]">HARVARD MEDICAL SCHOOL</span>
+                                <span className="text-[10px] font-semibold text-rose-900">Stem Cell &amp; Nutrition</span>
+                              </div>
+                              <Link
+                                href="/about"
+                                className="inline-flex items-center gap-1 text-[11px] font-bold text-[#A51C30] hover:underline"
+                              >
+                                <span>View Certs</span>
+                                <ArrowUpRight className="h-3 w-3" />
+                              </Link>
+                            </div>
+                            <p className="mt-1.5 text-[11px] leading-relaxed text-slate-600">
+                              Backed by Harvard Medical School CME in Stem Cell Medicine (Parkinson&apos;s Disease) and Harvard Health Food Is Medicine curriculum for neuro-metabolic recovery.
+                            </p>
+                          </div>
+                        )}
+
+                        {pillar.id === "life-advisory" && (
+                          <div className="mt-5 rounded-2xl border border-rose-100 bg-rose-50/60 p-3.5">
+                            <div className="flex items-center justify-between gap-2">
+                              <div className="flex items-center gap-1.5">
+                                <span className="font-serif font-bold text-xs text-[#A51C30]">HARVARD HEALTH</span>
+                                <span className="text-[10px] font-semibold text-rose-900">Cognitive Fitness</span>
+                              </div>
+                              <Link
+                                href="/about"
+                                className="inline-flex items-center gap-1 text-[11px] font-bold text-[#A51C30] hover:underline"
+                              >
+                                <span>View Certs</span>
+                                <ArrowUpRight className="h-3 w-3" />
+                              </Link>
+                            </div>
+                            <p className="mt-1.5 text-[11px] leading-relaxed text-slate-600">
+                              Backed by Harvard Health Publishing Cognitive Fitness certification for executive mental stamina, emotional coherence, and safeguarding cognitive bandwidth against burnout.
                             </p>
                           </div>
                         )}
