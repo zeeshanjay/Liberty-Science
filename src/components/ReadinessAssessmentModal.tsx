@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLenis } from "lenis/react";
 import {
   X,
   ArrowLeft,
@@ -186,6 +188,8 @@ export function ReadinessAssessmentModal({
   isOpen,
   onClose,
 }: ReadinessModalProps) {
+  const lenis = useLenis();
+  const [mounted, setMounted] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, QuestionOption>>({});
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -199,7 +203,11 @@ export function ReadinessAssessmentModal({
   const [isSubmittingLead, setIsSubmittingLead] = useState(false);
   const [leadSubmitted, setLeadSubmitted] = useState(false);
 
-  // Reset state on modal open
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Reset state on modal open & prevent background scrolling (including Lenis)
   useEffect(() => {
     if (isOpen) {
       setCurrentStep(0);
@@ -213,13 +221,16 @@ export function ReadinessAssessmentModal({
       setIsSubmittingLead(false);
       setLeadSubmitted(false);
       document.body.style.overflow = "hidden";
+      lenis?.stop();
     } else {
       document.body.style.overflow = "";
+      lenis?.start();
     }
     return () => {
       document.body.style.overflow = "";
+      lenis?.start();
     };
-  }, [isOpen]);
+  }, [isOpen, lenis]);
 
   // Keyboard navigation (1-4 and Esc)
   useEffect(() => {
@@ -401,477 +412,503 @@ Recommended Retainer: ${recommendedProgram.name} (${recommendedProgram.investmen
   };
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5">
-          {/* Backdrop Blur */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm transition-opacity"
-          />
+    <>
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {isOpen && (
+              <div
+                role="dialog"
+                aria-modal="true"
+                data-lenis-prevent="true"
+                onWheel={(e) => e.stopPropagation()}
+                className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-5"
+              >
+                {/* Backdrop Blur */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={onClose}
+                  className="fixed inset-0 bg-slate-950/70 backdrop-blur-sm transition-opacity"
+                />
 
-          {/* Compact Solid Modal Container */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 12 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: 12 }}
-            transition={{ type: "spring", damping: 26, stiffness: 360 }}
-            className="relative w-full max-w-[540px] max-h-[88vh] overflow-y-auto rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-6 shadow-2xl z-10 flex flex-col justify-between"
-          >
-            {/* Top Close Button */}
-            <button
-              type="button"
-              onClick={onClose}
-              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-900 hover:text-white transition-colors cursor-pointer"
-              aria-label="Close modal"
-            >
-              <X className="h-4 w-4" />
-            </button>
+                {/* Compact Solid Modal Container */}
+                <motion.div
+                  data-lenis-prevent="true"
+                  onWheel={(e) => e.stopPropagation()}
+                  initial={{ opacity: 0, scale: 0.96, y: 12 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.96, y: 12 }}
+                  transition={{ type: "spring", damping: 26, stiffness: 360 }}
+                  className="relative w-full max-w-[540px] max-h-[88vh] overflow-y-auto overscroll-contain rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-6 shadow-2xl z-10 flex flex-col justify-between my-auto"
+                >
+                  {/* Pinned Top Header Row with Dedicated Close Action (Never Overlaps Text) */}
+                  <div className="pb-3 mb-3 border-b border-slate-100 shrink-0">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="inline-flex items-center rounded-full bg-slate-900 px-2.5 py-0.5 text-[10px] font-mono font-bold tracking-wider text-white uppercase">
+                          {currentStep < QUESTIONS.length
+                            ? `Step 0${currentStep + 1} of 0${QUESTIONS.length}`
+                            : "Evaluation"}
+                        </span>
+                        <span className="text-[11px] font-mono text-slate-400 hidden sm:inline">
+                          45-Second Readiness Screen
+                        </span>
+                      </div>
 
-            {isAnalyzing ? (
-              // ==========================================
-              // STRIPE / CANVA STYLE SKELETON LOADING STATE
-              // ==========================================
-              <div className="py-4 sm:py-6">
-                <div className="flex items-center gap-2 mb-4">
-                  <Loader2 className="h-4 w-4 text-slate-900 animate-spin" />
-                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-900">
-                    Synthesizing Clinical Profile...
-                  </span>
-                </div>
+                      <div className="flex items-center gap-2">
+                        <span className="inline-flex items-center rounded-full bg-amber-50 border border-amber-200/70 px-2.5 py-0.5 text-[10px] font-mono font-semibold text-amber-900 uppercase tracking-wide">
+                          Tucson · Virtual Worldwide
+                        </span>
+                        <button
+                          type="button"
+                          onClick={onClose}
+                          className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-900 hover:text-white transition-colors cursor-pointer shrink-0 ml-1"
+                          aria-label="Close modal"
+                        >
+                          <X className="h-4 w-4" />
+                        </button>
+                      </div>
+                    </div>
 
-                <div className="space-y-3">
-                  {/* Skeleton Card 1 */}
-                  <div className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-4 animate-pulse">
-                    <div className="h-4 w-2/5 rounded bg-slate-200 mb-2.5" />
-                    <div className="h-3 w-4/5 rounded bg-slate-200/70 mb-1.5" />
-                    <div className="h-3 w-3/5 rounded bg-slate-200/60" />
+                    {/* Integrated progress bar within the header */}
+                    {currentStep < QUESTIONS.length && !isAnalyzing && (
+                      <div className="h-1 w-full rounded-full bg-slate-100 overflow-hidden mt-3">
+                        <motion.div
+                          className="h-full bg-slate-900"
+                          initial={{ width: 0 }}
+                          animate={{
+                            width: `${((currentStep + 1) / QUESTIONS.length) * 100}%`,
+                          }}
+                          transition={{ duration: 0.25 }}
+                        />
+                      </div>
+                    )}
                   </div>
 
-                  {/* Skeleton Card 2 */}
-                  <div className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-4 animate-pulse">
-                    <div className="h-4 w-1/3 rounded bg-slate-200 mb-2.5" />
-                    <div className="h-3 w-full rounded bg-slate-200/70 mb-1.5" />
-                    <div className="h-3 w-2/3 rounded bg-slate-200/60" />
-                  </div>
+                  {isAnalyzing ? (
+                    // ==========================================
+                    // STRIPE / CANVA STYLE SKELETON LOADING STATE
+                    // ==========================================
+                    <div className="py-4 sm:py-6">
+                      <div className="flex items-center gap-2 mb-4">
+                        <Loader2 className="h-4 w-4 text-slate-900 animate-spin" />
+                        <span className="text-xs font-semibold uppercase tracking-wider text-slate-900">
+                          Synthesizing Clinical Profile...
+                        </span>
+                      </div>
 
-                  {/* Skeleton Card 3 */}
-                  <div className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-4 animate-pulse">
-                    <div className="h-4 w-1/2 rounded bg-slate-200 mb-2.5" />
-                    <div className="h-3 w-3/4 rounded bg-slate-200/70" />
-                  </div>
-                </div>
-
-                <p className="mt-4 text-center text-xs text-slate-400">
-                  Calculating autonomic, neuromuscular &amp; executive indicators...
-                </p>
-              </div>
-            ) : currentStep < QUESTIONS.length ? (
-              // ==========================================
-              // STEP QUESTIONS FLOW (SOLID STRIPE CARDS)
-              // ==========================================
-              <div>
-                {/* Step Metadata & Progress Track */}
-                <div className="flex items-center justify-between text-xs text-slate-400 mb-1.5">
-                  <span className="font-mono">
-                    STEP 0{currentStep + 1} OF 0{QUESTIONS.length}
-                  </span>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 text-[9px] font-mono font-bold tracking-wider text-amber-900 uppercase">
-                    On-Site in Tucson · Or Virtual Worldwide
-                  </span>
-                </div>
-
-                {/* Compact Progress Bar */}
-                <div className="h-1 w-full rounded-full bg-slate-100 overflow-hidden mb-3">
-                  <motion.div
-                    className="h-full bg-slate-900"
-                    initial={{ width: 0 }}
-                    animate={{
-                      width: `${((currentStep + 1) / QUESTIONS.length) * 100}%`,
-                    }}
-                    transition={{ duration: 0.25 }}
-                  />
-                </div>
-
-                {/* Question Heading */}
-                <h3 className="text-lg sm:text-xl font-bold tracking-tight text-slate-900 leading-snug">
-                  {QUESTIONS[currentStep].question}
-                </h3>
-                <p className="mt-1 text-xs text-slate-500 leading-relaxed">
-                  {QUESTIONS[currentStep].context}
-                </p>
-
-                {/* Solid Stripe-style Options Grid */}
-                <div className="mt-4 space-y-2.5">
-                  {QUESTIONS[currentStep].options.map((opt, idx) => (
-                    <button
-                      key={opt.key}
-                      type="button"
-                      onClick={() => handleSelectOption(opt)}
-                      className="group w-full rounded-xl border border-slate-200 bg-white p-3 sm:p-3.5 text-left transition-all duration-150 hover:border-slate-900 hover:shadow-xs flex items-start gap-3 cursor-pointer"
-                    >
-                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-slate-300 font-mono text-[10px] font-bold text-slate-500 group-hover:border-slate-900 group-hover:bg-slate-900 group-hover:text-white transition-colors mt-0.5">
-                        {idx + 1}
-                      </span>
-                      <div className="flex-1 min-w-0">
-                        <div className="text-xs sm:text-[13px] font-semibold text-slate-900 group-hover:text-slate-950 transition-colors leading-snug">
-                          {opt.label}
+                      <div className="space-y-3">
+                        {/* Skeleton Card 1 */}
+                        <div className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-4 animate-pulse">
+                          <div className="h-4 w-2/5 rounded bg-slate-200 mb-2.5" />
+                          <div className="h-3 w-4/5 rounded bg-slate-200/70 mb-1.5" />
+                          <div className="h-3 w-3/5 rounded bg-slate-200/60" />
                         </div>
-                        <p className="mt-0.5 text-[11px] text-slate-500 leading-snug line-clamp-2">
-                          {opt.detail}
-                        </p>
-                      </div>
-                    </button>
-                  ))}
-                </div>
 
-                {/* Compact Footer Controls */}
-                <div className="mt-4 flex items-center justify-between pt-3 border-t border-slate-100 text-xs text-slate-400">
-                  {currentStep > 0 ? (
-                    <button
-                      type="button"
-                      onClick={handleBack}
-                      className="inline-flex items-center gap-1 font-semibold text-slate-600 hover:text-slate-900 transition-colors cursor-pointer text-xs"
-                    >
-                      <ArrowLeft className="h-3 w-3" />
-                      <span>Back</span>
-                    </button>
+                        {/* Skeleton Card 2 */}
+                        <div className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-4 animate-pulse">
+                          <div className="h-4 w-1/3 rounded bg-slate-200 mb-2.5" />
+                          <div className="h-3 w-full rounded bg-slate-200/70 mb-1.5" />
+                          <div className="h-3 w-2/3 rounded bg-slate-200/60" />
+                        </div>
+
+                        {/* Skeleton Card 3 */}
+                        <div className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-4 animate-pulse">
+                          <div className="h-4 w-1/2 rounded bg-slate-200 mb-2.5" />
+                          <div className="h-3 w-3/4 rounded bg-slate-200/70" />
+                        </div>
+                      </div>
+
+                      <p className="mt-4 text-center text-xs text-slate-400">
+                        Calculating autonomic, neuromuscular &amp; executive indicators...
+                      </p>
+                    </div>
+                  ) : currentStep < QUESTIONS.length ? (
+                    // ==========================================
+                    // STEP QUESTIONS FLOW (SOLID STRIPE CARDS)
+                    // ==========================================
+                    <div>
+                      {/* Question Heading */}
+                      <h3 className="text-lg sm:text-xl font-bold tracking-tight text-slate-900 leading-snug">
+                        {QUESTIONS[currentStep].question}
+                      </h3>
+                      <p className="mt-1 text-xs text-slate-500 leading-relaxed">
+                        {QUESTIONS[currentStep].context}
+                      </p>
+
+                      {/* Solid Stripe-style Options Grid */}
+                      <div className="mt-4 space-y-2.5">
+                        {QUESTIONS[currentStep].options.map((opt, idx) => (
+                          <button
+                            key={opt.key}
+                            type="button"
+                            onClick={() => handleSelectOption(opt)}
+                            className="group w-full rounded-xl border border-slate-200 bg-white p-3 sm:p-3.5 text-left transition-all duration-150 hover:border-slate-900 hover:shadow-xs flex items-start gap-3 cursor-pointer"
+                          >
+                            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-slate-300 font-mono text-[10px] font-bold text-slate-500 group-hover:border-slate-900 group-hover:bg-slate-900 group-hover:text-white transition-colors mt-0.5">
+                              {idx + 1}
+                            </span>
+                            <div className="flex-1 min-w-0">
+                              <div className="text-xs sm:text-[13px] font-semibold text-slate-900 group-hover:text-slate-950 transition-colors leading-snug">
+                                {opt.label}
+                              </div>
+                              <p className="mt-0.5 text-[11px] text-slate-500 leading-snug line-clamp-2">
+                                {opt.detail}
+                              </p>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+
+                      {/* Compact Footer Controls */}
+                      <div className="mt-4 flex items-center justify-between pt-3 border-t border-slate-100 text-xs text-slate-400">
+                        {currentStep > 0 ? (
+                          <button
+                            type="button"
+                            onClick={handleBack}
+                            className="inline-flex items-center gap-1 font-semibold text-slate-600 hover:text-slate-900 transition-colors cursor-pointer text-xs"
+                          >
+                            <ArrowLeft className="h-3 w-3" />
+                            <span>Back</span>
+                          </button>
+                        ) : (
+                          <span className="text-[11px]">
+                            Select an option to proceed
+                          </span>
+                        )}
+                        <span className="text-[11px]">
+                          45-Sec Screen
+                        </span>
+                      </div>
+                    </div>
+                  ) : leadSubmitted ? (
+                    // ==========================================
+                    // STEP 3: CONFIRMATION & HANDOFF COMPLETE
+                    // ==========================================
+                    <div className="text-center py-2 sm:py-4">
+                      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 mb-3 border border-emerald-200">
+                        <CheckCircle2 className="h-6 w-6" />
+                      </div>
+
+                      <h3 className="text-xl font-bold tracking-tight text-slate-950">
+                        You’re Ready for Vera Shury
+                      </h3>
+
+                      <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-emerald-700 flex items-center justify-center gap-1.5">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 inline" />
+                        Dossier Forwarded Successfully
+                      </p>
+
+                      <p className="text-xs text-slate-600 mt-2 max-w-sm mx-auto leading-relaxed">
+                        Your diagnostic markers have been registered and dispatched to Vera. She will review your profile prior to your 30-minute intake session.
+                      </p>
+
+                      {/* Dossier Summary Box */}
+                      <div className="my-4 rounded-xl border border-slate-200 bg-slate-50/80 p-3.5 text-left text-xs space-y-1.5">
+                        <div className="flex justify-between border-b border-slate-200/80 pb-1.5">
+                          <span className="text-slate-400">Candidate:</span>
+                          <span className="font-semibold text-slate-900">{candidateName} ({candidateEmail})</span>
+                        </div>
+                        <div className="flex justify-between border-b border-slate-200/80 pb-1.5">
+                          <span className="text-slate-400">Recommended Program:</span>
+                          <span className="font-semibold text-slate-900">{recommendedProgram.name} ({recommendedProgram.investment})</span>
+                        </div>
+                        <div className="flex justify-between border-b border-slate-200/80 pb-1.5">
+                          <span className="text-slate-400">Consultation Format:</span>
+                          <span className="font-semibold text-slate-900">On-Site in Tucson or Virtual Worldwide</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-slate-400">20-Min Intake Fee:</span>
+                          <span className="font-bold text-emerald-700">Complimentary ($250 Value)</span>
+                        </div>
+                      </div>
+
+                      {/* Free Instant Reward: 6-Day Habit Building Plan Download */}
+                      <div className="mb-4 rounded-xl border border-amber-500/30 bg-amber-50/70 p-3 text-left flex items-center justify-between gap-3">
+                        <div>
+                          <div className="text-[11px] font-bold text-amber-950 uppercase tracking-wider font-mono">
+                            Bonus Clinical Tool
+                          </div>
+                          <div className="text-xs font-semibold text-slate-900">
+                            Vera&apos;s 6-Day Habit Building Plan
+                          </div>
+                          <div className="text-[10px] text-slate-500">
+                            Day 0 Readiness Check + Daily Loop (Fuel, Move, Attention)
+                          </div>
+                        </div>
+                        <a
+                          href="/documents/Liberty_Science_6Day_Habit_Plan.pdf"
+                          download="Liberty_Science_6Day_Habit_Plan.pdf"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="shrink-0 px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-semibold text-xs transition-colors flex items-center gap-1.5 shadow-2xs"
+                        >
+                          <Download className="h-3.5 w-3.5" />
+                          <span>Download PDF</span>
+                        </a>
+                      </div>
+
+                      <div className="space-y-2 pt-1">
+                        <a
+                          href={CALENDAR_URL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full h-11 rounded-full bg-slate-900 font-semibold text-xs text-white flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors shadow-xs"
+                        >
+                          <Calendar className="h-4 w-4" />
+                          <span>Book 20-Min Call on Vera&apos;s Calendar ↗</span>
+                        </a>
+
+                        <button
+                          type="button"
+                          onClick={onClose}
+                          className="w-full h-9 rounded-full border border-slate-200 text-xs font-semibold text-slate-600 hover:text-slate-900 hover:border-slate-900 transition-colors cursor-pointer"
+                        >
+                          Return to Website
+                        </button>
+                      </div>
+                    </div>
+                  ) : showLeadForm ? (
+                    // ==========================================
+                    // STEP 2: 2-FIELD LEAD DOSSIER HANDOFF FORM
+                    // ==========================================
+                    <div>
+                      <h3 className="text-lg sm:text-xl font-bold tracking-tight text-slate-950">
+                        Forward Your Markers to Vera Shury
+                      </h3>
+
+                      <div className="flex items-center justify-between mt-1 mb-2">
+                        <span className="text-[11px] text-slate-500">
+                          Clinical Dossier Handoff
+                        </span>
+                        <span className="text-[10px] text-emerald-700 font-semibold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                          Complimentary Intake Call
+                        </span>
+                      </div>
+
+                      <p className="mt-1 text-xs text-slate-500 leading-relaxed">
+                        Vera personally reviews your responses before your 30-minute session so she enters your conversation informed of your exact challenges.
+                      </p>
+
+                      {/* Form Fields */}
+                      <form onSubmit={handleDossierSubmit} className="mt-4 space-y-3">
+                        <div>
+                          <label className="block text-xs font-semibold text-slate-800 mb-1">
+                            Full Name *
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            value={candidateName}
+                            onChange={(e) => setCandidateName(e.target.value)}
+                            placeholder="e.g. Eleanor Vance"
+                            className="w-full h-11 sm:h-9 rounded-xl sm:rounded-lg border border-slate-200 px-3.5 text-[16px] sm:text-xs text-slate-900 focus:outline-none focus:border-slate-900 shadow-2xs transition-colors"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-semibold text-slate-800 mb-1">
+                            Executive / Personal Email *
+                          </label>
+                          <input
+                            type="email"
+                            required
+                            value={candidateEmail}
+                            onChange={(e) => setCandidateEmail(e.target.value)}
+                            placeholder="e.g. eleanor@vanceholdings.com"
+                            className="w-full h-11 sm:h-9 rounded-xl sm:rounded-lg border border-slate-200 px-3.5 text-[16px] sm:text-xs text-slate-900 focus:outline-none focus:border-slate-900 shadow-2xs transition-colors"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-semibold text-slate-800 mb-1">
+                            Chief Movement or Stamina Priority (Optional)
+                          </label>
+                          <textarea
+                            rows={2}
+                            value={candidateNote}
+                            onChange={(e) => setCandidateNote(e.target.value)}
+                            placeholder="e.g. Preserving skiing balance, post-surgical stiffness, or executive burnout..."
+                            className="w-full rounded-xl sm:rounded-lg border border-slate-200 p-3 text-[16px] sm:text-xs text-slate-900 focus:outline-none focus:border-slate-900 resize-none shadow-2xs transition-colors"
+                          />
+                        </div>
+
+                        <div className="pt-2 flex flex-col gap-2">
+                          <button
+                            type="submit"
+                            disabled={isSubmittingLead}
+                            className="w-full h-11 rounded-full bg-slate-900 font-semibold text-xs text-white flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors shadow-xs cursor-pointer disabled:opacity-50"
+                          >
+                            {isSubmittingLead ? (
+                              <>
+                                <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                                <span>Dispatching Dossier...</span>
+                              </>
+                            ) : (
+                              <>
+                                <span>Transmit Dossier &amp; Open Calendar ↗</span>
+                              </>
+                            )}
+                          </button>
+
+                          <div className="flex items-center justify-between text-xs pt-1">
+                            <button
+                              type="button"
+                              onClick={handleBack}
+                              className="text-slate-500 hover:text-slate-900 text-xs font-semibold cursor-pointer inline-flex items-center gap-1"
+                            >
+                              <ArrowLeft className="h-3 w-3" />
+                              <span>Back to Assessment</span>
+                            </button>
+
+                            <a
+                              href={CALENDAR_URL}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[11px] text-slate-400 hover:text-slate-700 underline"
+                            >
+                              Skip directly to Calendar →
+                            </a>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
                   ) : (
-                    <span className="text-[11px]">
-                      Select an option to proceed
-                    </span>
-                  )}
-                  <span className="text-[11px]">
-                    45-Sec Screen
-                  </span>
-                </div>
-              </div>
-            ) : leadSubmitted ? (
-              // ==========================================
-              // STEP 3: CONFIRMATION & HANDOFF COMPLETE
-              // ==========================================
-              <div className="text-center py-2 sm:py-4">
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 mb-3 border border-emerald-200">
-                  <CheckCircle2 className="h-6 w-6" />
-                </div>
+                    // ==========================================
+                    // STEP 1: FINAL DIAGNOSTIC RESULTS READOUT
+                    // ==========================================
+                    <div className="text-slate-900">
+                      <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+                        Your Functional Readiness Profile
+                      </h3>
+                      <p className="mt-0.5 text-xs text-slate-500 font-medium">
+                        Clinical Evaluation Complete · Recommended Retainer Identified
+                      </p>
 
-                <span className="text-xs font-semibold uppercase tracking-wider text-emerald-700 block mb-1">
-                  Dossier Forwarded Successfully
-                </span>
+                      {/* Compact Profile Card */}
+                      <div className="mt-3.5 rounded-xl border border-slate-200 bg-slate-50/70 p-3.5 space-y-2.5 text-xs">
+                        <div className="flex items-center justify-between border-b border-slate-200/80 pb-2">
+                          <div>
+                            <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block">
+                              CLINICAL STAGE
+                            </span>
+                            <div className="font-bold text-slate-900">
+                              {priorityTag} · {domainTag}
+                            </div>
+                          </div>
+                          <span className="rounded bg-emerald-100 text-emerald-800 text-[10px] font-semibold px-2 py-0.5">
+                            Ready for Advisory
+                          </span>
+                        </div>
 
-                <h3 className="text-xl font-bold tracking-tight text-slate-950">
-                  You’re Ready for Vera Shury
-                </h3>
+                        <div className="grid grid-cols-2 gap-2">
+                          <div>
+                            <span className="text-slate-400 text-[10px] uppercase tracking-wider font-semibold block">
+                              PRIMARY GAP
+                            </span>
+                            <span className="font-semibold text-slate-800 text-[11px]">
+                              {gapTag}
+                            </span>
+                          </div>
+                          <div>
+                            <span className="text-slate-400 text-[10px] uppercase tracking-wider font-semibold block">
+                              DESIRED OUTCOME
+                            </span>
+                            <span className="font-semibold text-slate-800 text-[11px]">
+                              {outcomeTag}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
 
-                <p className="text-xs text-slate-600 mt-1.5 max-w-sm mx-auto leading-relaxed">
-                  Your diagnostic markers have been registered and dispatched to Vera. She will review your profile prior to your 30-minute intake session.
-                </p>
+                      {/* Recommended Retainer Card With Crystal-Clear Pricing & Value */}
+                      <div className="mt-3 rounded-xl border border-slate-200 bg-white p-3.5 space-y-2">
+                        <div className="flex flex-wrap items-center justify-between gap-1.5">
+                          <span className="text-[10px] uppercase tracking-wider text-slate-500 font-bold">
+                            RECOMMENDED CLINICAL ADVISORY
+                          </span>
+                          <div className="flex items-center gap-2">
+                            <span className="font-mono text-xs font-bold text-slate-900">
+                              {recommendedProgram.investment}
+                            </span>
+                            {recommendedProgram.amountCents && (
+                              <AffirmPromo amountCents={recommendedProgram.amountCents} compact={true} />
+                            )}
+                          </div>
+                        </div>
 
-                {/* Dossier Summary Box */}
-                <div className="my-4 rounded-xl border border-slate-200 bg-slate-50/80 p-3.5 text-left text-xs space-y-1.5">
-                  <div className="flex justify-between border-b border-slate-200/80 pb-1.5">
-                    <span className="text-slate-400">Candidate:</span>
-                    <span className="font-semibold text-slate-900">{candidateName} ({candidateEmail})</span>
-                  </div>
-                  <div className="flex justify-between border-b border-slate-200/80 pb-1.5">
-                    <span className="text-slate-400">Recommended Program:</span>
-                    <span className="font-semibold text-slate-900">{recommendedProgram.name} ({recommendedProgram.investment})</span>
-                  </div>
-                  <div className="flex justify-between border-b border-slate-200/80 pb-1.5">
-                    <span className="text-slate-400">Consultation Format:</span>
-                    <span className="font-semibold text-slate-900">On-Site in Tucson or Virtual Worldwide</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">20-Min Intake Fee:</span>
-                    <span className="font-bold text-emerald-700">Complimentary ($250 Value)</span>
-                  </div>
-                </div>
+                        <div className="text-xs sm:text-sm font-bold text-slate-900">
+                          {recommendedProgram.name}
+                        </div>
+                        <p className="text-[11px] text-slate-500 leading-snug">
+                          {recommendedProgram.desc}
+                        </p>
 
-                {/* Free Instant Reward: 6-Day Habit Building Plan Download */}
-                <div className="mb-4 rounded-xl border border-amber-500/30 bg-amber-50/70 p-3 text-left flex items-center justify-between gap-3">
-                  <div>
-                    <div className="text-[11px] font-bold text-amber-950 uppercase tracking-wider font-mono">
-                      Bonus Clinical Tool
-                    </div>
-                    <div className="text-xs font-semibold text-slate-900">
-                      Vera&apos;s 6-Day Habit Building Plan
-                    </div>
-                    <div className="text-[10px] text-slate-500">
-                      Day 0 Readiness Check + Daily Loop (Fuel, Move, Attention)
-                    </div>
-                  </div>
-                  <a
-                    href="/documents/Liberty_Science_6Day_Habit_Plan.pdf"
-                    download="Liberty_Science_6Day_Habit_Plan.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="shrink-0 px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-semibold text-xs transition-colors flex items-center gap-1.5 shadow-2xs"
-                  >
-                    <Download className="h-3.5 w-3.5" />
-                    <span>Download PDF</span>
-                  </a>
-                </div>
+                        {/* Pricing Clarity: Intake vs Retainer */}
+                        <div className="pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between text-[11px] gap-1">
+                          <div className="flex items-center gap-1.5 text-emerald-800 font-semibold">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
+                            <span>30-Min Intake: Complimentary ($250 Value)</span>
+                          </div>
+                          <span className="text-slate-400">
+                            Retainer applies only if admitted
+                          </span>
+                        </div>
+                      </div>
 
-                <div className="space-y-2 pt-1">
-                  <a
-                    href={CALENDAR_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full h-11 rounded-full bg-slate-900 font-semibold text-xs text-white flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors shadow-xs"
-                  >
-                    <Calendar className="h-4 w-4" />
-                    <span>Book 20-Min Call on Vera&apos;s Calendar ↗</span>
-                  </a>
+                      {/* Action Buttons */}
+                      <div className="mt-4 flex flex-col gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setShowLeadForm(true)}
+                          className="w-full h-11 rounded-full bg-slate-900 font-semibold text-xs text-white flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors shadow-xs cursor-pointer"
+                        >
+                          <Calendar className="h-3.5 w-3.5" />
+                          <span>Forward Dossier &amp; Book Free 30-Min Call</span>
+                        </button>
 
-                  <button
-                    type="button"
-                    onClick={onClose}
-                    className="w-full h-9 rounded-full border border-slate-200 text-xs font-semibold text-slate-600 hover:text-slate-900 hover:border-slate-900 transition-colors cursor-pointer"
-                  >
-                    Return to Website
-                  </button>
-                </div>
-              </div>
-            ) : showLeadForm ? (
-              // ==========================================
-              // STEP 2: 2-FIELD LEAD DOSSIER HANDOFF FORM
-              // ==========================================
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-[11px] uppercase tracking-wider text-slate-500 font-bold">
-                    Clinical Dossier Handoff
-                  </span>
-                  <span className="text-[10px] text-emerald-700 font-semibold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                    Complimentary Intake Call
-                  </span>
-                </div>
+                        <div className="flex items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={handleCopySummary}
+                            className="flex-1 h-9 rounded-full border border-slate-200 bg-white text-xs font-semibold text-slate-700 hover:border-slate-900 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                          >
+                            {copied ? (
+                              <>
+                                <Check className="h-3.5 w-3.5 text-emerald-600" />
+                                <span>Copied Summary</span>
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="h-3.5 w-3.5 text-slate-400" />
+                                <span>Copy Profile</span>
+                              </>
+                            )}
+                          </button>
 
-                <h3 className="text-lg sm:text-xl font-bold tracking-tight text-slate-950">
-                  Forward Your Markers to Vera Shury
-                </h3>
-
-                <p className="mt-1 text-xs text-slate-500 leading-relaxed">
-                  Vera personally reviews your responses before your 30-minute session so she enters your conversation informed of your exact challenges.
-                </p>
-
-                {/* Form Fields */}
-                <form onSubmit={handleDossierSubmit} className="mt-4 space-y-3">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-800 mb-1">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={candidateName}
-                      onChange={(e) => setCandidateName(e.target.value)}
-                      placeholder="e.g. Eleanor Vance"
-                      className="w-full h-11 sm:h-9 rounded-xl sm:rounded-lg border border-slate-200 px-3.5 text-[16px] sm:text-xs text-slate-900 focus:outline-none focus:border-slate-900 shadow-2xs transition-colors"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-800 mb-1">
-                      Executive / Personal Email *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={candidateEmail}
-                      onChange={(e) => setCandidateEmail(e.target.value)}
-                      placeholder="e.g. eleanor@vanceholdings.com"
-                      className="w-full h-11 sm:h-9 rounded-xl sm:rounded-lg border border-slate-200 px-3.5 text-[16px] sm:text-xs text-slate-900 focus:outline-none focus:border-slate-900 shadow-2xs transition-colors"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-800 mb-1">
-                      Chief Movement or Stamina Priority (Optional)
-                    </label>
-                    <textarea
-                      rows={2}
-                      value={candidateNote}
-                      onChange={(e) => setCandidateNote(e.target.value)}
-                      placeholder="e.g. Preserving skiing balance, post-surgical stiffness, or executive burnout..."
-                      className="w-full rounded-xl sm:rounded-lg border border-slate-200 p-3 text-[16px] sm:text-xs text-slate-900 focus:outline-none focus:border-slate-900 resize-none shadow-2xs transition-colors"
-                    />
-                  </div>
-
-                  <div className="pt-2 flex flex-col gap-2">
-                    <button
-                      type="submit"
-                      disabled={isSubmittingLead}
-                      className="w-full h-11 rounded-full bg-slate-900 font-semibold text-xs text-white flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors shadow-xs cursor-pointer disabled:opacity-50"
-                    >
-                      {isSubmittingLead ? (
-                        <>
-                          <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                          <span>Dispatching Dossier...</span>
-                        </>
-                      ) : (
-                        <>
-                          <span>Transmit Dossier &amp; Open Calendar ↗</span>
-                        </>
-                      )}
-                    </button>
-
-                    <div className="flex items-center justify-between text-xs pt-1">
-                      <button
-                        type="button"
-                        onClick={handleBack}
-                        className="text-slate-500 hover:text-slate-900 text-xs font-semibold cursor-pointer inline-flex items-center gap-1"
-                      >
-                        <ArrowLeft className="h-3 w-3" />
-                        <span>Back to Assessment</span>
-                      </button>
-
-                      <a
-                        href={CALENDAR_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[11px] text-slate-400 hover:text-slate-700 underline"
-                      >
-                        Skip directly to Calendar →
-                      </a>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            ) : (
-              // ==========================================
-              // STEP 1: FINAL DIAGNOSTIC RESULTS READOUT
-              // ==========================================
-              <div className="text-slate-900">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 block">
-                  Clinical Evaluation Complete
-                </span>
-
-                <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 mt-1">
-                  Your Functional Readiness Profile
-                </h3>
-
-                {/* Compact Profile Card */}
-                <div className="mt-3.5 rounded-xl border border-slate-200 bg-slate-50/70 p-3.5 space-y-2.5 text-xs">
-                  <div className="flex items-center justify-between border-b border-slate-200/80 pb-2">
-                    <div>
-                      <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block">
-                        CLINICAL STAGE
-                      </span>
-                      <div className="font-bold text-slate-900">
-                        {priorityTag} · {domainTag}
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setCurrentStep(0);
+                              setAnswers({});
+                              setShowLeadForm(false);
+                            }}
+                            className="h-9 px-4 rounded-full border border-slate-200 bg-white text-xs font-semibold text-slate-500 hover:text-slate-900 hover:border-slate-900 transition-colors cursor-pointer"
+                          >
+                            Retake
+                          </button>
+                        </div>
                       </div>
                     </div>
-                    <span className="rounded bg-emerald-100 text-emerald-800 text-[10px] font-semibold px-2 py-0.5">
-                      Ready for Advisory
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-2">
-                    <div>
-                      <span className="text-slate-400 text-[10px] uppercase tracking-wider font-semibold block">
-                        PRIMARY GAP
-                      </span>
-                      <span className="font-semibold text-slate-800 text-[11px]">
-                        {gapTag}
-                      </span>
-                    </div>
-                    <div>
-                      <span className="text-slate-400 text-[10px] uppercase tracking-wider font-semibold block">
-                        DESIRED OUTCOME
-                      </span>
-                      <span className="font-semibold text-slate-800 text-[11px]">
-                        {outcomeTag}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Recommended Retainer Card With Crystal-Clear Pricing & Value */}
-                <div className="mt-3 rounded-xl border border-slate-200 bg-white p-3.5 space-y-2">
-                  <div className="flex flex-wrap items-center justify-between gap-1.5">
-                    <span className="text-[10px] uppercase tracking-wider text-slate-500 font-bold">
-                      RECOMMENDED CLINICAL ADVISORY
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-bold text-slate-900">
-                        {recommendedProgram.investment}
-                      </span>
-                      {recommendedProgram.amountCents && (
-                        <AffirmPromo amountCents={recommendedProgram.amountCents} compact={true} />
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="text-xs sm:text-sm font-bold text-slate-900">
-                    {recommendedProgram.name}
-                  </div>
-                  <p className="text-[11px] text-slate-500 leading-snug">
-                    {recommendedProgram.desc}
-                  </p>
-
-                  {/* Pricing Clarity: Intake vs Retainer */}
-                  <div className="pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between text-[11px] gap-1">
-                    <div className="flex items-center gap-1.5 text-emerald-800 font-semibold">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
-                      <span>30-Min Intake: Complimentary ($250 Value)</span>
-                    </div>
-                    <span className="text-slate-400">
-                      Retainer applies only if admitted
-                    </span>
-                  </div>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="mt-4 flex flex-col gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setShowLeadForm(true)}
-                    className="w-full h-11 rounded-full bg-slate-900 font-semibold text-xs text-white flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors shadow-xs cursor-pointer"
-                  >
-                    <Calendar className="h-3.5 w-3.5" />
-                    <span>Forward Dossier &amp; Book Free 30-Min Call</span>
-                  </button>
-
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={handleCopySummary}
-                      className="flex-1 h-9 rounded-full border border-slate-200 bg-white text-xs font-semibold text-slate-700 hover:border-slate-900 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
-                    >
-                      {copied ? (
-                        <>
-                          <Check className="h-3.5 w-3.5 text-emerald-600" />
-                          <span>Copied Summary</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="h-3.5 w-3.5 text-slate-400" />
-                          <span>Copy Profile</span>
-                        </>
-                      )}
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setCurrentStep(0);
-                        setAnswers({});
-                        setShowLeadForm(false);
-                      }}
-                      className="h-9 px-4 rounded-full border border-slate-200 bg-white text-xs font-semibold text-slate-500 hover:text-slate-900 hover:border-slate-900 transition-colors cursor-pointer"
-                    >
-                      Retake
-                    </button>
-                  </div>
-                </div>
+                  )}
+                </motion.div>
               </div>
             )}
-          </motion.div>
-        </div>
-      )}
-    </AnimatePresence>
+          </AnimatePresence>,
+          document.body
+        )}
+    </>
   );
 }
