@@ -57,7 +57,7 @@ const HARVARD_CREDENTIALS = [
     previewImg: "/documents/certificates/hms_stem_cell_parkinsons_thumb.jpg",
     desc: "Rigorous clinical medical education on stem cell biology, dopaminergic pathway mechanisms, and neuro-motor re-education for Parkinson's disease.",
     supports: "Health Advisory & Parkinson'strength™ Practice",
-    badge: "Harvard Medical School CME",
+    badge: "2.00 AMA CME Credits",
   },
   {
     id: "hms-cognitive",
@@ -72,7 +72,7 @@ const HARVARD_CREDENTIALS = [
     previewImg: "/documents/certificates/harvard_health_cognitive_fitness_thumb.jpg",
     desc: "Evidence-based protocols for adult hippocampal neurogenesis, synaptic density, executive mental stamina, and safeguarding cognitive bandwidth against burnout.",
     supports: "Life Advisory & Executive Cognitive Stamina",
-    badge: "Harvard Health Publishing",
+    badge: "Executive Brain Health",
   },
   {
     id: "hms-food",
@@ -87,7 +87,7 @@ const HARVARD_CREDENTIALS = [
     previewImg: "/documents/certificates/harvard_health_food_is_medicine_thumb.jpg",
     desc: "Nutritional biochemistry, mitochondrial fuel switching, cyclic fasting, and epigenetic cellular signaling to suppress neuro-inflammation and support synaptogenesis.",
     supports: "Metabolic Neuroplasticity™ Fueling Protocols",
-    badge: "Harvard Health Publishing",
+    badge: "Metabolic Fueling",
   },
   {
     id: "harvardx-entrepreneurship",
@@ -102,7 +102,7 @@ const HARVARD_CREDENTIALS = [
     linkText: "Verify at HarvardX / edX ↗",
     desc: "Translating technological and clinical breakthroughs into scalable, sustainable business models and leadership succession without physical burnout.",
     supports: "Business Advisory & 4,000% Practice Scaling Model",
-    badge: "Harvard Business School",
+    badge: "Lab to Market",
   },
 ];
 
@@ -1043,8 +1043,8 @@ export default function AboutPage() {
                       </span>
                     </div>
 
-                    <div className="mt-3 text-[10px] font-mono uppercase tracking-wider text-slate-500 font-semibold">
-                      {cert.institution}
+                    <div className="mt-2.5 text-[10px] font-mono uppercase tracking-wider text-slate-500 font-semibold truncate">
+                      {cert.code}
                     </div>
 
                     {/* Certificate Thumbnail Preview */}

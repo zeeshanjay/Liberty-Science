@@ -520,24 +520,16 @@ export default function LibertyScienceLandingPage() {
                   </div>
                 </motion.div>
 
-                {/* Direct Link to Dedicated About Page & Verified Harvard Credentials */}
-                <div className="mt-7 flex flex-wrap items-center gap-3">
+                {/* Refined Executive Gateway Link */}
+                <div className="mt-7">
                   <Link
                     href="/about"
-                    className="group inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#ea580c] hover:text-[#c2410c] transition-colors"
+                    className="group inline-flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white px-4 py-2 text-xs font-semibold text-slate-800 shadow-2xs hover:border-slate-300 hover:bg-slate-50 transition-all"
                   >
-                    <span>Read Vera&apos;s full story &amp; clinical journey</span>
-                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </Link>
-
-                  <Link
-                    href="/about"
-                    className="inline-flex items-center gap-1.5 rounded-full border border-rose-200/90 bg-rose-50/80 px-3 py-1 text-[11px] font-semibold text-rose-950 transition-all hover:bg-rose-100 hover:border-rose-300 shadow-2xs"
-                  >
-                    <span className="font-serif font-bold text-[#A51C30]">HARVARD MEDICAL SCHOOL</span>
-                    <span className="text-rose-300">|</span>
-                    <span>Verified CME &amp; Curriculum Credentials</span>
-                    <ArrowUpRight className="h-3 w-3 text-[#A51C30]" />
+                    <span className="font-serif font-bold text-[#A51C30]">Harvard &amp; Board Credentials</span>
+                    <span className="text-slate-300">•</span>
+                    <span className="text-slate-600">Read Vera&apos;s Full Story &amp; Clinical Journey</span>
+                    <ArrowUpRight className="h-3.5 w-3.5 text-[#ea580c] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </Link>
                 </div>
               </div>

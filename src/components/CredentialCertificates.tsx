@@ -27,47 +27,47 @@ export const CERTIFICATES: CertificateData[] = [
     issuer: "Harvard Medical School",
     title: "Stem Cell Medicine: Parkinson's",
     subtitle: "2.00 AMA PRA Cat 1 Credits™ · Joint ACCME/ACPE/ANCC Accredited",
-    holder: "Vera Shury",
+    holder: "Vera Shury, MS, LBHC",
     accentGradient: "from-[#A51C30] via-rose-700 to-amber-700",
     logoSrc: "/logos/harvard-medical-school.svg",
     pdfUrl: "/documents/certificates/Harvard_Medical_School_Stem_Cell_Medicine_Parkinsons_Vera_Shury.pdf",
     previewImg: "/documents/certificates/hms_stem_cell_parkinsons_thumb.jpg",
-    badge: "Harvard Medical School",
+    badge: "2.00 AMA CME Credits",
   },
   {
     id: "harvard-cognitive",
     issuer: "Harvard Health Publishing · HMS",
     title: "Cognitive Fitness",
     subtitle: "Neuroplasticity, Brain Resilience & Executive Mental Stamina",
-    holder: "Vera Shury",
+    holder: "Vera Shury, MS, LBHC",
     accentGradient: "from-[#A51C30] via-indigo-700 to-purple-800",
     logoSrc: "/logos/harvard-health.svg",
     pdfUrl: "/documents/certificates/Harvard_Health_Cognitive_Fitness_Vera_Shury.pdf",
     previewImg: "/documents/certificates/harvard_health_cognitive_fitness_thumb.jpg",
-    badge: "Harvard Health · Nov 2026",
+    badge: "Executive Brain Health",
   },
   {
     id: "harvard-food",
     issuer: "Harvard Health Publishing · HMS",
     title: "Food Is Medicine",
     subtitle: "Metabolic Nutrition, Disease Reversal & Cellular Signaling",
-    holder: "Vera Shury",
+    holder: "Vera Shury, MS, LBHC",
     accentGradient: "from-[#A51C30] via-emerald-700 to-teal-800",
     logoSrc: "/logos/harvard-health.svg",
     pdfUrl: "/documents/certificates/Harvard_Health_Food_Is_Medicine_Vera_Shury.pdf",
     previewImg: "/documents/certificates/harvard_health_food_is_medicine_thumb.jpg",
-    badge: "Harvard Health · Nov 2026",
+    badge: "Metabolic Fueling",
   },
   {
     id: "harvardx",
     issuer: "HarvardX (Harvard University)",
     title: "Technology Entrepreneurship",
     subtitle: "Lab to Market · Prof. Karim Lakhani · edX ID: 954e0f86",
-    holder: "Vera Shury",
+    holder: "Vera Shury, MS, LBHC",
     accentGradient: "from-[#A51C30] via-rose-700 to-amber-700",
     logoSrc: "/logos/harvardx.svg",
     href: "https://courses.edx.org/certificates/954e0f86dfd74c74b05b4438674b7d07",
-    badge: "Harvard Business School",
+    badge: "Lab to Market",
   },
   {
     id: "ace",
@@ -87,7 +87,7 @@ export const CERTIFICATES: CertificateData[] = [
     holder: "Vera Shury, MS, LBHC",
     accentGradient: "from-blue-600 via-indigo-600 to-sky-500",
     logoSrc: "/logos/pwr.png",
-    badge: "Clinical Parkinson's",
+    badge: "Parkinson's Specialist",
   },
   {
     id: "heartmath",
@@ -97,7 +97,7 @@ export const CERTIFICATES: CertificateData[] = [
     holder: "Vera Shury, MS, LBHC",
     accentGradient: "from-purple-600 via-pink-600 to-rose-500",
     logoSrc: "/logos/heartmath.png",
-    badge: "Clinical HRV",
+    badge: "0.10 Hz Clinical HRV",
   },
   {
     id: "silversneakers",
@@ -107,7 +107,7 @@ export const CERTIFICATES: CertificateData[] = [
     holder: "Vera Shury, MS, LBHC",
     accentGradient: "from-sky-600 via-cyan-600 to-teal-600",
     logoSrc: "/logos/silversneakers.png",
-    badge: "Senior Mobility",
+    badge: "Fall Prevention",
   },
 ];
 
@@ -149,10 +149,10 @@ export function CredentialCertificates() {
                 )}
               />
 
-              {/* Header: Official Trademark Logo + Issuing Institution */}
+              {/* Header: Official Trademark Logo + Specialty Badge */}
               <div>
-                <div className="flex items-center justify-between gap-3">
-                  <div className="relative h-12 w-28 shrink-0">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="relative h-10 w-28 shrink-0">
                     <Image
                       src={cert.logoSrc}
                       alt={cert.title}
@@ -162,18 +162,26 @@ export function CredentialCertificates() {
                     />
                   </div>
                   {cert.badge && (
-                    <span className="rounded-full bg-slate-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-slate-600 border border-slate-200/80">
+                    <span className="rounded-full bg-slate-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-slate-700 border border-slate-200/80 shadow-2xs">
                       {cert.badge}
                     </span>
                   )}
                 </div>
 
-                <div className="mt-3 text-[10px] font-mono uppercase tracking-wider text-slate-500 font-semibold flex items-center justify-between">
-                  <span>{cert.issuer}</span>
-                  {cert.pdfUrl && (
-                    <span className="inline-flex items-center gap-1 text-[10px] font-bold text-[#A51C30] hover:underline">
-                      <FileText className="h-3 w-3" />
-                      PDF
+                <div className="mt-3 flex items-center justify-between text-[11px] pt-1">
+                  {cert.pdfUrl ? (
+                    <span className="inline-flex items-center gap-1.5 font-semibold text-[#A51C30] group-hover:underline">
+                      <FileText className="h-3.5 w-3.5" />
+                      <span>Official Certificate PDF</span>
+                    </span>
+                  ) : cert.href ? (
+                    <span className="inline-flex items-center gap-1.5 font-semibold text-slate-700 group-hover:text-slate-950">
+                      <ExternalLink className="h-3.5 w-3.5" />
+                      <span>Verify Credential ↗</span>
+                    </span>
+                  ) : (
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-slate-400">
+                      Clinical Accreditation
                     </span>
                   )}
                 </div>
