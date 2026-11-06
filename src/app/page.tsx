@@ -30,7 +30,7 @@ import { ReadinessAssessmentModal } from "@/components/ReadinessAssessmentModal"
 import { AffirmPromo } from "@/components/AffirmPromo";
 import { cn } from "@/lib/utils";
 
-const CALENDAR_URL = "https://calendar.app.google/8Gt1wf6dzY3ki8xy7";
+const CALENDAR_URL = "https://calendar.app.google/Zi5JvECS3AdEPAqx7";
 
 const fadeUpVariant: Variants = {
   hidden: { opacity: 0, y: 24 },

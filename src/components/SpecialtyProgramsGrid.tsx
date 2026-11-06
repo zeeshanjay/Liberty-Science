@@ -17,7 +17,7 @@ import { SPECIALTY_PROGRAMS, SpecialtyProgram } from "@/data/specialtyPrograms";
 import { AffirmPromo } from "@/components/AffirmPromo";
 import { cn } from "@/lib/utils";
 
-const CALENDAR_URL = "https://calendar.app.google/8Gt1wf6dzY3ki8xy7";
+const CALENDAR_URL = "https://calendar.app.google/Zi5JvECS3AdEPAqx7";
 
 type PillarFilter = "all" | "life" | "business" | "health";
 

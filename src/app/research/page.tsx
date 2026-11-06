@@ -22,7 +22,7 @@ import { StackedCircularFooter } from "@/components/ui/stacked-circular-footer";
 import { ReadinessAssessmentModal } from "@/components/ReadinessAssessmentModal";
 import { DownloadPlanModal } from "@/components/DownloadPlanModal";
 
-const CALENDAR_URL = "https://calendar.app.google/8Gt1wf6dzY3ki8xy7";
+const CALENDAR_URL = "https://calendar.app.google/Zi5JvECS3AdEPAqx7";
 
 export default function ResearchMonographPage() {
   const [assessmentOpen, setAssessmentOpen] = useState(false);

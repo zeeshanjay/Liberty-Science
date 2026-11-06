@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Phone, MessageSquare, CalendarDays, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const CALENDAR_URL = "https://calendar.app.google/8Gt1wf6dzY3ki8xy7";
+const CALENDAR_URL = "https://calendar.app.google/Zi5JvECS3AdEPAqx7";
 const PHONE_NUMBER = "520-275-8755";
 const PHONE_TEL = "tel:5202758755";
 const PHONE_SMS = "sms:5202758755";

@@ -465,7 +465,7 @@ function AffirmDirectCheckoutModal({
               </a>
 
               <a
-                href="https://calendar.app.google/8Gt1wf6dzY3ki8xy7"
+                href="https://calendar.app.google/Zi5JvECS3AdEPAqx7"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex w-full items-center justify-center gap-1.5 pt-0.5 text-[11px] font-medium text-slate-500 hover:text-slate-900 transition-colors"

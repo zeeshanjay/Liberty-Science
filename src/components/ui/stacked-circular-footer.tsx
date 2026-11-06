@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Facebook, Linkedin, Youtube, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 
-const CALENDAR_URL = "https://calendar.app.google/8Gt1wf6dzY3ki8xy7";
+const CALENDAR_URL = "https://calendar.app.google/Zi5JvECS3AdEPAqx7";
 
 function StackedCircularFooter() {
   const [subscribed, setSubscribed] = React.useState(false);
