@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Sparkles, Eye, RotateCw } from "lucide-react";
+import { Sparkles, Eye, RotateCw, Activity } from "lucide-react";
 
 interface Node3D {
   x: number;
@@ -351,15 +351,20 @@ export function NeuralModel3D({ staticImageSrc = "/neural-3d-model.jpg" }: { sta
       {/* Top Clinical Header & Mode Switcher */}
       <div className="relative z-10 p-5 sm:p-6 flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/80 bg-slate-950/50 backdrop-blur-md">
         <div className="flex items-center gap-3">
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-          </span>
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-slate-800 bg-slate-900/90 text-emerald-400 shadow-inner">
+            <Activity className="h-4 w-4" />
+          </div>
           <div>
-            <div className="text-xs font-mono font-bold tracking-wider text-white uppercase">
-              Metabolic Neuroplasticity™ 3D Lattice
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-xs font-mono font-bold tracking-wider text-white uppercase">
+                Metabolic Neuroplasticity™ 3D Lattice
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-mono font-medium text-emerald-300">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]" />
+                Live Telemetry
+              </span>
             </div>
-            <div className="text-[11px] text-slate-400 font-mono">
+            <div className="text-[11px] text-slate-400 font-mono mt-0.5">
               Adult Hippocampal &amp; Cortical Mapping
             </div>
           </div>
