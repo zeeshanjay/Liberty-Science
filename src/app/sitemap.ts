@@ -41,5 +41,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/documents/certificates/Harvard_Medical_School_Stem_Cell_Medicine_Parkinsons_Vera_Shury.pdf`,
+      lastModified: currentDate,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/documents/certificates/Harvard_Health_Cognitive_Fitness_Vera_Shury.pdf`,
+      lastModified: currentDate,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/documents/certificates/Harvard_Health_Food_Is_Medicine_Vera_Shury.pdf`,
+      lastModified: currentDate,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
   ];
 }
